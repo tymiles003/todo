@@ -1,0 +1,85 @@
+@import '../variables/variables';
+@import '../functions/functions';
+.todo-item {
+  color: @clr-text;
+  background-color: @clr-white;
+  .trs025(background);
+
+  &-text,
+  &-time{
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+  }
+
+  &.done {
+    @common-color: @clr-text;
+    color: @common-color;
+    background-color: fade(@clr-green,40%);
+    .trs025-delay(background);
+
+    .todo-item-text {
+      color: fade(@common-color,50%);
+      text-decoration: line-through;
+    }
+    .todo-item-time {
+      color: fade(@common-color,50%);
+    }
+  }
+
+  &.running{
+    @common-color: @clr-text;
+    .todo-item-text {
+      color: @common-color;
+    }
+    .todo-item-time {
+      color: @common-color;
+    }
+  }
+  &.paused{
+    @common-color: @clr-text-second;
+    .todo-item-text {
+      color: @common-color;
+    }
+    .todo-item-time {
+      color: @common-color;
+    }
+  }
+
+  &.pending {
+    @common-color: @clr-pending;
+    .todo-item-text {
+      color: @common-color;
+    }
+    .todo-item-time {
+      color: @common-color;
+    }
+  }
+
+  .todo-item-button {
+    cursor: pointer;
+    background-color: rgba(0,0,0,0);
+    .trs025-delay(background);
+    &:hover {
+      background-color: rgba(0,0,0,0.15);
+      .trs025(background);
+    }
+  }
+
+  .todo-item-text {
+    color: @clr-text;
+    cursor: pointer;
+    border-bottom: 2px solid rgba(0, 0, 0, 0);
+    .trs025-delay(border);
+    .trs025-delay(color);
+    .todo-item-text:hover {
+      color: @clr-text;
+      cursor: pointer;
+      border-bottom: 2px solid rgba(0,0,0,0.2);
+      .trs025(border);
+      .trs025(color);
+    }
+  }
+
+}
