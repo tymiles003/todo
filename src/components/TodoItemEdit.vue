@@ -1,5 +1,5 @@
 <template>
-  <div class="col-sm-6 col-md-8 input-group p-2"  v-if="todo.action===actns.EDIT">
+  <div class="col-sm-6 col-md-8 input-group pr-2 pl-2 pt-2"  v-if="todo.action===actns.EDIT">
     <input type="text" class="form-control" v-model="newText" @keydown.enter="editEnd" v-focus/>
     <div class="input-group-append">
       <button class="btn btn-outline-secondary" type="button" @click="editEnd">
@@ -17,6 +17,7 @@ export default {
   data () {
     return {
       newText: this.todo.text,
+      elem: null,
       stats: helper.stats,
       actns: helper.actns
     };
@@ -26,11 +27,12 @@ export default {
       inserted: function (el) {
         el.focus();
         el.select();
-      }
+      }.bind(this)
     }
   },
   methods: {
     editEnd () {
+      window.getSelection().removeAllRanges();
       this.$emit('editText', {text: this.newText});
       this.todo.action = this.actns.DEFAULT;
     }

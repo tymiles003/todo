@@ -13,20 +13,22 @@
       <font-awesome-icon icon="pause" />
   </div>
   <div
-    class="todo-item-time col-sm-3 col-md-2 col-lg-1 text-left p-2">
+    class="todo-item-time col-sm-3 col-md-2 col-lg-1 text-left pr-2 pl-2 pt-3">
       {{todo.time.pastTime.render}}
   </div>
   <div
-    class="todo-item-text col-sm-6 col-md-7 col-lg-8 text-left p-2"
+    class="todo-item-text col-sm-6 col-md-7 col-lg-8 text-left pr-2 pl-2 pt-3"
     @click="editThis"
     v-if="todo.action!==actns.EDIT"
     :title="todo.status">
       {{todo.text}}
   </div>
-  <todo-item-edit
-    @editText="setNewText"
-    v-bind:todo="todo">
-  </todo-item-edit>
+  <transition name="fade-element">
+    <todo-item-edit
+      @editText="setNewText"
+      v-bind:todo="todo">
+    </todo-item-edit>
+  </transition>
   <div
     class="todo-item-button col-sm-1 text-center p-2"
     @click="doneThis"
@@ -54,6 +56,11 @@
 </template>
 
 <script>
+// -----styles:
+import '../assets/less/components/todo-item.less';
+import '../assets/less/fade.less';
+
+// -----fontAwesome:
 // eslint-disable-next-line
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
 // eslint-disable-next-line
@@ -62,13 +69,19 @@ import faSolid from '@fortawesome/fontawesome-free-solid';
 import faRegular from '@fortawesome/fontawesome-free-regular';
 // eslint-disable-next-line
 import brands from '@fortawesome/fontawesome-free-brands'
+
+// -----vue components:
 import TodoItemEdit from '@/components/TodoItemEdit';
 import helper from '@/components/lib/todoHelpers';
+
 export default {
   name: 'TodoItem',
   props: ['todo'],
   data () {
     return {
+      animStates: {
+        newTextVisible: false
+      },
       stats: helper.stats,
       actns: helper.actns
     };
@@ -82,21 +95,19 @@ export default {
   },
   methods: {
     doneThis () {
-      this.$parent.statusDone(this.todo.id);
+      this.$emit('done', this.todo.id);
     },
     runThis () {
-      this.$parent.pausedAll();
-      this.$parent.statusRunning(this.todo.id);
+      this.$emit('run', this.todo.id);
     },
     pauseThis () {
-      this.$parent.statusPaused(this.todo.id);
+      this.$emit('pause', this.todo.id);
     },
     clearThis () {
-      this.$parent.clearThis(this.todo.id);
+      this.$emit('clear', this.todo.id);
     },
     editThis () {
-      this.$parent.editEndAll();
-      this.$parent.itemEdit(this.todo.id);
+      this.$emit('edit', this.todo.id);
     },
     setNewText (fromChild) {
       this.todo.text = fromChild.text;

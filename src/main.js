@@ -6,7 +6,7 @@ import router from './router';
 // eslint-disable-next-line
 import 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './assets/css/styles.less';
+import './assets/less/common.less';
 
 Vue.config.productionTip = true;
 /* eslint-disable no-new */

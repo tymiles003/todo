@@ -1,20 +1,31 @@
 <template>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 p-3">
-  <todo-item-new-line
-    v-bind:todo="todoList"
-    @add="addTodo">
-  </todo-item-new-line>
+  <transition name="fade-element">
+    <todo-item-new-line
+      v-if="animStates.newTextVisible"
+      v-bind:todo="todoList"
+      @add="addTodo">
+    </todo-item-new-line>
+  </transition>
+ <transition-group name="list" tag="div">
   <todo-item
     v-for="item in todoList.items"
     v-bind:todo="item"
-    v-bind:key="item.id"></todo-item>
+    v-bind:key="item.id"
+    @done="statusDone"
+    @run="statusRunning"
+    @pause="statusPaused"
+    @clear="clearThis"
+    @edit="itemEdit"
+
+    ></todo-item>
+  </transition-group>
   </div>
 </div>
 </template>
 
 <script>
-
 import moment from 'moment';
 // eslint-disable-next-line
 import momentDurationFormat from 'moment-duration-format';
@@ -25,6 +36,9 @@ export default {
   name: 'Todo',
   data () {
     return {
+      animStates: {
+        newTextVisible: false
+      },
       todoList: {
         items: [ ],
         lastCount: -1
@@ -36,6 +50,9 @@ export default {
   components: {
     TodoItem,
     TodoItemNewLine
+  },
+  mounted: function () {
+    this.animStates.newTextVisible = true;
   },
   methods: {
     addTodo (newText) {
@@ -85,6 +102,7 @@ export default {
       this.updateDuration(id);
     },
     statusRunning (id) {
+      this.pausedAll();
       let item = this.getItem(id).object;
       item.status = this.stats.RUNNING;
       item.time.startTime = moment();
@@ -102,6 +120,7 @@ export default {
       this.todoList.items.splice(this.getItem(id).index, 1);
     },
     itemEdit (id) {
+      this.editEndAll();
       let item = this.getItem(id).object;
       item.action = this.actns.EDIT;
     },
