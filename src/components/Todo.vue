@@ -1,6 +1,13 @@
 <template>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 p-3">
+
+    <todo-item-sort
+      @sortbydefault="sortByDefault"
+      @sortbystatus="sortByStatus"
+      @sortbytime="sortByTime">
+    </todo-item-sort>
+
     <transition name="fade-element">
       <todo-item-new-line
         v-if="animStates.newTextVisible"
@@ -8,6 +15,7 @@
         @add="addTodo">
       </todo-item-new-line>
     </transition>
+
    <transition-group name="list" tag="div">
     <todo-item
       v-for="item in todoItems"
@@ -27,11 +35,17 @@
 </template>
 
 <script>
+// -----libraries:
 import moment from 'moment';
 // eslint-disable-next-line
 import momentDurationFormat from 'moment-duration-format';
+
+// -----components:
 import TodoItem from '@/components/TodoItem';
+import TodoItemSort from '@/components/TodoItemSort';
 import TodoItemNewLine from '@/components/TodoItemNewLine';
+
+// -----other:
 import helper from '@/components/lib/todoHelpers';
 export default {
   name: 'Todo',
@@ -40,27 +54,39 @@ export default {
       animStates: {
         newTextVisible: false
       },
+      todoList: [ ],
       stats: helper.stats,
       actns: helper.actns
     };
   },
   components: {
     TodoItem,
+    TodoItemSort,
     TodoItemNewLine
   },
   computed: {
     todoItems () {
-      return this.$store.state.todoList.items;
+      return this.todoList;
     }
   },
   mounted: function () {
     this.animStates.newTextVisible = true;
+    this.todoList = this.$store.getters.all;
   },
   methods: {
+    sortByDefault () {
+      this.todoList = this.$store.getters.all;
+    },
+    sortByStatus () {
+      this.todoList = this.$store.getters.doneTodos;
+    },
+    sortByTime () {
+      this.todoList = this.$store.getters.timeSort;
+    },
     addTodo (newText) {
       const trimmedText = newText.trim();
       if (trimmedText && trimmedText !== '') {
-        this.$store.commit('add',{
+        this.$store.commit('add', {
           id: ++this.$store.state.todoList.lastCount,
           text: trimmedText,
           time: {
@@ -72,6 +98,7 @@ export default {
             },
             track: [ ]
           },
+          sort: 0,
           status: this.stats.PENDING,
           action: this.actns.DEFAULT
         });
@@ -119,7 +146,7 @@ export default {
       this.updateDuration(id);
     },
     clearThis (id) {
-      this.$store.commit('delete',this.getItem(id).index);
+      this.$store.commit('delete', this.getItem(id).index);
     },
     itemEdit (id) {
       this.editEndAll();
