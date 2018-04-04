@@ -19,6 +19,7 @@
 }
 
 .list-item {
+  .trs1-delay(all);
   display: inline-block;
   margin-right: 10px;
 }
@@ -26,7 +27,11 @@
   .trs015-delay(opacity);
   .trs015-delay(transform);
 }
+
 .list-enter, .list-leave-to /* .list-leave-active до версии 2.1.8 */ {
   opacity: 0;
   transform: translateY(30px);
+}
+.list-move {
+  .trs1(all);
 }
