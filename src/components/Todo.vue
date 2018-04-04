@@ -127,14 +127,14 @@ export default {
       item.action = this.actns.EDIT;
     },
     editEndAll () {
-      for (var i = 0; i <= this.todoList.items.length - 1; i++) {
-        this.todoList.items[i].action = this.actns.DEFAULT;
+      for (var i = 0; i <= this.$store.state.todoList.items.length - 1; i++) {
+        this.$store.state.todoList.items[i].action = this.actns.DEFAULT;
       }
     },
     pausedAll () {
-      for (var i = 0; i <= this.todoList.items.length - 1; i++) {
-        if (this.todoList.items[i].status === this.stats.RUNNING) {
-          this.statusPaused(this.todoList.items[i].id);
+      for (var i = 0; i <= this.$store.state.todoList.items.length - 1; i++) {
+        if (this.$store.state.todoList.items[i].status === this.stats.RUNNING) {
+          this.statusPaused(this.$store.state.todoList.items[i].id);
         }
       }
     }
