@@ -64,10 +64,12 @@ import '../assets/less/fade.less';
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
 import faSolid from '@fortawesome/fontawesome-free-solid';
 import faRegular from '@fortawesome/fontawesome-free-regular';
-import brands from '@fortawesome/fontawesome-free-brands'
+import brands from '@fortawesome/fontawesome-free-brands';
 
 // -----vue components:
 import TodoItemEdit from '@/components/TodoItemEdit';
+
+// -----other:
 import helper from '@/components/lib/todoHelpers';
 
 export default {

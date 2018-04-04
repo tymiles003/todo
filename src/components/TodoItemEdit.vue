@@ -27,7 +27,7 @@ export default {
       inserted: function (el) {
         el.focus();
         el.select();
-      }.bind(this)
+      }
     }
   },
   methods: {
