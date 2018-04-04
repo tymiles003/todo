@@ -1,6 +1,13 @@
 .trs(@property, @duration:0.25s, @delay:0s, @function:ease-out){
   transition+: @property @duration @delay @function;
 }
+.trs1(@property){
+  .trs(@property, 1s, 0s, ease-out);
+}
+.trs1-delay(@property){
+  .trs(@property, 1s, 1s, ease-out);
+}
+
 .trs025(@property){
   .trs(@property, 0.25s, 0s, ease-out);
 }
