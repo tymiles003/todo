@@ -61,13 +61,9 @@ import '../assets/less/components/todo-item.less';
 import '../assets/less/fade.less';
 
 // -----fontAwesome:
-// eslint-disable-next-line
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
-// eslint-disable-next-line
 import faSolid from '@fortawesome/fontawesome-free-solid';
-// eslint-disable-next-line
 import faRegular from '@fortawesome/fontawesome-free-regular';
-// eslint-disable-next-line
 import brands from '@fortawesome/fontawesome-free-brands'
 
 // -----vue components:
