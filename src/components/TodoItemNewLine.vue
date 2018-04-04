@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     placeholderControll () {
-      if (this.todo.items.length === 0) {
+      if (this.todo.length === 0) {
         this.placeholder = this.firstPlaceholder;
       } else {
         this.placeholder = this.regularPlaceholder;

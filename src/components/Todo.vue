@@ -1,26 +1,27 @@
 <template>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 p-3">
-  <transition name="fade-element">
-    <todo-item-new-line
-      v-if="animStates.newTextVisible"
-      v-bind:todo="todoList"
-      @add="addTodo">
-    </todo-item-new-line>
-  </transition>
- <transition-group name="list" tag="div">
-  <todo-item
-    v-for="item in todoList.items"
-    v-bind:todo="item"
-    v-bind:key="item.id"
-    @done="statusDone"
-    @run="statusRunning"
-    @pause="statusPaused"
-    @clear="clearThis"
-    @edit="itemEdit"
+    <transition name="fade-element">
+      <todo-item-new-line
+        v-if="animStates.newTextVisible"
+        v-bind:todo="todoItems"
+        @add="addTodo">
+      </todo-item-new-line>
+    </transition>
+   <transition-group name="list" tag="div">
+    <todo-item
+      v-for="item in todoItems"
+      v-bind:todo="item"
+      v-bind:key="item.id"
+      @done="statusDone"
+      @run="statusRunning"
+      @pause="statusPaused"
+      @clear="clearThis"
+      @edit="itemEdit"
 
-    ></todo-item>
-  </transition-group>
+      ></todo-item>
+    </transition-group>
+    <pre class="text-left hidden" style="font-size:1.2em;">{{todoItems}}</pre>
   </div>
 </div>
 </template>
@@ -39,10 +40,6 @@ export default {
       animStates: {
         newTextVisible: false
       },
-      todoList: {
-        items: [ ],
-        lastCount: -1
-      },
       stats: helper.stats,
       actns: helper.actns
     };
@@ -51,6 +48,11 @@ export default {
     TodoItem,
     TodoItemNewLine
   },
+  computed: {
+    todoItems () {
+      return this.$store.state.todoList.items;
+    }
+  },
   mounted: function () {
     this.animStates.newTextVisible = true;
   },
@@ -58,8 +60,8 @@ export default {
     addTodo (newText) {
       const trimmedText = newText.trim();
       if (trimmedText && trimmedText !== '') {
-        this.todoList.items.push({
-          id: ++this.todoList.lastCount,
+        this.$store.commit('add',{
+          id: ++this.$store.state.todoList.lastCount,
           text: trimmedText,
           time: {
             createdTime: moment(),
@@ -76,11 +78,11 @@ export default {
       }
     },
     getItem (id) {
-      for (var i = 0; i <= this.todoList.items.length; i++) {
-        if (String(this.todoList.items[i].id) === String(id)) {
+      for (var i = 0; i <= this.$store.state.todoList.items.length; i++) {
+        if (String(this.$store.state.todoList.items[i].id) === String(id)) {
           return {
             index: i,
-            object: this.todoList.items[i]
+            object: this.$store.state.todoList.items[i]
           };
         }
       }
@@ -117,7 +119,7 @@ export default {
       this.updateDuration(id);
     },
     clearThis (id) {
-      this.todoList.items.splice(this.getItem(id).index, 1);
+      this.$store.commit('delete',this.getItem(id).index);
     },
     itemEdit (id) {
       this.editEndAll();
