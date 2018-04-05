@@ -77,11 +77,11 @@ export default {
     sortByDefault () {
       this.todoList = this.$store.getters.all;
     },
-    sortByStatus () {
-      this.todoList = this.$store.getters.doneTodos;
+    sortByStatus (status) {
+      this.todoList = this.$store.getters.statusSort(status);
     },
-    sortByTime () {
-      this.todoList = this.$store.getters.timeSort;
+    sortByTime (intSortFlag) {
+      this.todoList = this.$store.getters.timeSort(intSortFlag);
     },
     addTodo (newText) {
       const trimmedText = newText.trim();

@@ -5,9 +5,11 @@ import Vuex from 'vuex';
 import App from './App';
 import router from './router';
 
-// -----styles:
+// -----bootstrap:
 import 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+// -----styles:
 import './assets/less/common.less';
 
 import helper from '@/components/lib/todoHelpers';
@@ -35,18 +37,33 @@ const store = new Vuex.Store({
       return state.todoList.items;
     },
     timeSort (state) {
-      return [...state.todoList.items].sort((a, b) => {
-        let at = a.time.pastTime.duration;
-        let bt = b.time.pastTime.duration;
-        return at.as('ms') < bt.as('ms');
-      });
+      return (intSortFlag)=>{
+        return [...state.todoList.items].sort((a, b) => {
+          let at = a.time.pastTime.duration;
+          let bt = b.time.pastTime.duration;
+          if(intSortFlag === 0){
+            return 0;
+          }else if(intSortFlag === 1){
+            return at.as('ms') < bt.as('ms');
+          }else if(intSortFlag === 2){
+            return at.as('ms') > bt.as('ms');
+          }else{
+            return 0;
+          }
+        });
+      }
     },
-    doneTodos (state) {
-      return state.todoList.items.filter((todo) => {
-        if (todo.status === helper.stats.DONE) {
-          return todo;
-        }
-      });
+    statusSort (state) {
+      const showAll = 'all'
+      return (sortByThis)=>{
+        return state.todoList.items.filter((todo) => {
+          if (todo.status === sortByThis.toLowerCase()) {
+            return todo;
+          }else if(showAll === sortByThis.toLowerCase()){
+            return todo;
+          }
+        });
+      }
     }
   }
 });

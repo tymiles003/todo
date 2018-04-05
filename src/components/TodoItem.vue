@@ -13,11 +13,11 @@
       <font-awesome-icon icon="pause" />
   </div>
   <div
-    class="todo-item-time col-sm-3 col-md-2 col-lg-1 text-left pr-2 pl-2 pt-3">
+    class="todo-item-time col-sm-3 col-md-2 col-lg-2 text-left pr-2 pl-2 pt-3">
       {{todo.time.pastTime.render}}
   </div>
   <div
-    class="todo-item-text col-sm-6 col-md-7 col-lg-8 text-left pr-2 pl-2 pt-3"
+    class="todo-item-text col-sm-6 col-md-7 col-lg-7 text-left pr-2 pl-2 pt-3"
     @click="editThis"
     v-if="todo.action!==actns.EDIT"
     :title="todo.status">
