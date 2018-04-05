@@ -6,6 +6,15 @@
   .trs025(background);
   position: relative;
 
+  &.trace{
+    background-color: fade(#f00,10%);
+    outline: fade(#00f,10%);
+    *, * *{
+      background-color: fade(#f00,10%);
+      outline: 2px solid fade(#00f,10%);
+    }
+  }
+
   &-text,
   &-time{
     padding: .375rem .75rem;
