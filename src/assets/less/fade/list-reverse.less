@@ -1,0 +1,18 @@
+@import '../functions/functions';
+.list-reverse-item {
+  .trs1-delay(all);
+  display: inline-block;
+  margin-right: 10px;
+}
+.list-reverse-enter-active, .list-reverse-leave-active {
+  .trs015-delay(opacity);
+  .trs015-delay(transform);
+}
+
+.list-reverse-enter, .list-reverse-leave-to /* .list-reverse-leave-active до версии 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+.list-reverse-move {
+  .trs1(all);
+}

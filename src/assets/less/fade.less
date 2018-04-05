@@ -1,37 +1,4 @@
-@import './functions/functions';
-.fade-enter-active,
-.fade-leave-active {
-  .trs015-delay(opacity);
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-
-.fade-element-enter-active,
-.fade-element-leave-active {
-  .trs015(opacity);
-}
-.fade-element-enter,
-.fade-element-leave-to {
-  .trs015(opacity);
-  opacity: 0;
-}
-
-.list-item {
-  .trs1-delay(all);
-  display: inline-block;
-  margin-right: 10px;
-}
-.list-enter-active, .list-leave-active {
-  .trs015-delay(opacity);
-  .trs015-delay(transform);
-}
-
-.list-enter, .list-leave-to /* .list-leave-active до версии 2.1.8 */ {
-  opacity: 0;
-  transform: translateY(30px);
-}
-.list-move {
-  .trs1(all);
-}
+@import './fade/fade';
+@import './fade/fade-element';
+@import './fade/list-item';
+@import './fade/list-reverse';
