@@ -3,20 +3,27 @@
   <div
     class="todo-item-text col-xs-12 col-sm-2 col-md-2 col-lg-1 text-left p-2">
     <sort-duration
+      v-bind:reset="resets.time"
+      @reinit="timeReinit"
       @sort="timeSort">
     </sort-duration>
   </div>
   <div
     class="todo-item-text col-xs-12 col-sm-4 col-md-2 col-lg-2 text-left p-2">
       <sort-select-status
+      v-bind:reset="resets.status"
+      @reinit="statusReinit"
       @sort="statusSort">
       </sort-select-status>
   </div>
-  <div
-    class="todo-item-text col-xs-12 col-sm-2 col-md-2 col-lg-1 offset-sm-4 offset-md-6 offset-lg-8 text-right p-2">
-    <sort-reset
-    @sort="resetSort">
-  </sort-reset>
+    <div
+      class="todo-item-text col-xs-12 col-sm-2 col-md-2 col-lg-1 offset-sm-4 offset-md-6 offset-lg-8 text-right p-2 nocursor">
+        <transition name="fade">
+          <sort-reset
+            v-if="isSorted"
+            @sort="resetSort">
+          </sort-reset>
+        </transition>
 
   </div>
 </div>
@@ -44,6 +51,11 @@ export default {
   name: 'TodoItemSort',
   data () {
     return {
+      resets: {
+        time: false,
+        status: false
+      },
+      isSorted: false,
       stats: helper.stats,
       actns: helper.actns
     };
@@ -52,16 +64,24 @@ export default {
   },
   methods: {
     timeSort (intSortFlag) {
+      this.isSorted = true;
       this.$emit('sortbytime', intSortFlag);
-      // console.log(this.$store.getters.doneTodos);
     },
     statusSort (status) {
+      this.isSorted = true;
       this.$emit('sortbystatus', status);
-      // console.log(this.$store.getters.doneTodos);
     },
     resetSort () {
       this.$emit('sortbydefault');
-      // console.log(this.$store.getters.doneTodos);
+      this.resets.time = true;
+      this.resets.status = true;
+      this.isSorted = false;
+    },
+    timeReinit () {
+      this.resets.time = false;
+    },
+    statusReinit () {
+      this.resets.status = false;
     }
   },
   computed: {

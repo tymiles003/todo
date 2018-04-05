@@ -33,6 +33,9 @@ const store = new Vuex.Store({
     }
   },
   getters: {
+    length (state) {
+      return state.todoList.items.length;
+    },
     all (state) {
       return state.todoList.items;
     },
@@ -54,12 +57,16 @@ const store = new Vuex.Store({
       }
     },
     statusSort (state) {
-      const showAll = 'all'
+      const showAll = 'all';
+      const showDone = 'done';
+      const showUndone = 'undone';
       return (sortByThis)=>{
         return state.todoList.items.filter((todo) => {
           if (todo.status === sortByThis.toLowerCase()) {
             return todo;
           }else if(showAll === sortByThis.toLowerCase()){
+            return todo;
+          }else if(showUndone === sortByThis.toLowerCase() && todo.status !== showDone){
             return todo;
           }
         });

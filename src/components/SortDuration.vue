@@ -20,6 +20,7 @@ import brands from '@fortawesome/fontawesome-free-brands';
 
 export default {
   name: 'SortDuration',
+  props: ['reset'],
   data () {
     return {
       showStatus: 0,
@@ -27,8 +28,19 @@ export default {
     };
   },
   created () { },
+  watch: {
+    'reset': function () {
+      if(this.reset === true){
+        this.reinit();
+      }
+    }
+  },
   directives: { },
   methods: {
+    reinit () {
+      this.showStatus = 0;
+      this.$emit('reinit');
+    },
     handlerButton () {
       this.showStatus++;
       if(this.showStatus > this.maxStatus){

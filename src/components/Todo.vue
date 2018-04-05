@@ -1,13 +1,14 @@
 <template>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 p-3">
-
-    <todo-item-sort
-      @sortbydefault="sortByDefault"
-      @sortbystatus="sortByStatus"
-      @sortbytime="sortByTime">
-    </todo-item-sort>
-
+    <transition name="list-reverse">
+      <todo-item-sort
+        v-if="storeLength !== 0"
+        @sortbydefault="sortByDefault"
+        @sortbystatus="sortByStatus"
+        @sortbytime="sortByTime">
+      </todo-item-sort>
+    </transition>
     <transition name="fade-element">
       <todo-item-new-line
         v-if="animStates.newTextVisible"
@@ -55,6 +56,7 @@ export default {
         newTextVisible: false
       },
       todoList: [ ],
+      storeLength: 0,
       stats: helper.stats,
       actns: helper.actns
     };
@@ -72,6 +74,10 @@ export default {
   mounted: function () {
     this.animStates.newTextVisible = true;
     this.todoList = this.$store.getters.all;
+    this.storeLength = this.$store.getters.length;
+  },
+  updated: function () {
+    this.storeLength = this.$store.getters.length;
   },
   methods: {
     sortByDefault () {
@@ -147,6 +153,7 @@ export default {
     },
     clearThis (id) {
       this.$store.commit('delete', this.getItem(id).index);
+      this.todoList = this.$store.getters.all;
     },
     itemEdit (id) {
       this.editEndAll();

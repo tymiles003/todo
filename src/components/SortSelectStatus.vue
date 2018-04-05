@@ -22,20 +22,34 @@ import helper from '@/components/lib/todoHelpers';
 
 export default {
   name: 'SortSelectStatus',
+  props: ['reset'],
   data () {
     return {
       values: [
         'All',
         'Pending',
         'Paused',
-        'Done'
+        'Done',
+        'Undone'
       ],
-      label: 'Статус'
+      label: 'Статус',
+      labelDefault: 'Статус'
     };
   },
   created () { },
+  watch: {
+    'reset': function () {
+      if(this.reset === true){
+        this.reinit();
+      }
+    }
+  },
   directives: { },
   methods: {
+    reinit () {
+      this.label = this.labelDefault;
+      this.$emit('reinit');
+    },
     selectValue (e) {
       this.label = e.toElement.innerText;
       this.$emit('sort', e.toElement.innerText);
