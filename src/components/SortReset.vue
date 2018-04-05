@@ -6,9 +6,6 @@
 
 <script>
 
-// -----other:
-import helper from '@/components/lib/todoHelpers';
-
 // -----fontAwesome:
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
 import faSolid from '@fortawesome/fontawesome-free-solid';
@@ -28,7 +25,7 @@ export default {
   methods: {
     handlerButton () {
       this.showStatus++;
-      if(this.showStatus > this.maxStatus){
+      if (this.showStatus > this.maxStatus) {
         this.showStatus = 0;
       }
       this.$emit('sort', this.showStatus);

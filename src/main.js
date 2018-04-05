@@ -12,7 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // -----styles:
 import './assets/less/common.less';
 
-import helper from '@/components/lib/todoHelpers';
+// import helper from '@/components/lib/todoHelpers';
 
 Vue.use(Vuex);
 
@@ -40,37 +40,37 @@ const store = new Vuex.Store({
       return state.todoList.items;
     },
     timeSort (state) {
-      return (intSortFlag)=>{
+      return (intSortFlag) => {
         return [...state.todoList.items].sort((a, b) => {
           let at = a.time.pastTime.duration;
           let bt = b.time.pastTime.duration;
-          if(intSortFlag === 0){
+          if (intSortFlag === 0) {
             return 0;
-          }else if(intSortFlag === 1){
+          } else if (intSortFlag === 1) {
             return at.as('ms') < bt.as('ms');
-          }else if(intSortFlag === 2){
+          } else if (intSortFlag === 2) {
             return at.as('ms') > bt.as('ms');
-          }else{
+          } else {
             return 0;
           }
         });
-      }
+      };
     },
     statusSort (state) {
       const showAll = 'all';
       const showDone = 'done';
       const showUndone = 'undone';
-      return (sortByThis)=>{
+      return (sortByThis) => {
         return state.todoList.items.filter((todo) => {
           if (todo.status === sortByThis.toLowerCase()) {
             return todo;
-          }else if(showAll === sortByThis.toLowerCase()){
+          } else if (showAll === sortByThis.toLowerCase()) {
             return todo;
-          }else if(showUndone === sortByThis.toLowerCase() && todo.status !== showDone){
+          } else if (showUndone === sortByThis.toLowerCase() && todo.status !== showDone) {
             return todo;
           }
         });
-      }
+      };
     }
   }
 });

@@ -9,9 +9,6 @@
 
 <script>
 
-// -----other:
-import helper from '@/components/lib/todoHelpers';
-
 // -----fontAwesome:
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
 import faSolid from '@fortawesome/fontawesome-free-solid';
@@ -30,7 +27,7 @@ export default {
   created () { },
   watch: {
     'reset': function () {
-      if(this.reset === true){
+      if (this.reset === true) {
         this.reinit();
       }
     }
@@ -43,18 +40,18 @@ export default {
     },
     handlerButton () {
       this.showStatus++;
-      if(this.showStatus > this.maxStatus){
+      if (this.showStatus > this.maxStatus) {
         this.showStatus = 0;
       }
       this.$emit('sort', this.showStatus);
     }
   },
   computed: {
-    titleComputed (){
+    titleComputed () {
       const sw0 = 'Отсортировать по продолжительности';
       const sw1 = 'Отсортировано по продолжительности в порядке возрастания';
       const sw2 = 'Отсортировано по продолжительности в порядке убывания';
-      return this.showStatus === 0?sw0:this.showStatus === 1?sw1:this.showStatus === 2?sw2:sw0;
+      return this.showStatus === 0 ? sw0 : this.showStatus === 1 ? sw1 : this.showStatus === 2 ? sw2 : sw0;
     }
   },
   components: {

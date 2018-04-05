@@ -6,6 +6,7 @@
     <div class="dropdown-menu" aria-labelledby="myDropdown">
       <a
         v-for="value in values"
+        v-bind:key="value"
         class="dropdown-item"
         @click="selectValue"
         href="#">{{value}}</a>
@@ -14,11 +15,6 @@
 </template>
 
 <script>
-
-// -----other:
-import helper from '@/components/lib/todoHelpers';
-
-
 
 export default {
   name: 'SortSelectStatus',
@@ -39,7 +35,7 @@ export default {
   created () { },
   watch: {
     'reset': function () {
-      if(this.reset === true){
+      if (this.reset === true) {
         this.reinit();
       }
     }
