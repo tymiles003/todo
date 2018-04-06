@@ -1,19 +1,13 @@
 @import '../functions/functions';
-// .list-item {
-//   .trs1-delay(all);
-//   display: inline-block;
-//   margin-right: 10px;
-// }
-.list{
-  &-enter, &-leave-to{
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  &-enter-active, &-leave-active{
-    .trs025-delay(opacity);
-    .trs025-delay(transform);
-  }
-  &-move{
-    .trs1(all);
-  }
+
+.list-move {
+  .trs025(transform);
+}
+.list-enter-active, .list-leave-active{
+  .trs015-delay(opacity);
+  .trs015-delay(transform);
+}
+.list-enter, .list-leave-to{
+  opacity: 0;
+  transform: translateY(30px);
 }
