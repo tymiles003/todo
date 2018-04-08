@@ -39,17 +39,15 @@
 <script>
 // -----libraries:
 import moment from 'moment';
-window.moment = moment;
 // eslint-disable-next-line
 import momentDurationFormat from 'moment-duration-format';
-
 // -----components:
 import TodoItem from '@/components/TodoItem';
 import TodoItemSort from '@/components/TodoItemSort';
 import TodoItemNewLine from '@/components/TodoItemNewLine';
-
 // -----other:
 import helper from '@/components/lib/todoHelpers';
+
 export default {
   name: 'Todo',
   data () {
@@ -146,7 +144,7 @@ export default {
       item.status = this.stats.DONE;
       this.updateDuration(id);
       this.$store.commit('update', {
-        index:index,
+        index: index,
         object: item
       });
     },
@@ -162,7 +160,7 @@ export default {
         duration: 0
       });
       this.$store.commit('update', {
-        index:index,
+        index: index,
         object: item
       });
     },
@@ -173,7 +171,7 @@ export default {
       item.status = this.stats.PAUSED;
       this.updateDuration(id);
       this.$store.commit('update', {
-        index:index,
+        index: index,
         object: item
       });
     },
@@ -193,7 +191,7 @@ export default {
       let item = object.object;
       item.text = arg.text;
       this.$store.commit('update', {
-        index:index,
+        index: index,
         object: item
       });
     },
