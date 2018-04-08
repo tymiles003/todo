@@ -4,5 +4,8 @@ export const mutations = {
   },
   delete (state, index) {
     state.todoList.items.splice(index, 1);
+  },
+  update (state, arg) {
+    state.todoList.items[arg.index] = arg.object;
   }
 };

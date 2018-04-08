@@ -108,7 +108,11 @@ export default {
       this.$emit('edit', this.todo.id);
     },
     setNewText (fromChild) {
-      this.todo.text = fromChild.text;
+      // this.todo.text = fromChild.text;
+      this.$emit('newText', {
+        id: this.todo.id,
+        text: fromChild.text
+      });
     }
   },
   computed: {

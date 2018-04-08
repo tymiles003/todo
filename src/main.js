@@ -16,7 +16,6 @@ import './assets/less/common.less';
 
 Vue.config.productionTip = true;
 
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
