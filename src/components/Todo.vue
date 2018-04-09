@@ -16,7 +16,6 @@
         @add="addTodo">
       </todo-item-new-line>
     </transition>
-
    <transition-group name="list" tag="div">
     <todo-item
       v-for="item in todoItems"

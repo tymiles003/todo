@@ -13,8 +13,17 @@
       <font-awesome-icon icon="pause" />
   </div>
   <div
-    class="todo-item-time col-sm-3 col-md-2 col-lg-2 text-left pr-2 pl-2 pt-3">
+    class="todo-item-time col-sm-3 col-md-2 col-lg-2 text-left pr-2 pl-2 pt-3"
+    @click="showTracks">
       {{todo.time.pastTime.render}}
+      <transition name="fade">
+        <time-tracker-modal
+          v-if="trackerShow"
+          v-bind:trackerShow="trackerShow"
+          v-bind:track="todo.time.track"
+          @close="hideTracks">
+        </time-tracker-modal>
+      </transition>
   </div>
   <div
     class="todo-item-text col-sm-6 col-md-7 col-lg-7 text-left pr-2 pl-2 pt-3"
@@ -68,6 +77,7 @@ import brands from '@fortawesome/fontawesome-free-brands';
 
 // -----vue components:
 import TodoItemEdit from '@/components/TodoItemEdit';
+import TimeTrackerModal from '@/components/TimeTrackerModal';
 
 // -----other:
 import helper from '@/components/lib/todoHelpers';
@@ -80,6 +90,7 @@ export default {
       animStates: {
         newTextVisible: false
       },
+      trackerShow: false,
       stats: helper.stats,
       actns: helper.actns
     };
@@ -113,6 +124,13 @@ export default {
         id: this.todo.id,
         text: fromChild.text
       });
+    },
+    showTracks () {
+      this.trackerShow = true;
+    },
+    hideTracks () {
+      this.trackerShow = false;
+      console.log('handler emit', this.trackerShow);
     }
   },
   computed: {
@@ -142,7 +160,8 @@ export default {
     faSolid,
     faRegular,
     brands,
-    TodoItemEdit
+    TodoItemEdit,
+    TimeTrackerModal
   }
 };
 </script>
