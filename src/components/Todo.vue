@@ -38,36 +38,17 @@
 
 <script>
 // -----for component:
+import {data} from '@/components/Todo/data';
+import {components} from '@/components/Todo/components';
 import {methods} from '@/components/Todo/methods';
 import {computed} from '@/components/Todo/computed';
 import {mounted} from '@/components/Todo/mounted';
 import {updated} from '@/components/Todo/updated';
 
-// -----components:
-import TodoItem from '@/components/TodoItem';
-import TodoItemSort from '@/components/TodoItemSort';
-import TodoItemNewLine from '@/components/TodoItemNewLine';
-// -----other:
-import helper from '@/components/lib/todoHelpers';
-
 export default {
   name: 'Todo',
-  data () {
-    return {
-      animStates: {
-        newTextVisible: false
-      },
-      todoList: [ ],
-      storeLength: 0,
-      stats: helper.stats,
-      actns: helper.actns
-    };
-  },
-  components: {
-    TodoItem,
-    TodoItemSort,
-    TodoItemNewLine
-  },
+  data,
+  components,
   computed,
   mounted,
   updated,
