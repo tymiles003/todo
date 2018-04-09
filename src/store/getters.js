@@ -13,9 +13,9 @@ export const getters = {
         if (intSortFlag === 0) {
           return 0;
         } else if (intSortFlag === 1) {
-          return at.as('ms') < bt.as('ms');
+          return at < bt;
         } else if (intSortFlag === 2) {
-          return at.as('ms') > bt.as('ms');
+          return at > bt;
         } else {
           return 0;
         }
