@@ -13,7 +13,7 @@ import '../assets/less/fade.less';
 
 export default {
   name: 'TimeTrackerModal',
-  props: ['trackerShow','track'],
+  props: ['trackerShow', 'track'],
   data () {
     return {
       a: 0
