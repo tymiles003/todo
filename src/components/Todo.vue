@@ -27,7 +27,6 @@
       @clear="clearThis"
       @edit="itemEdit"
       @newText="setNewText"
-
       ></todo-item>
     </transition-group>
     <pre class="text-left hidden" style="font-size:1.2em;">{{todoItems}}</pre>

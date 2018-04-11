@@ -20,7 +20,7 @@
         <time-tracker-modal
           v-if="trackerShow"
           v-bind:trackerShow="trackerShow"
-          v-bind:track="todo.time.track"
+          v-bind:tracks="todo.time.track"
           @close="hideTracks">
         </time-tracker-modal>
       </transition>
