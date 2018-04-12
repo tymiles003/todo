@@ -30,14 +30,16 @@
       ></todo-item>
     </transition-group>
   </div>
-  <transition-group name="fade-element">
-    <notify-items
-      v-for="item in notifyMessages"
-      v-bind:notify="item"
-      v-bind:key="item.id"
-      @delete="deleteNotify">
-    </notify-items>
-  </transition-group>
+  <div class="notify-box">
+    <transition-group name="list-reverse" tag="div">
+      <notify-items
+        v-for="item in notifyMessages"
+        v-bind:notify="item"
+        v-bind:key="item.id"
+        @delete="deleteNotify">
+      </notify-items>
+    </transition-group>
+  </div>
 </div>
 </template>
 
@@ -49,6 +51,9 @@ import {methods} from '@/components/Todo/methods';
 import {computed} from '@/components/Todo/computed';
 import {mounted} from '@/components/Todo/mounted';
 import {updated} from '@/components/Todo/updated';
+
+// -----styles:
+import '../assets/less/components/notify-box.less';
 
 export default {
   name: 'Todo',
