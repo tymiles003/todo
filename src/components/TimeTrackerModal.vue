@@ -60,7 +60,6 @@ export default {
   },
   methods: {
     closeMe () {
-      console.log('click');
       this.$emit('close');
     }
   },

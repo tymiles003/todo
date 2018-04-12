@@ -3,6 +3,9 @@ import moment from 'moment';
 // eslint-disable-next-line
 import momentDurationFormat from 'moment-duration-format';
 
+// -----other:
+import array from '@/components/lib/array';
+
 export const commonMethods = {
   updateDuration (id) {
     let item = this.getItem(id).object;
@@ -23,14 +26,6 @@ export const commonMethods = {
     }
   },
   getItem (id) {
-    for (var i = 0; i <= this.$store.state.todoList.items.length; i++) {
-      if (String(this.$store.state.todoList.items[i].id) === String(id)) {
-        return {
-          index: i,
-          object: this.$store.state.todoList.items[i]
-        };
-      }
-    }
-    return false;
+    return array.getItemInObjArrByID(id, this.$store.state.todoList.items);
   }
 };

@@ -6,7 +6,7 @@ import store from './store';
 import router from './router';
 
 // -----bootstrap:
-import 'bootstrap/dist/js/bootstrap.min.js';
+import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // -----styles:

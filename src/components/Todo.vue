@@ -29,8 +29,15 @@
       @newText="setNewText"
       ></todo-item>
     </transition-group>
-    <pre class="text-left hidden" style="font-size:1.2em;">{{todoItems}}</pre>
   </div>
+  <transition-group name="fade-element">
+    <notify-items
+      v-for="item in notifyMessages"
+      v-bind:notify="item"
+      v-bind:key="item.id"
+      @delete="deleteNotify">
+    </notify-items>
+  </transition-group>
 </div>
 </template>
 

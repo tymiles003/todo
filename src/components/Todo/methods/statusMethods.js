@@ -2,6 +2,8 @@
 import moment from 'moment';
 // eslint-disable-next-line
 import momentDurationFormat from 'moment-duration-format';
+// eslint-disable-next-line
+import momentTimer from 'moment-timer';
 
 export const statusMethods = {
   statusDone (id) {
@@ -14,6 +16,7 @@ export const statusMethods = {
       index: index,
       object: item
     });
+    this.addNotify('Текст завершен', 5);
   },
   statusRunning (id) {
     this.pausedAll();
@@ -26,10 +29,15 @@ export const statusMethods = {
       startTime: parseInt(moment().format('x')),
       duration: 0
     });
+    let timer = moment.duration(moment.duration(25, 'minutes').asMilliseconds()).timer(() => {
+      this.statusPaused(id);
+    });
+    timer.start();
     this.$store.commit('update', {
       index: index,
       object: item
     });
+    this.addNotify('Таск запущен', 5);
   },
   statusPaused (id) {
     let object = this.getItem(id);

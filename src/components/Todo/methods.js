@@ -1,6 +1,7 @@
 // -----for component:
 import {commonMethods} from '@/components/Todo/methods/commonMethods';
 import {sortMethods} from '@/components/Todo/methods/sortMethods';
+import {notifyMethods} from '@/components/Todo/methods/notifyMethods';
 import {statusMethods} from '@/components/Todo/methods/statusMethods';
 import {actionsMethods} from '@/components/Todo/methods/actionsMethods';
 
@@ -8,12 +9,16 @@ import {actionsMethods} from '@/components/Todo/methods/actionsMethods';
 import moment from 'moment';
 // eslint-disable-next-line
 import momentDurationFormat from 'moment-duration-format';
+// eslint-disable-next-line
+import momentTimer from 'moment-timer';
 
 export const methods = {
   ...commonMethods,
   ...sortMethods,
+  ...notifyMethods,
   ...statusMethods,
   ...actionsMethods,
+
   addTodo (newText) {
     const trimmedText = newText.trim();
     if (trimmedText && trimmedText !== '') {
@@ -33,11 +38,13 @@ export const methods = {
         status: this.stats.PENDING,
         action: this.actns.DEFAULT
       });
+      this.addNotify('Добавлен новый таск', 5);
     }
   },
   clearThis (id) {
     this.$store.commit('delete', this.getItem(id).index);
     this.todoList = this.$store.getters.all;
+    this.addNotify('Удален таск', 5);
   },
   setNewText (arg) {
     this.editEndAll();
@@ -49,5 +56,6 @@ export const methods = {
       index: index,
       object: item
     });
+    this.addNotify('Текст таска изменен', 5);
   }
 };

@@ -130,7 +130,6 @@ export default {
     },
     hideTracks () {
       this.trackerShow = false;
-      console.log('handler emit', this.trackerShow);
     }
   },
   computed: {
