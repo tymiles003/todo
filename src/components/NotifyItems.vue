@@ -22,7 +22,7 @@ export default {
   },
   created () {
     let timer = moment.duration(
-      moment.duration(this.notify.durationSeconds,'seconds').asMilliseconds()
+      moment.duration(this.notify.durationSeconds, 'seconds').asMilliseconds()
     ).timer(() => {
       this.removeNotify();
     });
