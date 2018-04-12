@@ -22,7 +22,7 @@ import '../assets/less/components/todo-tracker.less';
 
 export default {
   name: 'TrackItem',
-  props: ['track','percents'],
+  props: ['track', 'percents'],
   data () {
     return {
       a: 0
@@ -57,7 +57,7 @@ export default {
     persentComputed () {
       let percent = 0;
       for (var i = 0; i < this.percents.length; i++) {
-        if (this.track.startTime === this.percents[i].key){
+        if (this.track.startTime === this.percents[i].key) {
           percent = this.percents[i].percentDuration;
           break;
         }

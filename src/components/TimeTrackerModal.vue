@@ -44,13 +44,11 @@ import TrackItem from '@/components/TrackItem';
 // -----other:
 import math from '@/components/lib/math';
 
-
 // -----fontAwesome:
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
 import faSolid from '@fortawesome/fontawesome-free-solid';
 import faRegular from '@fortawesome/fontawesome-free-regular';
 import brands from '@fortawesome/fontawesome-free-brands';
-
 
 export default {
   name: 'TimeTrackerModal',
@@ -69,11 +67,12 @@ export default {
   computed: {
     percentsComputed () {
       let sumDuration = this.tracks.reduce((sum, current) => {
+        // eslint-disable-next-line
         return sum += current.duration;
-      },0);
+      }, 0);
       let percentArray = [];
 
-      this.tracks.forEach((item, i , arr) => {
+      this.tracks.forEach((item, i, arr) => {
         percentArray.push({
           key: item.startTime,
           percentDuration: math.getPersentOfValues(item.duration, sumDuration)
@@ -88,7 +87,7 @@ export default {
     FontAwesomeIcon,
     faSolid,
     faRegular,
-    brands,
+    brands
   }
 };
 </script>
