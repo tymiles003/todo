@@ -1,17 +1,11 @@
 <template>
 <div class="todo-item row" v-bind:class="todo.status">
-  <div
-    class="todo-item-button col-sm-1 text-center p-2"
-    @click="runThis"
-    v-if="isRun">
-      <font-awesome-icon icon="play" />
-  </div>
-  <div
-    class="todo-item-button col-sm-1 text-center p-2"
-    @click="pauseThis"
-    v-if="isPause">
-      <font-awesome-icon icon="pause" />
-  </div>
+  <play-button
+    :isRun="isRun"
+    :isPause="isPause"
+    @run="runThis"
+    @pause="pauseThis">
+  </play-button>
   <div
     class="todo-item-time col-sm-3 col-md-2 col-lg-2 text-left pr-2 pl-2 pt-3"
     @click="showTracks">
@@ -26,7 +20,7 @@
       </transition>
   </div>
   <div
-    class="todo-item-text col-sm-6 col-md-7 col-lg-7 text-left pr-2 pl-2 pt-3"
+    class="todo-item-text col-sm-3 col-md-6 col-lg-7 text-left pr-2 pl-2 pt-3"
     @click="editThis"
     v-if="todo.action!==actns.EDIT"
     :title="todo.status">
@@ -39,13 +33,13 @@
     </todo-item-edit>
   </transition>
   <div
-    class="todo-item-button col-sm-1 text-center p-2"
+    class="todo-item-button col-sm-1 col-md-2 col-lg-1 text-center p-2"
     @click="doneThis"
     v-if="isDone">
       <font-awesome-icon :icon="['far', 'square']" />
   </div>
   <div
-    class="todo-item-button col-sm-1 text-center p-2"
+    class="todo-item-button col-sm-1 col-md-2 col-lg-1 text-center p-2"
     @click="pauseThis"
     v-if="todo.status===stats.DONE">
       <font-awesome-icon
@@ -78,6 +72,7 @@ import brands from '@fortawesome/fontawesome-free-brands';
 // -----vue components:
 import TodoItemEdit from '@/components/TodoItemEdit';
 import TimeTrackerModal from '@/components/TimeTrackerModal';
+import PlayButton from '@/components/PlayButton';
 
 // -----other:
 import helper from '@/components/lib/todoHelpers';
@@ -160,7 +155,8 @@ export default {
     faRegular,
     brands,
     TodoItemEdit,
-    TimeTrackerModal
+    TimeTrackerModal,
+    PlayButton
   }
 };
 </script>
