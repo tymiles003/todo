@@ -47,7 +47,29 @@
     .second();
   }
 }
-.track-persent{
-  height: 1em;
-  background-color: @clr-black;
+.track-progress-wrapper{
+  .common(){
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
+  position: relative;
+
+  .track-progress-proportion{
+    .common();
+    background-color: fade(@clr-red, 50%);
+  }
+  .track-progress-percent{
+    .common();
+    background-color: fade(@clr-blue, 50%);
+  }
+
+}
+
+.nav-link{
+  cursor: pointer;
+  &.active{
+    color: @clr-link!important;
+  }
 }

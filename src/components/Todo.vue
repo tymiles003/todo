@@ -1,6 +1,7 @@
 <template>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 p-3">
+
     <transition name="list-reverse">
       <todo-item-sort
         v-if="storeLength !== 0"

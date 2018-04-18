@@ -1,13 +1,16 @@
 <template>
-  <div class="track-item row">
+  <div class="track-item row mb-1">
     <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3 track-item-startTime" :title="startTimeFull">
       <span class="year-track">{{YYYY}}</span>.<span class="month-track">{{MM}}</span>.<span class="day-track">{{DD}}</span> -- <span class="hour-track">{{HH}}</span>:<span class="minute-track">{{mm}}</span><span class="second-track hidden">:{{ss}}</span>
     </div>
     <div class="col-xs-12 col-sm-3 col-md-2 col-lg-2">{{duration}}</div>
-    <div class="col-xs-12 col-sm-4 col-md-6 col-lg-7" :title="persentComputed">
+    <div class="col-xs-12 col-sm-4 col-md-6 col-lg-7 track-progress-wrapper" :title="titleProgress">
       <div
-        class="track-persent bg-primary"
-        v-bind:style="{ width: persentComputed + '%', color:'red'}"></div>
+        class="track-progress-proportion -bg-primary"
+        v-bind:style="{ width: proportionComputed + '%', color:'red'}"></div>
+      <div
+        class="track-progress-percent -bg-secondary"
+        v-bind:style="{ width: percentComputed + '%', color:'red'}"></div>
     </div>
   </div>
 </template>
@@ -22,7 +25,7 @@ import '../assets/less/components/todo-tracker.less';
 
 export default {
   name: 'TrackItem',
-  props: ['track', 'percents'],
+  props: ['track', 'progress'],
   data () {
     return {
       a: 0
@@ -54,17 +57,31 @@ export default {
     duration () {
       return moment.duration(this.track.duration).format('HH:mm:ss', {trim: false});
     },
-    persentComputed () {
-      let percent = 0;
-      for (var i = 0; i < this.percents.length; i++) {
-        if (this.track.startTime === this.percents[i].key) {
-          percent = this.percents[i].percentDuration;
+    proportionComputed () {
+      let proportion = 0;
+      let arr = this.progress;
+      for (var i = 0; i < arr.length; i++) {
+        if (this.track.startTime === arr[i].key) {
+          proportion = this.progress[i].proportionDuration;
           break;
         }
       }
-      return Math.floor(percent);
+      return Math.floor(proportion);
+    },
+    percentComputed () {
+      let persent = 0;
+      let arr = this.progress;
+      for (var i = 0; i < arr.length; i++) {
+        if (this.track.startTime === arr[i].key) {
+          persent = arr[i].percentDuration;
+          break;
+        }
+      }
+      return Math.floor(persent);
+    },
+    titleProgress () {
+      return `${this.proportionComputed} / ${this.percentComputed}`;
     }
-
   },
   components: { }
 };
