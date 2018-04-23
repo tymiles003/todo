@@ -22,7 +22,7 @@
       <polyline-steps
         v-for="point in pointsPerc"
         v-bind:point="point"
-        v-bind:key="point[0]">
+        v-bind:key="point.key">
       </polyline-steps>
       <polyline
         stroke="rgba(255,0,0,0.50)"
@@ -79,7 +79,7 @@ export default {
       let pointsReturn = '';
       let percentArray = [];
       let percentArrayMiddle = [];
-      if (this.progress.length === 0) {
+      if (this.progress && this.progress.length === 0) {
         return '0,0 0,0';
       }
       this.progress.forEach((item, i, arr) => {
