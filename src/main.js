@@ -9,6 +9,7 @@ import router from './router';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // test
+// test
 // -----styles:
 import './assets/less/common.less';
 
