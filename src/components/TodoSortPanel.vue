@@ -1,15 +1,12 @@
 <template>
 <div class="row trace-">
   <div class="col-sm-12 text-left mb-3">
-    <button
-      v-for="cat in categories"
-      v-bind:key="cat.id"
-      @click="selectCategory(cat.id)"
-      type="button"
-      class="btn ml-2"
-      :class="{'btn-outline-primary':categorySelected===cat.id, 'btn-outline-secondary':categorySelected!==cat.id, }">
-      {{cat.name}}
-    </button>
+    <sort-button
+      v-for="item in categories"
+      v-bind:cat="item"
+      v-bind:key="item.id"
+      @sort="sortByCategory">
+    </sort-button>
     <div class="d-inline-block ml-2">
       <div class="input-group" v-if="isShowNewCategory">
         <input
@@ -43,6 +40,9 @@ import faSolid from '@fortawesome/fontawesome-free-solid';
 import faRegular from '@fortawesome/fontawesome-free-regular';
 import brands from '@fortawesome/fontawesome-free-brands';
 
+// -----vue components:
+import SortButton from '@/components/SortButton';
+
 export default {
   name: 'TodoSortPanel',
   data () {
@@ -50,14 +50,14 @@ export default {
       categories: [],
       nameNewCategory: '',
       isShowNewCategory: false
+
     };
   },
   created () {
     this.categories = this.$store.state.todoList.categories;
   },
   methods: {
-    selectCategory (categoryId) {
-      this.$store.commit("setCategory", categoryId);
+    sortByCategory (categoryId) {
       this.$emit('sort', categoryId);
     },
     showNewCategory () {
@@ -78,16 +78,13 @@ export default {
       this.isShowNewCategory = false;
     }
   },
-  computed: {
-    categorySelected () {
-      return this.$store.state.todoList.selectedCategory;
-    }
-  },
+  computed: { },
   components: {
     FontAwesomeIcon,
     faSolid,
     faRegular,
-    brands
+    brands,
+    SortButton
   }
 };
 </script>
