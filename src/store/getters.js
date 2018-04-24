@@ -1,13 +1,23 @@
+function filterAll (item, selectedCategory) {
+  if (item.categoryId === selectedCategory) {
+    return item;
+  }
+}
+
 export const getters = {
   length (state) {
     return state.todoList.items.length;
   },
   all (state) {
-    return state.todoList.items;
+    return [...state.todoList.items].filter((todo)=>{
+      return filterAll(todo, state.todoList.selectedCategory);
+    });
   },
   timeSort (state) {
     return (intSortFlag) => {
-      return [...state.todoList.items].sort((a, b) => {
+      return [...state.todoList.items].filter((todo)=>{
+        return filterAll(todo, state.todoList.selectedCategory);
+      }).sort((a, b) => {
         let at = a.time.pastTime.duration;
         let bt = b.time.pastTime.duration;
           if (intSortFlag === 0) {
@@ -27,7 +37,11 @@ export const getters = {
     const showDone = 'done';
     const showUndone = 'undone';
     return (sortByThis) => {
-      return state.todoList.items.filter((todo) => {
+      return state.todoList.items.filter((todo)=>{
+        if (todo.categoryId === state.todoList.selectedCategory) {
+          return todo;
+        }
+      }).filter((todo) => {
         if (todo.status === sortByThis.toLowerCase()) {
           return todo;
         } else if (showAll === sortByThis.toLowerCase()) {
@@ -41,9 +55,7 @@ export const getters = {
   categorySort (state) {
     return (categoryId) => {
       return state.todoList.items.filter((todo) => {
-        if (todo.categoryId === categoryId) {
-          return todo;
-        }
+        return filterAll(todo, categoryId);
       });
     };
   }
