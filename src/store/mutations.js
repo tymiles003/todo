@@ -5,6 +5,9 @@ export const mutations = {
   addCategory (state, object) {
     state.todoList.categories.push(object);
   },
+  setCategory (state, id) {
+    state.todoList.selectedCategory = id;
+  },
   delete (state, index) {
     state.todoList.items.splice(index, 1);
   },

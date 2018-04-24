@@ -17,7 +17,8 @@
         @add="addTodo">
       </todo-item-new-line>
     </transition>
-    <todo-sort-panel>
+    <todo-sort-panel
+      @sort="sortByCategory">
     </todo-sort-panel>
    <transition-group name="list" tag="div">
     <todo-item

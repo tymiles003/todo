@@ -10,15 +10,15 @@ export const getters = {
       return [...state.todoList.items].sort((a, b) => {
         let at = a.time.pastTime.duration;
         let bt = b.time.pastTime.duration;
-        if (intSortFlag === 0) {
-          return 0;
-        } else if (intSortFlag === 1) {
-          return at < bt;
-        } else if (intSortFlag === 2) {
-          return at > bt;
-        } else {
-          return 0;
-        }
+          if (intSortFlag === 0) {
+            return 0;
+          } else if (intSortFlag === 1) {
+            return at < bt;
+          } else if (intSortFlag === 2) {
+            return at > bt;
+          } else {
+            return 0;
+          }
       });
     };
   },
@@ -33,6 +33,15 @@ export const getters = {
         } else if (showAll === sortByThis.toLowerCase()) {
           return todo;
         } else if (showUndone === sortByThis.toLowerCase() && todo.status !== showDone) {
+          return todo;
+        }
+      });
+    };
+  },
+  categorySort (state) {
+    return (categoryId) => {
+      return state.todoList.items.filter((todo) => {
+        if (todo.categoryId === categoryId) {
           return todo;
         }
       });

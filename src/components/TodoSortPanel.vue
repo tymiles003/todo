@@ -4,9 +4,10 @@
     <button
       v-for="cat in categories"
       v-bind:key="cat.id"
+      @click="selectCategory(cat.id)"
       type="button"
       class="btn ml-2"
-      :class="{'btn-outline-primary':categorySelected, 'btn-outline-secondary':!categorySelected, }">
+      :class="{'btn-outline-primary':categorySelected===cat.id, 'btn-outline-secondary':categorySelected!==cat.id, }">
       {{cat.name}}
     </button>
     <div class="d-inline-block ml-2">
@@ -55,6 +56,10 @@ export default {
     this.categories = this.$store.state.todoList.categories;
   },
   methods: {
+    selectCategory (categoryId) {
+      this.$store.commit("setCategory", categoryId);
+      this.$emit('sort', categoryId);
+    },
     showNewCategory () {
       this.isShowNewCategory = true;
     },
@@ -65,9 +70,9 @@ export default {
             id: ++this.$store.state.todoList.lastCountCategory,
             name: trimmedText,
             color: '#cccccc',
-            elements: [],
-            selected: false
+            elements: []
         });
+
       }
       this.nameNewCategory = '';
       this.isShowNewCategory = false;
@@ -75,7 +80,7 @@ export default {
   },
   computed: {
     categorySelected () {
-      return true;
+      return this.$store.state.todoList.selectedCategory;
     }
   },
   components: {

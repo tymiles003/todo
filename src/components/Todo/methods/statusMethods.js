@@ -16,7 +16,7 @@ export const statusMethods = {
       index: index,
       object: item
     });
-    this.addNotify('Текст завершен', 5);
+    this.addNotify('Таск завершен', 5);
   },
   statusRunning (id) {
     this.pausedAll();

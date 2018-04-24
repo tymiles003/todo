@@ -24,6 +24,7 @@ export const methods = {
     if (trimmedText && trimmedText !== '') {
       this.$store.commit('add', {
         id: ++this.$store.state.todoList.lastCount,
+        categoryId: this.$store.state.todoList.selectedCategory,
         text: trimmedText,
         time: {
           createdTime: parseInt(moment().format('x')),
@@ -39,12 +40,14 @@ export const methods = {
         action: this.actns.DEFAULT
       });
       this.addNotify('Добавлен новый таск', 5);
+      this.sortByCategory();
     }
   },
   clearThis (id) {
     this.$store.commit('delete', this.getItem(id).index);
     this.todoList = this.$store.getters.all;
     this.addNotify('Удален таск', 5);
+    this.sortByCategory();
   },
   setNewText (arg) {
     this.editEndAll();
