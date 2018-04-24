@@ -3,7 +3,7 @@ const TODO_KEY = 'todoList';
 const DEFAULT_OBJECT = {
   items: [],
   lastCount: -1,
-  lastCountCategory: 1,
+  lastCountCategory: 0,
   selectedCategory: 0,
   categories: [
     {

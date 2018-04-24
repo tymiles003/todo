@@ -68,9 +68,7 @@ export default {
       if (trimmedText && trimmedText !== '') {
         this.$store.commit("addCategory", {
             id: ++this.$store.state.todoList.lastCountCategory,
-            name: trimmedText,
-            color: '#cccccc',
-            elements: []
+            name: trimmedText
         });
 
       }
