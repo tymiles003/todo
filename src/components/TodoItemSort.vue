@@ -1,7 +1,7 @@
 <template>
-<div class="todo-item row row mb-3">
+<div class="row mb-3">
   <div
-    class="todo-item-text col-xs-12 col-sm-2 col-md-2 col-lg-1 text-left p-2">
+    class="col-xs-12 col-sm-2 col-md-2 col-lg-1 text-left">
     <sort-duration
       v-bind:reset="resets.time"
       @reinit="timeReinit"
@@ -9,7 +9,7 @@
     </sort-duration>
   </div>
   <div
-    class="todo-item-text col-xs-12 col-sm-4 col-md-2 col-lg-2 text-left p-2">
+    class="col-xs-12 col-sm-4 col-md-2 col-lg-2 text-left">
       <sort-select-status
       v-bind:reset="resets.status"
       @reinit="statusReinit"
@@ -17,7 +17,7 @@
       </sort-select-status>
   </div>
     <div
-      class="todo-item-text col-xs-12 col-sm-2 col-md-2 col-lg-1 offset-sm-4 offset-md-6 offset-lg-8 text-right p-2 nocursor">
+      class="col-xs-12 col-sm-2 col-md-2 col-lg-1 offset-sm-4 offset-md-6 offset-lg-8 text-right p-2 nocursor">
         <transition name="fade">
           <sort-reset
             v-if="isSorted"

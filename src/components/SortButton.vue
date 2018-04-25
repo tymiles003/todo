@@ -1,6 +1,6 @@
 <template>
 <div class="d-inline-block">
-  <div class="d-inline-block ml-2" v-if="isEditCategory">
+  <div class="d-inline-block mr-2" v-if="isEditCategory">
     <div class="input-group">
       <input type="text" class="form-control" placeholder="Новая категория" @keydown.enter="editCategory(cat.id)" v-model="newNameCategory">
       <div class="input-group-append" @click="editCategory(cat.id)">
@@ -15,7 +15,7 @@
       </div>
     </div>
   </div>
-  <button v-if="!isEditCategory" @click="selectCategory(cat.id)" type="button" class="btn ml-2" :class="{'btn-outline-primary':categorySelected===cat.id, 'btn-outline-secondary':categorySelected!==cat.id, }">
+  <button v-if="!isEditCategory" @click="selectCategory(cat.id)" type="button" class="btn mr-2" :class="{'btn-outline-primary':categorySelected===cat.id, 'btn-outline-secondary':categorySelected!==cat.id, }">
       {{cat.name}}
     </button>
 </div>

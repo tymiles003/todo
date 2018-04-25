@@ -7,7 +7,7 @@
       v-bind:key="item.id"
       @sort="sortByCategory">
     </sort-button>
-    <div class="d-inline-block ml-2">
+    <div class="d-inline-block mr-2">
       <div class="input-group" v-if="isShowNewCategory">
         <input
           type="text"
@@ -44,7 +44,7 @@ import brands from '@fortawesome/fontawesome-free-brands';
 import SortButton from '@/components/SortButton';
 
 export default {
-  name: 'TodoSortPanel',
+  name: 'TodoCategoryPanel',
   data () {
     return {
       categories: [],

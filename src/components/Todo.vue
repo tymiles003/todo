@@ -2,6 +2,17 @@
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 p-3">
 
+
+    <todo-category-panel
+      @sort="sortByCategory">
+    </todo-category-panel>
+    <transition name="fade-element">
+      <todo-item-new-line
+        v-if="animStates.newTextVisible"
+        v-bind:todo="todoItems"
+        @add="addTodo">
+      </todo-item-new-line>
+    </transition>
     <transition name="list-reverse">
       <todo-item-sort
         v-if="storeLength !== 0"
@@ -10,16 +21,6 @@
         @sortbytime="sortByTime">
       </todo-item-sort>
     </transition>
-    <transition name="fade-element">
-      <todo-item-new-line
-        v-if="animStates.newTextVisible"
-        v-bind:todo="todoItems"
-        @add="addTodo">
-      </todo-item-new-line>
-    </transition>
-    <todo-sort-panel
-      @sort="sortByCategory">
-    </todo-sort-panel>
    <transition-group name="list" tag="div">
     <todo-item
       v-for="item in todoItems"
