@@ -90,13 +90,6 @@ export default {
       actns: helper.actns
     };
   },
-  directives: {
-    focus: {
-      inserted (el) {
-        el.focus();
-      }
-    }
-  },
   methods: {
     doneThis () {
       this.$emit('done', this.todo.id);
