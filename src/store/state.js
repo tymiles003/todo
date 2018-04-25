@@ -13,7 +13,7 @@ const DEFAULT_OBJECT = {
       elements: []
     }
   ]
-}
+};
 const INIT_TEMPLATE = JSON.stringify(DEFAULT_OBJECT);
 
 export const state = {

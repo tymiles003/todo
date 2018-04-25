@@ -66,11 +66,10 @@ export default {
     createNewCategory () {
       const trimmedText = this.nameNewCategory.trim();
       if (trimmedText && trimmedText !== '') {
-        this.$store.commit("addCategory", {
-            id: ++this.$store.state.todoList.lastCountCategory,
-            name: trimmedText
+        this.$store.commit('addCategory', {
+          id: ++this.$store.state.todoList.lastCountCategory,
+          name: trimmedText
         });
-
       }
       this.nameNewCategory = '';
       this.isShowNewCategory = false;

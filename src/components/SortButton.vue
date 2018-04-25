@@ -59,23 +59,22 @@ export default {
       let item = object.object;
       const trimmedText = this.newNameCategory.trim();
       if (trimmedText && trimmedText !== '') {
-
         item.name = trimmedText;
         this.$store.commit('updateCategory', {
           index: index,
           object: item
         });
       }
-        this.newNameCategory = this.cat.name;
-        this.isEditCategory = false;
+      this.newNameCategory = this.cat.name;
+      this.isEditCategory = false;
     },
     removeCategory (id) {
-      if (id !== 0){
+      if (id !== 0) {
         this.$store.commit('deleteCategory', {
           index: this.getItem(id).index,
           id: id
         });
-      }else{
+      } else {
         this.isEditCategory = false;
       }
     }

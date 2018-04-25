@@ -21,11 +21,11 @@ export const mutations = {
 
     state.todoList.categories.splice(arg.index, 1);
 
-    orphans.forEach((item, i, arr)=>{
+    orphans.forEach((item, i, arr) => {
       indexes.push(array.getItemInObjArrByID(arr[i].id, state.todoList.items).index);
       arr[i].categoryId = 0;
     });
-    indexes.forEach((item, i, arr)=>{
+    indexes.forEach((item, i, arr) => {
       state.todoList.items[item] = orphans[i];
     });
   },
