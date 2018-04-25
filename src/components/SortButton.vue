@@ -2,7 +2,7 @@
 <div class="d-inline-block">
   <div class="d-inline-block mr-2" v-if="isEditCategory">
     <div class="input-group">
-      <input type="text" class="form-control" placeholder="Новая категория" @keydown.enter="editCategory(cat.id)" v-model="newNameCategory">
+      <input type="text" class="form-control" placeholder="Новая категория" @keydown.enter="editCategory(cat.id)" v-model="newNameCategory" v-focus>
       <div class="input-group-append" @click="editCategory(cat.id)">
         <span class="input-group-text">
             <font-awesome-icon :icon="['fas', 'check']" />
@@ -15,7 +15,7 @@
       </div>
     </div>
   </div>
-  <button v-if="!isEditCategory" @click="selectCategory(cat.id)" type="button" class="btn mr-2" :class="{'btn-outline-primary':categorySelected===cat.id, 'btn-outline-secondary':categorySelected!==cat.id, }">
+  <button v-if="!isEditCategory" @click="selectCategory(cat.id)" type="button" class="btn mr-2" :class="{'btn-outline-primary':categorySelected===cat.id, 'btn-outline-secondary':categorySelected!==cat.id}">
       {{cat.name}}
     </button>
 </div>
@@ -39,6 +39,14 @@ export default {
       isEditCategory: false,
       newNameCategory: this.cat.name
     };
+  },
+  directives: {
+    focus: {
+      inserted (el) {
+        el.focus();
+        el.select();
+      }
+    }
   },
   methods: {
     getItem (id) {
