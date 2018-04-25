@@ -14,7 +14,8 @@
           class="form-control"
           placeholder="Новая категория"
           @keydown.enter="createNewCategory"
-          v-model="nameNewCategory">
+          v-model="nameNewCategory"
+          v-focus>
         <div class="input-group-append" @click="createNewCategory">
           <span class="input-group-text">
             <font-awesome-icon :icon="['fas', 'plus']" />
@@ -53,6 +54,13 @@ export default {
 
     };
   },
+  directives: {
+    focus: {
+      inserted (el) {
+        el.focus();
+      }
+    }
+  },
   created () {
     this.categories = this.$store.state.todoList.categories;
   },
@@ -71,6 +79,8 @@ export default {
           name: trimmedText
         });
       }
+      this.$store.state.todoList.selectedCategory = this.$store.state.todoList.lastCountCategory;
+      this.$emit('sort', this.$store.state.todoList.lastCountCategory);
       this.nameNewCategory = '';
       this.isShowNewCategory = false;
     }
