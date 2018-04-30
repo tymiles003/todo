@@ -14,7 +14,7 @@ import './assets/less/common.less';
 
 // import helper from '@/components/lib/todoHelpers';
 
-Vue.config.productionTip = true;
+Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
