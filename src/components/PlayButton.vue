@@ -1,5 +1,5 @@
 <template>
-  <div class="todo-item-button col-sm-1">
+  <div class="todo-item-button col-2 col-sm-2 col-md-2 col-lg-1">
     <div
       class="text-center p-2"
       @click="runThis"

@@ -1,5 +1,5 @@
 <template>
-  <div class="col-sm-6 col-md-6 col-lg-7 input-group pr-2 pl-2 pt-2"  v-if="todo.action===actns.EDIT">
+  <div class="col-7 col-sm-4 col-md-5 col-lg-7 input-group pr-2 pl-2 pt-2"  v-if="todo.action===actns.EDIT">
     <input type="text" class="form-control" v-model="newText" @keydown.enter="editEnd" v-focus/>
     <div class="input-group-append">
       <button class="btn btn-outline-secondary" type="button" @click="editEnd">

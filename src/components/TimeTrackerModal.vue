@@ -5,8 +5,8 @@
         <div class="card todo-tracker-modal">
           <h5 class="card-header">
             <div class="row">
-              <div class="col-sm-10 pt-2">Трекер активности</div>
-              <div class="col-sm-2"><button type="button" class="btn btn-light" style="float: right;" @click="closeMe"><font-awesome-icon icon="times" /></button></div>
+              <div class="col-10 col-sm-10 col-md-10 col-lg-10 pt-2">Трекер активности</div>
+              <div class="col-2 col-sm-2 col-md-2 col-lg-2"><button type="button" class="btn btn-light" style="float: right;" @click="closeMe"><font-awesome-icon icon="times" /></button></div>
             </div>
           </h5>
           <ul class="nav nav-tabs mt-2 px-2" role="tablist">
@@ -35,11 +35,11 @@
                 v-if="isTracker">
                 <div class="card-body">
                   <div class="track-item track-item-legend row">
-                    <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3 track-item-startTime">
+                    <div class="col-6 col-sm-5 col-md-4 col-lg-3 track-item-startTime">
                       Время начала работы
                     </div>
-                    <div class="col-xs-12 col-sm-3 col-md-2 col-lg-2">Длительность</div>
-                    <div class="col-xs-12 col-sm-4 col-md-6 col-lg-7">
+                    <div class="col-6 col-sm-3 col-md-2 col-lg-2">Длительность</div>
+                    <div class="col-12 col-sm-4 col-md-6 col-lg-7 d-none d-sm-block d-md-block d-lg-block">
                       доля процентов выполнения
                     </div>
                   </div>

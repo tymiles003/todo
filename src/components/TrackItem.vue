@@ -1,10 +1,10 @@
 <template>
-  <div class="track-item row mb-1">
-    <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3 track-item-startTime" :title="startTimeFull">
+  <div class="track-item row mb-4">
+    <div class="col-6 col-sm-5 col-md-4 col-lg-3 track-item-startTime" :title="startTimeFull">
       <span class="year-track">{{YYYY}}</span>.<span class="month-track">{{MM}}</span>.<span class="day-track">{{DD}}</span> -- <span class="hour-track">{{HH}}</span>:<span class="minute-track">{{mm}}</span><span class="second-track hidden">:{{ss}}</span>
     </div>
-    <div class="col-xs-12 col-sm-3 col-md-2 col-lg-2">{{duration}}</div>
-    <div class="col-xs-12 col-sm-4 col-md-6 col-lg-7 track-progress-wrapper" :title="titleProgress">
+    <div class="col-6 col-sm-3 col-md-2 col-lg-2">{{duration}}</div>
+    <div class="col-12 col-sm-4 col-md-6 col-lg-7 p-2 track-progress-wrapper" :title="titleProgress">
       <div
         class="track-progress-proportion -bg-primary"
         v-bind:style="{ width: proportionComputed + '%', color:'red'}"></div>
