@@ -2,7 +2,6 @@ import math from '@/components/lib/math';
 import crypt from '@/components/lib/crypt';
 import moment from 'moment';
 
-
 const KEY_LENGTH = 128;
 const KEY_HALF = KEY_LENGTH / 2;
 export const STORAGE_KEY = 'time-tracker';
@@ -22,24 +21,24 @@ const DEFAULT_OBJECT = {
   ]
 };
 const INIT_TEMPLATE = JSON.stringify(DEFAULT_OBJECT);
-let data = "";
+let data = '';
 
-export function isFirstRun(){
+export function isFirstRun () {
   return !(window.localStorage.getItem(STORAGE_KEY) !== null);
 }
-export function keyGen(){
-  return crypt.SHA512(String(math.uniqArrayInt(5,0,9).join(''))+String(parseInt(moment().format('x')))+window.navigator.appVersion+String(math.uniqArrayInt(5,0,9).join(''))).toString();
+export function keyGen () {
+  return crypt.SHA512(String(math.uniqArrayInt(5, 0, 9).join('')) + String(parseInt(moment().format('x'))) + window.navigator.appVersion + String(math.uniqArrayInt(5, 0, 9).join(''))).toString();
 }
-export function keySet(data, key){
-  return key.substr(0, KEY_HALF)+data+key.substr(KEY_HALF, KEY_LENGTH);
+export function keySet (data, key) {
+  return key.substr(0, KEY_HALF) + data + key.substr(KEY_HALF, KEY_LENGTH);
 }
-export function keyGet(data){
+export function keyGet (data) {
   return {
-    key: data.substr(0,KEY_HALF)+data.substr(data.length - KEY_HALF,data.length),
+    key: data.substr(0, KEY_HALF) + data.substr(data.length - KEY_HALF, data.length),
     data: data.substr(KEY_HALF, data.length - KEY_LENGTH)
   };
 }
-let key = ""
+let key = '';
 if (isFirstRun()) {
   data = JSON.parse(INIT_TEMPLATE);
 } else {
