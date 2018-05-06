@@ -8,7 +8,7 @@
   </play-button>
   <div
     class="todo-item-time col-3 col-sm-3 col-md-2 col-lg-2 text-left pr-2 pl-2 pt-3"
-    @click="showTracks">
+    @click="showTracks" title="открыть трекер активности">
       {{todo.time.pastTime.render}}
       <transition name="fade">
         <time-tracker-modal

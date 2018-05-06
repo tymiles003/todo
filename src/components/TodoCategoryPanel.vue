@@ -16,13 +16,13 @@
           @keydown.enter="createNewCategory"
           v-model="nameNewCategory"
           v-focus>
-        <div class="input-group-append" @click="createNewCategory">
+        <div class="input-group-append" @click="createNewCategory" title="Добавить категорию">
           <span class="input-group-text">
             <font-awesome-icon :icon="['fas', 'plus']" />
           </span>
         </div>
       </div>
-      <button type="button" class="btn btn-outline-secondary" v-if="!isShowNewCategory" @click="showNewCategory">
+      <button type="button" class="btn btn-outline-secondary" v-if="!isShowNewCategory" @click="showNewCategory" title="Добавить категорию">
         <font-awesome-icon :icon="['fas', 'plus']" />
       </button>
     </div>
