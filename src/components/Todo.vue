@@ -34,6 +34,13 @@
       ></todo-item>
     </transition-group>
   </div>
+  <datalist id="hintlist">
+    <hint-item
+      v-for="item in todoItems"
+      v-bind:hint="item"
+      v-bind:key="item.id"
+      ></hint-item>
+  </datalist>
   <div class="notify-box">
     <transition-group name="list-reverse" tag="div">
       <notify-items

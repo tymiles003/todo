@@ -1,5 +1,13 @@
 <template>
 <div id="app">
+  <div class="row mb-4">
+    <div class="col-sm-6 text-left">
+      <h1 class="title h4">Time Tracker</h1>
+      <span>just count your time</span>
+    </div>
+    <div class="col-sm-6"></div>
+  </div>
+  <hr/>
   <router-view/>
 </div>
 </template>

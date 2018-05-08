@@ -1,9 +1,13 @@
 <template>
 <div class="row">
   <div class="col-sm-9 col-md-9 col-lg-10 todoItem-text p-3">
-    <input autofocus type="text" class="form-control" v-model="newText"
-    @keyup.enter="addThis"
-    :placeholder="placeholderComputed" />
+    <input
+      autofocus type="text"
+      class="form-control"
+      v-model="newText"
+      @keyup.enter="addThis"
+      list="hintlist"
+      :placeholder="placeholderComputed" />
   </div>
   <div class="col-sm-3 col-md-3 col-lg-2 p-3">
     <button class="btn btn-primary btn-block" @click="addThis">Добавить</button>

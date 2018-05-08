@@ -22,7 +22,7 @@ Application for time tracking and simple task scheduling. Created as part of the
 ## Using App
 > for using only
 
-coming soon...
+Visit the site [time-tracker.ru](https://time-tracker.ru/)
 
 ## Build Setup
 > for developers
