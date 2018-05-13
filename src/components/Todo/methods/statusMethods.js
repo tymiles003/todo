@@ -29,9 +29,9 @@ export const statusMethods = {
       startTime: parseInt(moment().format('x')),
       duration: 0
     });
-    let timer = moment.duration(moment.duration(25, 'minutes').asMilliseconds()).timer(() => {
-      this.statusPaused(id);
-    });
+    // let timer = moment.duration(moment.duration(25, 'minutes').asMilliseconds()).timer(() => {
+    //   this.statusPaused(id);
+    // });
     timer.start();
     this.$store.commit('update', {
       index: index,
