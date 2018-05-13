@@ -32,7 +32,7 @@ export const statusMethods = {
     // let timer = moment.duration(moment.duration(25, 'minutes').asMilliseconds()).timer(() => {
     //   this.statusPaused(id);
     // });
-    timer.start();
+    // timer.start();
     this.$store.commit('update', {
       index: index,
       object: item
