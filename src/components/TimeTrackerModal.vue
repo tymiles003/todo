@@ -5,7 +5,7 @@
         <div class="card todo-tracker-modal">
           <h5 class="card-header">
             <div class="row">
-              <div class="col-10 col-sm-10 col-md-10 col-lg-10 pt-2">Трекер активности</div>
+              <div class="col-10 col-sm-10 col-md-10 col-lg-10 pt-2">{{getLocalMsg('ITM_LABEL_TRACKER_TITLE')}}</div>
               <div class="col-2 col-sm-2 col-md-2 col-lg-2"><button type="button" class="btn btn-light" style="float: right;" @click="closeMe"><font-awesome-icon icon="times" /></button></div>
             </div>
           </h5>
@@ -15,7 +15,9 @@
                 class="nav-link"
                 v-bind:class="{active: isTracker}"
                 @click="setTracker"
-                data-toggle="tab" role="tab">Трекер</div>
+                data-toggle="tab" role="tab">
+                  {{getLocalMsg('TRK_LABEL_TAB_TRACKER')}}
+              </div>
             </li>
             <li class="nav-item">
               <div
@@ -23,7 +25,9 @@
                 v-bind:class="{active: isDiagramm}"
                 @click="setDiagramm"
                 data-toggle="tab"
-                role="tab">Диаграмма</div>
+                role="tab">
+                  {{getLocalMsg('TRK_LABEL_TAB_DIAGRAMM')}}
+              </div>
             </li>
           </ul>
           <div class="tab-content">
@@ -36,11 +40,13 @@
                 <div class="card-body">
                   <div class="track-item track-item-legend row">
                     <div class="col-6 col-sm-5 col-md-4 col-lg-3 track-item-startTime">
-                      Время начала работы
+                      {{getLocalMsg('TRK_LABEL_START_TIME')}}
                     </div>
-                    <div class="col-6 col-sm-3 col-md-2 col-lg-2">Длительность</div>
+                    <div class="col-6 col-sm-3 col-md-2 col-lg-2">
+                      {{getLocalMsg('TRK_LABEL_DURATION_TIME')}}
+                    </div>
                     <div class="col-12 col-sm-4 col-md-6 col-lg-7 d-none d-sm-block d-md-block d-lg-block">
-                      доля процентов выполнения
+                      {{getLocalMsg('TRK_LABEL_PERCENTS_TIME')}}
                     </div>
                   </div>
                 </div>
@@ -112,6 +118,16 @@ export default {
     setDiagramm () {
       this.isTracker = false;
       this.isDiagramm = true;
+    },
+    getLocalMsg (key) {
+      let lib = this.$store.getters.currentLib;
+      let def = this.$store.getters.localLib('en');
+      return lib[key]||def[key];
+    },
+    getLocalMsg (key) {
+      let lib = this.$store.getters.currentLib;
+      let def = this.$store.getters.localLib('en');
+      return lib[key]||def[key];
     }
   },
   computed: {

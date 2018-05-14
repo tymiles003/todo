@@ -8,7 +8,8 @@
   </play-button>
   <div
     class="todo-item-time col-3 col-sm-3 col-md-2 col-lg-2 text-left pr-2 pl-2 pt-3"
-    @click="showTracks" title="открыть трекер активности">
+    @click="showTracks"
+    :title="getLocalMsg('ITM_TOOLTIP_OPEN_TRACKER')">
       {{todo.time.pastTime.render}}
       <transition name="fade">
         <time-tracker-modal
@@ -118,6 +119,11 @@ export default {
     },
     hideTracks () {
       this.trackerShow = false;
+    },
+    getLocalMsg (key) {
+      let lib = this.$store.getters.currentLib;
+      let def = this.$store.getters.localLib('en');
+      return lib[key]||def[key];
     }
   },
   computed: {

@@ -37,5 +37,8 @@ export const mutations = {
   },
   update (state, arg) { // обновить таск
     state.todoList.items[arg.index] = arg.object;
+  },
+  setLocalization (state, arg) { // сменить текущую локализацию
+    state.todoList.localization = arg.loc;
   }
 };
