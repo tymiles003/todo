@@ -10,14 +10,6 @@
     class="todo-item-time col-3 col-sm-3 col-md-2 col-lg-2 text-left pr-2 pl-2 pt-3"
     @click="showTracks" title="открыть трекер активности">
       {{todo.time.pastTime.render}}
-      <transition name="fade">
-        <time-tracker-modal
-          v-if="trackerShow"
-          v-bind:trackerShow="trackerShow"
-          v-bind:tracks="todo.time.track"
-          @close="hideTracks">
-        </time-tracker-modal>
-      </transition>
   </div>
   <div
     class="todo-item-text col-4 col-sm-4 col-md-5 col-lg-7 text-left pr-2 pl-2 pt-3"
@@ -55,6 +47,15 @@
       {{todo.time}}
     </pre>
   </div>
+  <transition name="fade">
+    <time-tracker-modal
+      v-if="trackerShow"
+      v-bind:trackerShow="trackerShow"
+      v-bind:tracks="todo.time.track"
+      v-bind:todo="todo"
+      @close="hideTracks">
+    </time-tracker-modal>
+  </transition>
 </div>
 </template>
 

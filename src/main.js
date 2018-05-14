@@ -13,7 +13,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/less/common.less';
 
 // import helper from '@/components/lib/todoHelpers';
-//git test
 Vue.config.productionTip = false;
 
 Vue.use(VueYandexMetrika, {

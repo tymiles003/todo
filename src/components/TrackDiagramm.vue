@@ -1,7 +1,7 @@
 <template>
-  <div style="position:relative; min-height:400px;">
+  <div style="position:relative; min-height:400px; left:0px;">
     <svg
-      style="position:absolute;"
+      style="position:absolute; left:0px;"
       width="100%"
       height="400px"
       xmlns="http://www.w3.org/2000/svg"

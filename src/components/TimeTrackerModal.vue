@@ -25,6 +25,14 @@
                 data-toggle="tab"
                 role="tab">Диаграмма</div>
             </li>
+            <li class="nav-item hidden">
+              <div
+                class="nav-link"
+                v-bind:class="{active: isProperty}"
+                @click="setProperty"
+                data-toggle="tab"
+                role="tab">Свойства</div>
+            </li>
           </ul>
           <div class="tab-content">
             <transition name="fade-element">
@@ -67,6 +75,18 @@
                   </div>
                 </div>
             </transition>
+            <transition name="fade-element">
+              <div
+                class="tab-pane fade hidden"
+                role="tabpanel"
+                v-bind:class="{active: isProperty, show: isProperty}"
+                v-if="isProperty">
+                  <div class="card-body">
+                    <track-property v-bind:todo="todo">
+                    </track-property>
+                  </div>
+                </div>
+            </transition>
           </div>
         </div>
       </div>
@@ -82,6 +102,7 @@ import '../assets/less/fade.less';
 // -----vue components:
 import TrackItem from '@/components/TrackItem';
 import TrackDiagramm from '@/components/TrackDiagramm';
+import TrackProperty from '@/components/TrackProperty';
 
 // -----other:
 import math from '@/components/lib/math';
@@ -94,11 +115,12 @@ import brands from '@fortawesome/fontawesome-free-brands';
 
 export default {
   name: 'TimeTrackerModal',
-  props: ['trackerShow', 'tracks'],
+  props: ['trackerShow', 'tracks', 'todo'],
   data () {
     return {
       isTracker: true,
-      isDiagramm: false
+      isDiagramm: false,
+      isProperty: false
     };
   },
   methods: {
@@ -108,10 +130,17 @@ export default {
     setTracker () {
       this.isTracker = true;
       this.isDiagramm = false;
+      this.isProperty = false;
     },
     setDiagramm () {
       this.isTracker = false;
       this.isDiagramm = true;
+      this.isProperty = false;
+    },
+    setProperty () {
+      this.isTracker = false;
+      this.isDiagramm = false;
+      this.isProperty = true;
     }
   },
   computed: {
@@ -141,6 +170,7 @@ export default {
   components: {
     TrackItem,
     TrackDiagramm,
+    TrackProperty,
     FontAwesomeIcon,
     faSolid,
     faRegular,

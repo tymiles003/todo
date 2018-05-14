@@ -58,5 +58,14 @@ export const getters = {
         return filterAll(todo, categoryId);
       });
     };
+  },
+  getCategoryById (state) {
+    return (categoryId) => {
+      return state.todoList.categories.filter((cat) => {
+        if (categoryId === cat.id) {
+          return cat;
+        }
+      });
+    };
   }
 };
