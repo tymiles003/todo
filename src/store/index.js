@@ -6,9 +6,24 @@ import {getters} from './getters';
 import {localStoragePlugin} from './plugins';
 
 Vue.use(Vuex);
-export default new Vuex.Store({
+
+let UserData = {
   state,
   mutations,
   getters,
   plugins: [localStoragePlugin]
+}
+let Notify = {
+  state: {
+    notifyMessages: []
+  },
+  mutations: { },
+  getters: { }
+}
+
+export default new Vuex.Store({
+  modules: {
+    UserData,
+    Notify
+  }
 });

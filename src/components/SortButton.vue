@@ -62,10 +62,10 @@ export default {
   },
   methods: {
     getItem (id) {
-      return array.getItemInObjArrByID(id, this.$store.state.todoList.categories);
+      return array.getItemInObjArrByID(id, this.$store.state.UserData.todoList.categories);
     },
     selectCategory (categoryId) {
-      if (categoryId !== this.$store.state.todoList.selectedCategory) {
+      if (categoryId !== this.$store.state.UserData.todoList.selectedCategory) {
         this.$store.commit('setCategory', categoryId);
         this.$emit('sort', categoryId);
         this.isEditCategory = false;
@@ -101,7 +101,7 @@ export default {
   },
   computed: {
     categorySelected () {
-      return this.$store.state.todoList.selectedCategory;
+      return this.$store.state.UserData.todoList.selectedCategory;
     }
   },
   components: {

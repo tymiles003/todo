@@ -5,7 +5,6 @@ export const data = function () {
     animStates: {
       newTextVisible: false
     },
-    notifyMessages: [],
     todoList: [ ],
     storeLength: 0,
     stats: helper.stats,

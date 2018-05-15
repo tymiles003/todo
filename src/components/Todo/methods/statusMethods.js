@@ -16,7 +16,7 @@ export const statusMethods = {
       index: index,
       object: item
     });
-    this.addNotify('Таск завершен', 5);
+    this.notify.addNotify(this.$store.state.Notify.notifyMessages,this.getLocalMsg('NTF_MSG_TASKEND'), 5);
   },
   statusRunning (id) {
     this.pausedAll();
@@ -37,7 +37,7 @@ export const statusMethods = {
       index: index,
       object: item
     });
-    this.addNotify('Таск запущен', 5);
+    this.notify.addNotify(this.$store.state.Notify.notifyMessages,this.getLocalMsg('NTF_MSG_TASKRUN'), 5);
   },
   statusPaused (id) {
     let object = this.getItem(id);
@@ -51,9 +51,9 @@ export const statusMethods = {
     });
   },
   pausedAll () {
-    for (var i = 0; i <= this.$store.state.todoList.items.length - 1; i++) {
-      if (this.$store.state.todoList.items[i].status === this.stats.RUNNING) {
-        this.statusPaused(this.$store.state.todoList.items[i].id);
+    for (var i = 0; i <= this.$store.state.UserData.todoList.items.length - 1; i++) {
+      if (this.$store.state.UserData.todoList.items[i].status === this.stats.RUNNING) {
+        this.statusPaused(this.$store.state.UserData.todoList.items[i].id);
       }
     }
   }

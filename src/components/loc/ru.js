@@ -18,7 +18,14 @@ const localization = {
 
   TRK_LABEL_TAB_TRACKER: 'Трекер',
   TRK_LABEL_TAB_DIAGRAMM: 'Диаграмма',
-  TRK_LABEL_TAB_PROPERTY: 'Свойства'
+  TRK_LABEL_TAB_PROPERTY: 'Свойства',
+
+  NTF_MSG_TASKEND: 'Таск завершен',
+  NTF_MSG_TASKRUN: 'Таск запущен',
+  NTF_MSG_TASKADD: 'Добавлен новый таск',
+  NTF_MSG_TASKDELETED: 'Удален таск',
+  NTF_MSG_TASKUPDATE: 'Task updated',
+
 };
 
 export default localization;

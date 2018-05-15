@@ -16,13 +16,11 @@ export default {
   name: 'notifyItems',
   props: ['notify'],
   data () {
-    return {
-      a: 0
-    };
+    return { };
   },
   created () {
     let timer = moment.duration(
-      moment.duration(this.notify.durationSeconds, 'seconds').asMilliseconds()
+      moment.duration($store.state.Notify.durationSeconds, 'seconds').asMilliseconds()
     ).timer(() => {
       this.removeNotify();
     });
@@ -30,7 +28,8 @@ export default {
   },
   methods: {
     removeNotify () {
-      this.$emit('delete', this.notify.id);
+      console.log(this.$store.state.Notify);
+      // this.deleteNotify(this.$store.state.Notify, this.notify.id);
     }
   },
   computed: { },

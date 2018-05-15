@@ -1,7 +1,6 @@
 // -----for component:
 import {commonMethods} from '@/components/Todo/methods/commonMethods';
 import {sortMethods} from '@/components/Todo/methods/sortMethods';
-import {notifyMethods} from '@/components/Todo/methods/notifyMethods';
 import {statusMethods} from '@/components/Todo/methods/statusMethods';
 import {actionsMethods} from '@/components/Todo/methods/actionsMethods';
 
@@ -15,7 +14,6 @@ import momentTimer from 'moment-timer';
 export const methods = {
   ...commonMethods,
   ...sortMethods,
-  ...notifyMethods,
   ...statusMethods,
   ...actionsMethods,
 
@@ -23,8 +21,8 @@ export const methods = {
     const trimmedText = newText.trim();
     if (trimmedText && trimmedText !== '') {
       this.$store.commit('add', {
-        id: ++this.$store.state.todoList.lastCount,
-        categoryId: this.$store.state.todoList.selectedCategory,
+        id: ++this.$store.state.UserData.todoList.lastCount,
+        categoryId: this.$store.state.UserData.todoList.selectedCategory,
         text: trimmedText,
         time: {
           createdTime: parseInt(moment().format('x')),
@@ -39,14 +37,15 @@ export const methods = {
         status: this.stats.PENDING,
         action: this.actns.DEFAULT
       });
-      this.addNotify('Добавлен новый таск', 5);
+      console.log(this.$store.state.Notify.notifyMessages);
+      this.notify.addNotify(this.$store.state.Notify.notifyMessages, this.getLocalMsg('NTF_MSG_TASKADD'), 5);
       this.sortByCategory();
     }
   },
   clearThis (id) {
     this.$store.commit('delete', this.getItem(id).index);
     this.todoList = this.$store.getters.all;
-    this.addNotify('Удален таск', 5);
+    this.notify.addNotify(this.$store.state.Notify.notifyMessages,this.getLocalMsg('NTF_MSG_TASKDELETED'), 5);
     this.sortByCategory();
   },
   setNewText (arg) {
@@ -59,6 +58,6 @@ export const methods = {
       index: index,
       object: item
     });
-    this.addNotify('Текст таска изменен', 5);
+    this.notify.addNotify(this.$store.state.Notify.notifyMessages,this.getLocalMsg('NTF_MSG_TASKUPDATE'), 5);
   }
 };

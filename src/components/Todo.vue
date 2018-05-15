@@ -46,8 +46,7 @@
       <notify-items
         v-for="item in notifyMessages"
         v-bind:notify="item"
-        v-bind:key="item.id"
-        @delete="deleteNotify">
+        v-bind:key="item.id">
       </notify-items>
     </transition-group>
   </div>

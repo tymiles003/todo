@@ -34,10 +34,10 @@ export default {
     };
   },
   created () {
-    if (!this.$store.state.todoList.localization) {
-      this.$store.state.todoList.localization = 'en';
+    if (!this.$store.state.UserData.todoList.localization) {
+      this.$store.state.UserData.todoList.localization = 'en';
     }
-    this.localization = this.$store.state.todoList.localization;
+    this.localization = this.$store.state.UserData.todoList.localization;
   },
   updated () {
     this.$store.commit('setLocalization', {loc: this.localization});

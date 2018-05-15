@@ -9,7 +9,7 @@ export const sortMethods = {
     this.todoList = this.$store.getters.timeSort(intSortFlag);
   },
   sortByCategory (_id) {
-    let id = _id || this.$store.state.todoList.selectedCategory;
+    let id = _id || this.$store.state.UserData.todoList.selectedCategory;
     this.todoList = this.$store.getters.categorySort(id);
   }
 };

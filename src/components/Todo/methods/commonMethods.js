@@ -26,6 +26,6 @@ export const commonMethods = {
     }
   },
   getItem (id) {
-    return array.getItemInObjArrByID(id, this.$store.state.todoList.items);
+    return array.getItemInObjArrByID(id, this.$store.state.UserData.todoList.items);
   }
 };

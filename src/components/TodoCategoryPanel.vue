@@ -62,7 +62,7 @@ export default {
     }
   },
   created () {
-    this.categories = this.$store.state.todoList.categories;
+    this.categories = this.$store.state.UserData.todoList.categories;
   },
   methods: {
     sortByCategory (categoryId) {
@@ -75,12 +75,12 @@ export default {
       const trimmedText = this.nameNewCategory.trim();
       if (trimmedText && trimmedText !== '') {
         this.$store.commit('addCategory', {
-          id: ++this.$store.state.todoList.lastCountCategory,
+          id: ++this.$store.state.UserData.todoList.lastCountCategory,
           name: trimmedText
         });
       }
-      this.$store.state.todoList.selectedCategory = this.$store.state.todoList.lastCountCategory;
-      this.$emit('sort', this.$store.state.todoList.lastCountCategory);
+      this.$store.state.UserData.todoList.selectedCategory = this.$store.state.UserData.todoList.lastCountCategory;
+      this.$emit('sort', this.$store.state.UserData.todoList.lastCountCategory);
       this.nameNewCategory = '';
       this.isShowNewCategory = false;
     }

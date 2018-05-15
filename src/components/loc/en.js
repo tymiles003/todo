@@ -18,7 +18,13 @@ const localization = {
 
   TRK_LABEL_TAB_TRACKER: 'Tracker',
   TRK_LABEL_TAB_DIAGRAMM: 'Diagram',
-  TRK_LABEL_TAB_PROPERTY: 'Property'
+  TRK_LABEL_TAB_PROPERTY: 'Property',
+
+  NTF_MSG_TASKEND: 'Task completed',
+  NTF_MSG_TASKRUN: 'Task is running',
+  NTF_MSG_TASKADD: 'New task was added',
+  NTF_MSG_TASKDELETED: 'Task was deleted',
+  NTF_MSG_TASKUPDATE: 'Task updated',
 };
 
 export default localization;
