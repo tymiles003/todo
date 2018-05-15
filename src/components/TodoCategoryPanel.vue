@@ -12,17 +12,17 @@
         <input
           type="text"
           class="form-control"
-          placeholder="Новая категория"
+          :placeholder="getLocalMsg('CAT_PLACEHOLDER_NEW')"
           @keydown.enter="createNewCategory"
           v-model="nameNewCategory"
           v-focus>
-        <div class="input-group-append" @click="createNewCategory" title="Добавить категорию">
+        <div class="input-group-append" @click="createNewCategory" :title="getLocalMsg('CAT_TOOLTIP_ADD')">
           <span class="input-group-text">
             <font-awesome-icon :icon="['fas', 'plus']" />
           </span>
         </div>
       </div>
-      <button type="button" class="btn btn-outline-secondary" v-if="!isShowNewCategory" @click="showNewCategory" title="Добавить категорию">
+      <button type="button" class="btn btn-outline-secondary" v-if="!isShowNewCategory" @click="showNewCategory" :title="getLocalMsg('CAT_TOOLTIP_ADD')">
         <font-awesome-icon :icon="['fas', 'plus']" />
       </button>
     </div>
@@ -83,6 +83,11 @@ export default {
       this.$emit('sort', this.$store.state.todoList.lastCountCategory);
       this.nameNewCategory = '';
       this.isShowNewCategory = false;
+    },
+    getLocalMsg (key) {
+      let lib = this.$store.getters.currentLib;
+      let def = this.$store.getters.localLib('en');
+      return lib[key]||def[key];
     }
   },
   computed: { },

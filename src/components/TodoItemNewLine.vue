@@ -10,7 +10,11 @@
       :placeholder="placeholderComputed" />
   </div>
   <div class="col-sm-3 col-md-3 col-lg-2 p-3">
-    <button class="btn btn-primary btn-block" @click="addThis">Добавить</button>
+    <button
+      class="btn btn-primary btn-block"
+      @click="addThis">
+        {{getLocalMsg('ITM_LABEL_ADD')}}
+    </button>
   </div>
 </div>
 </template>
@@ -22,23 +26,29 @@ export default {
   data () {
     return {
       newText: '',
-      placeholder: '',
-      firstPlaceholder: 'Создайте вашу первую задачу',
-      regularPlaceholder: 'Добавьте запись'
+      placeholder: ''
     };
+  },
+  update () {
+    this.firstPlaceholder = this.getLocalMsg('ITM_PLACEHOLDER_FIRST_ITEM');
   },
   methods: {
     placeholderControll () {
       if (this.$store.getters.length === 0) {
-        this.placeholder = this.firstPlaceholder;
+        this.placeholder = this.getLocalMsg('ITM_PLACEHOLDER_FIRST_ITEM')
       } else {
-        this.placeholder = this.regularPlaceholder;
+        this.placeholder = this.getLocalMsg('ITM_PLACEHOLDER_REGULAR_ITEM');
       }
       return this.placeholder;
     },
     addThis () {
       this.$emit('add', this.newText);
       this.newText = '';
+    },
+    getLocalMsg (key) {
+      let lib = this.$store.getters.currentLib;
+      let def = this.$store.getters.localLib('en');
+      return lib[key]||def[key];
     }
   },
   computed: {
