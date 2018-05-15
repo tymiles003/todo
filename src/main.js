@@ -4,6 +4,8 @@ import Vue from 'vue';
 import App from './App';
 import store from './store';
 import router from './router';
+import getLocalMsg from '@/components/plugins/getLocalMsg';
+
 import VueYandexMetrika from 'vue-yandex-metrika';
 // -----bootstrap:
 import 'bootstrap';
@@ -26,6 +28,8 @@ Vue.use(VueYandexMetrika, {
     webvisor: true
   }
 });
+
+Vue.use(getLocalMsg);
 
 /* eslint-disable no-new */
 new Vue({

@@ -83,11 +83,6 @@ export default {
       this.$emit('sort', this.$store.state.todoList.lastCountCategory);
       this.nameNewCategory = '';
       this.isShowNewCategory = false;
-    },
-    getLocalMsg (key) {
-      let lib = this.$store.getters.currentLib;
-      let def = this.$store.getters.localLib('en');
-      return lib[key] || def[key];
     }
   },
   computed: { },

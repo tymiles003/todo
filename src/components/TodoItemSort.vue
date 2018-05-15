@@ -24,7 +24,6 @@
             @sort="resetSort">
           </sort-reset>
         </transition>
-
   </div>
 </div>
 </template>

@@ -44,11 +44,6 @@ export default {
     addThis () {
       this.$emit('add', this.newText);
       this.newText = '';
-    },
-    getLocalMsg (key) {
-      let lib = this.$store.getters.currentLib;
-      let def = this.$store.getters.localLib('en');
-      return lib[key] || def[key];
     }
   },
   computed: {
