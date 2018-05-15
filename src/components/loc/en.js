@@ -18,7 +18,7 @@ const localization = {
 
   TRK_LABEL_TAB_TRACKER: 'Tracker',
   TRK_LABEL_TAB_DIAGRAMM: 'Diagram',
-  TRK_LABEL_TAB_PROPERTY: 'Property',
+  TRK_LABEL_TAB_PROPERTY: 'Property'
 };
 
 export default localization;

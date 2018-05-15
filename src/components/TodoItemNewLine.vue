@@ -35,7 +35,7 @@ export default {
   methods: {
     placeholderControll () {
       if (this.$store.getters.length === 0) {
-        this.placeholder = this.getLocalMsg('ITM_PLACEHOLDER_FIRST_ITEM')
+        this.placeholder = this.getLocalMsg('ITM_PLACEHOLDER_FIRST_ITEM');
       } else {
         this.placeholder = this.getLocalMsg('ITM_PLACEHOLDER_REGULAR_ITEM');
       }
@@ -48,7 +48,7 @@ export default {
     getLocalMsg (key) {
       let lib = this.$store.getters.currentLib;
       let def = this.$store.getters.localLib('en');
-      return lib[key]||def[key];
+      return lib[key] || def[key];
     }
   },
   computed: {

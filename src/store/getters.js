@@ -14,7 +14,7 @@ export const getters = {
     };
   },
   currentLib (state) {
-      return {...state.todoList.localizationLib[state.todoList.localization]};
+    return {...state.todoList.localizationLib[state.todoList.localization]};
   },
   length (state) {
     return state.todoList.items.length;
