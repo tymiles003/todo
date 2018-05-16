@@ -24,7 +24,7 @@ const localization = {
   NTF_MSG_TASKRUN: 'Task is running',
   NTF_MSG_TASKADD: 'New task was added',
   NTF_MSG_TASKDELETED: 'Task was deleted',
-  NTF_MSG_TASKUPDATE: 'Task updated',
+  NTF_MSG_TASKUPDATE: 'Task updated'
 };
 
 export default localization;

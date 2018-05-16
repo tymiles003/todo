@@ -12,11 +12,14 @@ export const statusMethods = {
     let item = object.object;
     item.status = this.stats.DONE;
     this.updateDuration(id);
-    this.$store.commit('update', {
+    this.$store.commit('UserData/update', {
       index: index,
       object: item
     });
-    this.notify.addNotify(this.$store.state.Notify.notifyMessages,this.getLocalMsg('NTF_MSG_TASKEND'), 5);
+    this.$store.commit('Notify/addNotify', {
+      text: this.getLocalMsg('NTF_MSG_TASKEND'),
+      duration: 5
+    });
   },
   statusRunning (id) {
     this.pausedAll();
@@ -33,11 +36,14 @@ export const statusMethods = {
     //   this.statusPaused(id);
     // });
     // timer.start();
-    this.$store.commit('update', {
+    this.$store.commit('UserData/update', {
       index: index,
       object: item
     });
-    this.notify.addNotify(this.$store.state.Notify.notifyMessages,this.getLocalMsg('NTF_MSG_TASKRUN'), 5);
+    this.$store.commit('Notify/addNotify', {
+      text: this.getLocalMsg('NTF_MSG_TASKRUN'),
+      duration: 5
+    });
   },
   statusPaused (id) {
     let object = this.getItem(id);
@@ -45,7 +51,7 @@ export const statusMethods = {
     let item = object.object;
     item.status = this.stats.PAUSED;
     this.updateDuration(id);
-    this.$store.commit('update', {
+    this.$store.commit('UserData/update', {
       index: index,
       object: item
     });

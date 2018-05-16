@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     getCategoryName (id) {
-      return this.$store.getters.getCategoryById(id)[0].name;
+      return this.$store.getters['UserData/getCategoryById'](id)[0].name;
     },
     getCreationTime (ms) {
       return moment(ms).format('DD.MM.YYYY -- HH:mm:ss');

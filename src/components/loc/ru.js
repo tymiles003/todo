@@ -24,7 +24,7 @@ const localization = {
   NTF_MSG_TASKRUN: 'Таск запущен',
   NTF_MSG_TASKADD: 'Добавлен новый таск',
   NTF_MSG_TASKDELETED: 'Удален таск',
-  NTF_MSG_TASKUPDATE: 'Task updated',
+  NTF_MSG_TASKUPDATE: 'Task updated'
 
 };
 

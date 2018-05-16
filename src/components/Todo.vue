@@ -44,7 +44,7 @@
   <div class="notify-box">
     <transition-group name="list-reverse" tag="div">
       <notify-items
-        v-for="item in notifyMessages"
+        v-for="item in $store.state.Notify.notifyArray"
         v-bind:notify="item"
         v-bind:key="item.id">
       </notify-items>

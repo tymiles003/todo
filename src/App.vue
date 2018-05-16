@@ -34,13 +34,14 @@ export default {
     };
   },
   created () {
+    console.log(this.$store);
     if (!this.$store.state.UserData.todoList.localization) {
       this.$store.state.UserData.todoList.localization = 'en';
     }
     this.localization = this.$store.state.UserData.todoList.localization;
   },
   updated () {
-    this.$store.commit('setLocalization', {loc: this.localization});
+    this.$store.commit('UserData/setLocalization', {loc: this.localization});
   },
   methods: {
     setRu () {

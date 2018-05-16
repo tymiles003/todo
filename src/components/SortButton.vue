@@ -66,7 +66,7 @@ export default {
     },
     selectCategory (categoryId) {
       if (categoryId !== this.$store.state.UserData.todoList.selectedCategory) {
-        this.$store.commit('setCategory', categoryId);
+        this.$store.commit('UserData/setCategory', categoryId);
         this.$emit('sort', categoryId);
         this.isEditCategory = false;
       } else {
@@ -80,7 +80,7 @@ export default {
       const trimmedText = this.newNameCategory.trim();
       if (trimmedText && trimmedText !== '') {
         item.name = trimmedText;
-        this.$store.commit('updateCategory', {
+        this.$store.commit('UserData/updateCategory', {
           index: index,
           object: item
         });
@@ -90,7 +90,7 @@ export default {
     },
     removeCategory (id) {
       if (id !== 0) {
-        this.$store.commit('deleteCategory', {
+        this.$store.commit('UserData/deleteCategory', {
           index: this.getItem(id).index,
           id: id
         });

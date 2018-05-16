@@ -74,7 +74,7 @@ export default {
     createNewCategory () {
       const trimmedText = this.nameNewCategory.trim();
       if (trimmedText && trimmedText !== '') {
-        this.$store.commit('addCategory', {
+        this.$store.commit('UserData/addCategory', {
           id: ++this.$store.state.UserData.todoList.lastCountCategory,
           name: trimmedText
         });

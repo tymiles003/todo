@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     placeholderControll () {
-      if (this.$store.getters.length === 0) {
+      if (this.$store.getters['UserData/length'] === 0) {
         this.placeholder = this.getLocalMsg('ITM_PLACEHOLDER_FIRST_ITEM');
       } else {
         this.placeholder = this.getLocalMsg('ITM_PLACEHOLDER_REGULAR_ITEM');

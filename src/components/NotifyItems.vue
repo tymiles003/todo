@@ -20,7 +20,7 @@ export default {
   },
   created () {
     let timer = moment.duration(
-      moment.duration($store.state.Notify.durationSeconds, 'seconds').asMilliseconds()
+      moment.duration(this.notify.durationSeconds, 'seconds').asMilliseconds()
     ).timer(() => {
       this.removeNotify();
     });
@@ -28,8 +28,7 @@ export default {
   },
   methods: {
     removeNotify () {
-      console.log(this.$store.state.Notify);
-      // this.deleteNotify(this.$store.state.Notify, this.notify.id);
+      this.$store.commit('Notify/deleteNotify', this.notify.id);
     }
   },
   computed: { },

@@ -20,7 +20,7 @@ export const methods = {
   addTodo (newText) {
     const trimmedText = newText.trim();
     if (trimmedText && trimmedText !== '') {
-      this.$store.commit('add', {
+      this.$store.commit('UserData/add', {
         id: ++this.$store.state.UserData.todoList.lastCount,
         categoryId: this.$store.state.UserData.todoList.selectedCategory,
         text: trimmedText,
@@ -37,15 +37,20 @@ export const methods = {
         status: this.stats.PENDING,
         action: this.actns.DEFAULT
       });
-      console.log(this.$store.state.Notify.notifyMessages);
-      this.notify.addNotify(this.$store.state.Notify.notifyMessages, this.getLocalMsg('NTF_MSG_TASKADD'), 5);
+      this.$store.commit('Notify/addNotify', {
+        text: this.getLocalMsg('NTF_MSG_TASKADD'),
+        duration: 5
+      });
       this.sortByCategory();
     }
   },
   clearThis (id) {
-    this.$store.commit('delete', this.getItem(id).index);
-    this.todoList = this.$store.getters.all;
-    this.notify.addNotify(this.$store.state.Notify.notifyMessages,this.getLocalMsg('NTF_MSG_TASKDELETED'), 5);
+    this.$store.commit('UserData/delete', this.getItem(id).index);
+    this.todoList = this.$store.getters['UserData/all'];
+    this.$store.commit('Notify/addNotify', {
+      text: this.getLocalMsg('NTF_MSG_TASKDELETED'),
+      duration: 5
+    });
     this.sortByCategory();
   },
   setNewText (arg) {
@@ -54,10 +59,13 @@ export const methods = {
     let index = object.index;
     let item = object.object;
     item.text = arg.text;
-    this.$store.commit('update', {
+    this.$store.commit('UserData/update', {
       index: index,
       object: item
     });
-    this.notify.addNotify(this.$store.state.Notify.notifyMessages,this.getLocalMsg('NTF_MSG_TASKUPDATE'), 5);
+    this.$store.commit('Notify/addNotify', {
+      text: this.getLocalMsg('NTF_MSG_TASKUPDATE'),
+      duration: 5
+    });
   }
 };
