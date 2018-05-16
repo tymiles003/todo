@@ -34,7 +34,6 @@ export default {
     };
   },
   created () {
-    console.log(this.$store);
     if (!this.$store.state.UserData.todoList.localization) {
       this.$store.state.UserData.todoList.localization = 'en';
     }

@@ -1,7 +1,6 @@
 import {STORAGE_KEY, isFirstRun, keyGen, keySet, KEY} from './state';
 import crypt from '@/components/lib/crypt';
 
-console.log(crypt);
 // export function localStoragePlugin (options = {}) {
 //   console.log('plugin test');
 //   return function (store) {
@@ -22,12 +21,12 @@ console.log(crypt);
 //         window.localStorage.setItem(STORAGE_KEY, dataEnd);
 //       });
 //     }
-//   }
+//   };
 // };
-//
+
 export const localStoragePlugin = (store) => {
-  console.log('hello');
   if (isFirstRun()) {
+    console.log('hello', store);
     let key = keyGen();
     store.subscribe((mutation, items) => {
       console.log('kkkkkk');
@@ -42,4 +41,18 @@ export const localStoragePlugin = (store) => {
       window.localStorage.setItem(STORAGE_KEY, dataEnd);
     });
   }
+};
+
+export const myPlugin = (arg) => {
+  // called when the store is initialized
+  console.log('1', arg);
+  return store => {
+    console.log('2', arg);
+    store.subscribe((mutation, state) => {
+      console.log('3', arg);
+      console.log(state, 'eee');
+      // called after every mutation.
+      // The mutation comes in the format of `{ type, payload }`.
+    })();
+  };
 };
