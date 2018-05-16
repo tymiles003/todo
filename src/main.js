@@ -5,7 +5,7 @@ import App from './App';
 import store from './store';
 import router from './router';
 import getLocalMsg from '@/components/plugins/getLocalMsg';
-import notify from '@/components/plugins/notify';
+// import notify from '@/components/plugins/notify';
 
 import VueYandexMetrika from 'vue-yandex-metrika';
 // -----bootstrap:
@@ -31,7 +31,7 @@ Vue.use(VueYandexMetrika, {
 });
 
 Vue.use(getLocalMsg);
-Vue.use(notify);
+// Vue.use(notify);
 
 /* eslint-disable no-new */
 new Vue({
