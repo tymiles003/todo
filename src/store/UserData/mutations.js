@@ -1,7 +1,7 @@
 // -----other:
 import array from '@/components/lib/array';
 
-export const mutations = {
+export const UserDataMutations = {
   addCategory (state, object) { // Добавить категорию
     state.todoList.categories.push(object);
   },
@@ -16,7 +16,7 @@ export const mutations = {
     // останутся элементы входящие в эту категорию,
     // но имеющие не актуальный categoryId
     // мы перемещаем элементы в категорию по умолчанию
-    let orphans = this.getters.categorySort(arg.id);
+    let orphans = this.getters['UserData/categorySort'](arg.id);
     let indexes = [];
 
     state.todoList.categories.splice(arg.index, 1);

@@ -1,25 +1,31 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import {state} from './state';
-import {mutations} from './mutations';
-import {getters} from './getters';
-import {localStoragePlugin} from './plugins';
+
+import {UserDataState} from './UserData/state';
+import {UserDataMutations} from './UserData/mutations';
+import {UserDataGetters} from './UserData/getters';
+import {localStoragePlugin} from './UserData/plugins';
+
+import {NotifyState} from './Notify/state';
+import {NotifyMutations} from './Notify/mutations';
+import {NotifyGetters} from './Notify/getters';
 
 Vue.use(Vuex);
 
 let UserData = {
-  state,
-  mutations,
-  getters,
+  namespaced: true,
+  state: UserDataState,
+  mutations: UserDataMutations,
+  getters: UserDataGetters,
   plugins: [localStoragePlugin]
-}
+};
+
 let Notify = {
-  state: {
-    notifyMessages: []
-  },
-  mutations: { },
-  getters: { }
-}
+  namespaced: true,
+  state: NotifyState,
+  mutations: NotifyMutations,
+  getters: NotifyGetters
+};
 
 export default new Vuex.Store({
   modules: {

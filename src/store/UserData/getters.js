@@ -4,7 +4,7 @@ function filterAll (item, selectedCategory) {
   }
 }
 
-export const getters = {
+export const UserDataGetters = {
   currentLocal (state) {
     return state.todoList.localization;
   },
