@@ -52,8 +52,18 @@ if (isFirstRun()) {
   let stor = window.localStorage.getItem(STORAGE_KEY);
   key = keyGet(stor).key;
   let exclData = keyGet(stor).data;
-  let decrypt = crypt.decrypt(exclData, key);
-  data = JSON.parse(decrypt)[TODO_KEY];
+  let decrypt = {test: 'test'};
+  let isError = false;
+  try {
+    decrypt = crypt.decrypt(exclData, key);
+  } catch (e) {
+    isError = true;
+  }
+  if (isError) {
+    data = JSON.parse(INIT_TEMPLATE);
+  } else {
+    data = JSON.parse(decrypt)[TODO_KEY];
+  }
 }
 
 export const UserDataState = { [TODO_KEY]: data };
