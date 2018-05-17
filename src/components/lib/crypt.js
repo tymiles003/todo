@@ -9,24 +9,17 @@ export default (() => {
 
   obj.wrap = (data) => {
     let rawData = data;
-    let round1 = CryptoJS.enc.Utf8.parse(rawData).toString();
-    let round2 = btoa(round1);
-    let round3 = CryptoJS.enc.Utf8.parse(round2).toString();
-
-    return round3;
+    let round1 = btoa(rawData);
+    let round2 = CryptoJS.enc.Utf8.parse(round1).toString();
+    return round2;
   };
 
   obj.unwrap = (data) => {
     let rawData = data;
-    let round3 = CryptoJS.enc.Utf8.stringify(
+    let round2 = CryptoJS.enc.Utf8.stringify(
       CryptoJS.enc.Hex.parse(rawData)
     );
-
-    let round2 = atob(round3);
-
-    let round1 = CryptoJS.enc.Utf8.stringify(
-      CryptoJS.enc.Hex.parse(round2)
-    );
+    let round1 = atob(round2);
     return round1;
   };
 
