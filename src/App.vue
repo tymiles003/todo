@@ -6,16 +6,20 @@
       <span>just count your time</span>
     </div>
     <div class="col-sm-6 text-right">
-      <button
-        @click="setRu"
-        type="button"
-        class="btn btn-sm"
-        v-bind:class="{'btn-outline-primary': isRu, 'btn-outline-secondary': notRu}">Ru</button>
-      <button
-        @click="setEn"
-        type="button"
-        class="btn btn-sm"
-        v-bind:class="{'btn-outline-primary': isEn, 'btn-outline-secondary': notEn}">En</button>
+      <div class="btn-group">
+        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span v-if="isRu">Ru</span>
+          <span v-if="isEn">En</span>
+        </button>
+        <div class="dropdown-menu">
+          <div
+            class="dropdown-item"
+            @click="setRu">Русский</div>
+          <div
+            class="dropdown-item"
+            @click="setEn">English</div>
+        </div>
+      </div>
     </div>
     <div class="col-sm-6"></div>
   </div>
@@ -75,5 +79,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.dropdown-item{
+  cursor: pointer;
 }
 </style>
