@@ -7,9 +7,7 @@ export const localStoragePlugin = (options) => {
     if (isFirstRun()) {
       let key = keyGen();
       store.subscribe((mutation, items) => {
-        console.log( options, namespace, items[namespace]);
         if (namespace && items[namespace]) {
-          console.log(items);
           let data = crypt.crypt(JSON.stringify(items[namespace]), key);
           let dataEnd = keySet(data, key);
           window.localStorage.setItem(STORAGE_KEY, dataEnd);
@@ -17,7 +15,6 @@ export const localStoragePlugin = (options) => {
       });
     } else {
       store.subscribe((mutation, items) => {
-        console.log( namespace, items[namespace]);
         if (namespace && items[namespace]) {
           let data = crypt.crypt(JSON.stringify(items[namespace]), KEY);
           let dataEnd = keySet(data, KEY);
