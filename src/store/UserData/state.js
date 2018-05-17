@@ -1,7 +1,6 @@
 import math from '@/components/lib/math';
 import crypt from '@/components/lib/crypt';
 import moment from 'moment';
-import localization from '@/components/loc';
 
 const KEY_LENGTH = 128;
 const KEY_HALF = KEY_LENGTH / 2;
@@ -10,7 +9,6 @@ const TODO_KEY = 'todoList';
 
 const DEFAULT_OBJECT = {
   localization: 'en',
-  localizationLib: localization,
   items: [],
   lastCount: -1,
   lastCountCategory: 0,
@@ -56,7 +54,6 @@ if (isFirstRun()) {
   let exclData = keyGet(stor).data;
   let decrypt = crypt.decrypt(exclData, key);
   data = JSON.parse(decrypt)[TODO_KEY];
-  data.localizationLib = localization;
 }
 
 export const UserDataState = { [TODO_KEY]: data };

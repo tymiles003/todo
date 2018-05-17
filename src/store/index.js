@@ -10,12 +10,22 @@ import {NotifyState} from './Notify/state';
 import {NotifyMutations} from './Notify/mutations';
 import {NotifyGetters} from './Notify/getters';
 
+import {LocalizationState} from './Localization/state';
+import {LocalizationMutations} from './Localization/mutations';
+import {LocalizationGetters} from './Localization/getters';
+
 Vue.use(Vuex);
 let UserData = {
   namespaced: true,
   state: UserDataState,
   mutations: UserDataMutations,
   getters: UserDataGetters
+};
+let Localization = {
+  namespaced: true,
+  state: LocalizationState,
+  mutations: LocalizationMutations,
+  getters: LocalizationGetters
 };
 let Notify = {
   namespaced: true,
@@ -27,7 +37,8 @@ let Notify = {
 export default new Vuex.Store({
   modules: {
     UserData,
-    Notify
+    Notify,
+    Localization
   },
   plugins: [ localStoragePlugin({namespace: 'UserData'}) ]
 });

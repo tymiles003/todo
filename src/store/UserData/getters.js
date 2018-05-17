@@ -5,16 +5,8 @@ function filterAll (item, selectedCategory) {
 }
 
 export const UserDataGetters = {
-  currentLocal (state) {
+  getCurrentLocal (state) {
     return state.todoList.localization;
-  },
-  localLib (state) {
-    return (key) => {
-      return {...state.todoList.localizationLib[key]};
-    };
-  },
-  currentLib (state) {
-    return {...state.todoList.localizationLib[state.todoList.localization]};
   },
   length (state) {
     return state.todoList.items.length;
