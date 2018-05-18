@@ -1,4 +1,13 @@
 const localization = {
+  STAT_ALL: 'Все',
+  STAT_PENDING: 'Запланировано',
+  STAT_PAUSED: 'Пауза',
+  STAT_RUNING: 'Запущен',
+  STAT_DONE: 'Завершено',
+  STAT_UNDONE: 'Не завершено',
+  STAT_LABEL: 'Статус',
+  STAT_LABEL_BTNACTION: 'Сортировать по статусу',
+
   CAT_NAME_DEFAULT: 'Главная',
   CAT_TOOLTIP_ADD: 'Добавить категорию',
   CAT_TOOLTIP_SAVE: 'Сохранить название категории',

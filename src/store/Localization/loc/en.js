@@ -1,4 +1,13 @@
 const localization = {
+  STAT_ALL: 'All',
+  STAT_PENDING: 'Pending',
+  STAT_PAUSED: 'Paused',
+  STAT_RUNING: 'Running',
+  STAT_DONE: 'Done',
+  STAT_UNDONE: 'Undone',
+  STAT_LABEL: 'Status',
+  STAT_LABEL_BTNACTION: 'Sort by status',
+
   CAT_NAME_DEFAULT: 'Default',
   CAT_TOOLTIP_ADD: 'Create new category',
   CAT_TOOLTIP_SAVE: 'Save category name',

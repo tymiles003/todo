@@ -1,5 +1,5 @@
 <template>
-  <div class="dropdown" title="сортировка по статусу">
+  <div class="dropdown" :title="getLocalMsg('STAT_LABEL_BTNACTION')">
     <button class="btn btn-light dropdown-toggle" type="button" id="myDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       {{label}}
     </button>
