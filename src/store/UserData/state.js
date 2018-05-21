@@ -2,28 +2,16 @@ import math from '@/library/math';
 import crypt from '@/library/crypt';
 import moment from 'moment';
 
+import dataTemplates from './dataTemplates';
+import modelChecker from '@/library/modelChecker';
+
 const KEY_LENGTH = 128;
 const KEY_HALF = KEY_LENGTH / 2;
 export const STORAGE_KEY = 'time-tracker';
 const TODO_KEY = 'todoList';
 
-const DEFAULT_OBJECT = {
-  localization: 'en',
-  items: [],
-  lastCount: -1,
-  lastCountCategory: 0,
-  selectedCategory: 0,
-  categories: [
-    {
-      id: 0,
-      name: 'default',
-      color: '#cccccc',
-      elements: []
-    }
-  ]
-};
 
-const INIT_TEMPLATE = JSON.stringify(DEFAULT_OBJECT);
+const INIT_TEMPLATE = JSON.stringify(dataTemplates.DEFAULT_OBJECT);
 let data = '';
 
 export function isFirstRun () {
@@ -65,6 +53,27 @@ if (isFirstRun()) {
     data = JSON.parse(decrypt)[TODO_KEY];
   }
 }
+
+let modelValidate = (data) => {
+  modelChecker.complement(data, dataTemplates.DEFAULT_OBJECT);
+  modelChecker.clippingPropertys(data, ["test"]);
+  for (let item of data.items) {
+    modelChecker.complement(item, dataTemplates.DEFAULT_OBJECT_ITEM);
+    modelChecker.clippingPropertys(item, ["test"]);
+    modelChecker.complement(item.time, dataTemplates.DEFAULT_OBJECT_ITEM_TIME);
+    modelChecker.complement(item.time.pastTime, dataTemplates.DEFAULT_OBJECT_ITEM_TIME_PAST);
+
+    for (let itemTrack of item.time.track) {
+      modelChecker.complement(itemTrack, dataTemplates.DEFAULT_OBJECT_ITEM_TIME_TRACK_ITEM);
+    }
+  }
+  for (let cat of data.categories) {
+    modelChecker.complement(cat, dataTemplates.DEFAULT_OBJECT_CAT);
+    modelChecker.clippingPropertys(cat, ['color', 'elements']);
+  }
+};
+
+modelValidate(data);
 
 export const UserDataState = { [TODO_KEY]: data };
 
