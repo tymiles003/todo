@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import helper from '@/components/lib/todoHelpers';
+import helper from '@/library/todoHelpers';
 export default {
   name: 'TodoItemEdit',
   props: ['todo'],

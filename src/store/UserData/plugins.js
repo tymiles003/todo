@@ -1,5 +1,5 @@
 import {STORAGE_KEY, isFirstRun, keyGen, keySet, KEY} from './state';
-import crypt from '@/components/lib/crypt';
+import crypt from '@/library/crypt';
 
 export const localStoragePlugin = (options) => {
   const namespace = options.namespace;

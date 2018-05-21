@@ -44,7 +44,7 @@ import SortDuration from '@/components/SortDuration';
 import SortReset from '@/components/SortReset';
 
 // -----other:
-import helper from '@/components/lib/todoHelpers';
+import helper from '@/library/todoHelpers';
 
 export default {
   name: 'TodoItemSort',

@@ -1,5 +1,5 @@
-import math from '@/components/lib/math';
-import crypt from '@/components/lib/crypt';
+import math from '@/library/math';
+import crypt from '@/library/crypt';
 import moment from 'moment';
 
 const KEY_LENGTH = 128;

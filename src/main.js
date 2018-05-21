@@ -4,7 +4,7 @@ import Vue from 'vue';
 import App from './App';
 import store from './store';
 import router from './router';
-import getLocalMsg from '@/components/plugins/getLocalMsg';
+import getLocalMsg from '@/plugins/getLocalMsg';
 // import notify from '@/components/plugins/notify';
 
 import VueYandexMetrika from 'vue-yandex-metrika';

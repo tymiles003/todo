@@ -41,7 +41,7 @@ import faRegular from '@fortawesome/fontawesome-free-regular';
 import brands from '@fortawesome/fontawesome-free-brands';
 
 // -----other:
-import array from '@/components/lib/array';
+import array from '@/library/array';
 
 export default {
   name: 'SortButton',

@@ -111,7 +111,7 @@ import TrackDiagramm from '@/components/TrackDiagramm';
 import TrackProperty from '@/components/TrackProperty';
 
 // -----other:
-import math from '@/components/lib/math';
+import math from '@/library/math';
 
 // -----fontAwesome:
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome';

@@ -1,5 +1,5 @@
 // -----other:
-import array from '@/components/lib/array';
+import array from '@/library/array';
 
 export const NotifyMutations = {
   addNotify (state, arg) { // Добавить таск

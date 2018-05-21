@@ -4,7 +4,7 @@ import moment from 'moment';
 import momentDurationFormat from 'moment-duration-format';
 
 // -----other:
-import array from '@/components/lib/array';
+import array from '@/library/array';
 
 export const commonMethods = {
   updateDuration (id) {

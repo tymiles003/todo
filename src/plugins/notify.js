@@ -1,5 +1,5 @@
 // -----other:
-import array from '@/components/lib/array';
+import array from '@/library/array';
 // the plugin example
 const notify = {
   install (Vue){

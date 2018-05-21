@@ -77,7 +77,7 @@ import TimeTrackerModal from '@/components/TimeTrackerModal';
 import PlayButton from '@/components/PlayButton';
 
 // -----other:
-import helper from '@/components/lib/todoHelpers';
+import helper from '@/library/todoHelpers';
 
 export default {
   name: 'TodoItem',

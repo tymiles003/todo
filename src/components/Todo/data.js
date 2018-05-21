@@ -1,5 +1,5 @@
 // -----other:
-import helper from '@/components/lib/todoHelpers';
+import helper from '@/library/todoHelpers';
 export const data = function () {
   return {
     animStates: {
