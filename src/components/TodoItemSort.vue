@@ -30,7 +30,7 @@
 
 <script>
 // -----styles:
-import '../assets/less/fade.less';
+import '@/assets/less/fade.less';
 
 // -----fontAwesome:
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome';

@@ -21,7 +21,7 @@ import moment from 'moment';
 // eslint-disable-next-line
 import momentDurationFormat from 'moment-duration-format';
 // -----styles:
-import '../assets/less/components/todo-tracker.less';
+import '@/assets/less/components/todo-tracker.less';
 
 export default {
   name: 'TrackItem',

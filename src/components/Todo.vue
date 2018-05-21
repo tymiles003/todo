@@ -62,7 +62,7 @@ import {mounted} from '@/components/Todo/mounted';
 import {updated} from '@/components/Todo/updated';
 
 // -----styles:
-import '../assets/less/components/notify-box.less';
+import '@/assets/less/components/notify-box.less';
 
 export default {
   name: 'Todo',

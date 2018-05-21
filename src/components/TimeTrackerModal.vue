@@ -102,13 +102,13 @@
 
 <script>
 // -----styles:
-import '../assets/less/components/todo-tracker.less';
-import '../assets/less/fade.less';
+import '@/assets/less/components/todo-tracker.less';
+import '@/assets/less/fade.less';
 
 // -----vue components:
-import TrackItem from '@/components/TrackItem';
-import TrackDiagramm from '@/components/TrackDiagramm';
-import TrackProperty from '@/components/TrackProperty';
+import TrackItem from '@/components/TimeTrackerModal/TrackItem';
+import TrackDiagramm from '@/components/TimeTrackerModal/TrackDiagramm';
+import TrackProperty from '@/components/TimeTrackerModal/TrackProperty';
 
 // -----other:
 import math from '@/library/math';
