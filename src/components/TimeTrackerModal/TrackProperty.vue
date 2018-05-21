@@ -16,9 +16,10 @@
           <input
             type="text"
             class="form-control"
-            :value="todo.text"/>
+            v-model="newText"
+            @keydown.enter="editText(todo.id)"/>
             <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button">
+              <button class="btn btn-outline-secondary" type="button" @click="editText(todo.id)">
                 Ok
               </button>
             </div>
@@ -55,19 +56,38 @@ import momentDurationFormat from 'moment-duration-format';
 // eslint-disable-next-line
 import momentTimer from 'moment-timer';
 
+// -----other:
+import array from '@/library/array';
+
 export default {
   name: 'TrackProperty',
   props: ['todo'],
   data () {
-    return { };
+    return {
+      newText: this.todo.text,
+    };
   },
   methods: {
+    getItem (id) {
+      return array.getItemInObjArrByID(id, this.$store.state.UserData.todoList.items);
+    },
     getCategoryName (id) {
       return this.$store.getters['UserData/getCategoryById'](id)[0].name;
     },
     getCreationTime (ms) {
       return moment(ms).format('DD.MM.YYYY -- HH:mm:ss');
+    },
+    editText (id) {
+      let object = this.getItem(id);
+      let index = object.index;
+      let item = object.object;
+      this.todo.text = this.newText
+      this.$store.commit('UserData/update', {
+        index: index,
+        object: item
+      });
     }
+
   },
   computed: { },
   components: { }
