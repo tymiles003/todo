@@ -13,7 +13,7 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // -----styles:
-import './assets/less/common.less';
+import '@/assets/less/common.less';
 
 // import helper from '@/components/lib/todoHelpers';
 Vue.config.productionTip = false;

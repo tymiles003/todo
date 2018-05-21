@@ -39,9 +39,9 @@ import faRegular from '@fortawesome/fontawesome-free-regular';
 import brands from '@fortawesome/fontawesome-free-brands';
 
 // -----vue components:
-import SortSelectStatus from '@/components/SortSelectStatus';
-import SortDuration from '@/components/SortDuration';
-import SortReset from '@/components/SortReset';
+import SortSelectStatus from '@/components/TodoItemSort/SortSelectStatus';
+import SortDuration from '@/components/TodoItemSort/SortDuration';
+import SortReset from '@/components/TodoItemSort/SortReset';
 
 // -----other:
 import helper from '@/library/todoHelpers';

@@ -42,7 +42,7 @@ import faRegular from '@fortawesome/fontawesome-free-regular';
 import brands from '@fortawesome/fontawesome-free-brands';
 
 // -----vue components:
-import SortButton from '@/components/SortButton';
+import SortButton from '@/components/TodoCategoryPanel/SortButton';
 
 export default {
   name: 'TodoCategoryPanel',

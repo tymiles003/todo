@@ -72,9 +72,9 @@ import faRegular from '@fortawesome/fontawesome-free-regular';
 import brands from '@fortawesome/fontawesome-free-brands';
 
 // -----vue components:
-import TodoItemEdit from '@/components/TodoItemEdit';
-import TimeTrackerModal from '@/components/TimeTrackerModal';
-import PlayButton from '@/components/PlayButton';
+import TodoItemEdit from '@/components/TodoItem/TodoItemEdit';
+import TimeTrackerModal from '@/components/TimeTrackerModal/TimeTrackerModal';
+import PlayButton from '@/components/TodoItem/PlayButton';
 
 // -----other:
 import helper from '@/library/todoHelpers';
