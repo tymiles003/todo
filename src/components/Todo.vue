@@ -1,56 +1,55 @@
 <template>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 p-3">
-
-    <todo-category-panel
-      @sort="sortByCategory">
-    </todo-category-panel>
-    <transition name="fade-element">
-      <todo-item-new-line
-        v-if="animStates.newTextVisible"
-        v-bind:todo="todoItems"
-        @add="addTodo">
-      </todo-item-new-line>
-    </transition>
-    <transition name="list-reverse">
-      <todo-item-sort
-        v-if="storeLength !== 0"
-        @sortbydefault="sortByDefault"
-        @sortbystatus="sortByStatus"
-        @sortbytime="sortByTime">
-      </todo-item-sort>
-    </transition>
-   <transition-group name="list" tag="div">
-    <todo-item
-      v-for="item in todoItems"
-      v-bind:todo="item"
-      v-bind:key="item.id"
-      @done="statusDone"
-      @run="statusRunning"
-      @pause="statusPaused"
-      @clear="clearThis"
-      @edit="itemEdit"
-      @newText="setNewText"
-      ></todo-item>
-    </transition-group>
-  </div>
-  <datalist id="hintlist">
-    <hint-item
-      v-for="item in todoItems"
-      v-bind:hint="item"
-      v-bind:key="item.id"
-      ></hint-item>
-  </datalist>
-  <div class="notify-box">
-    <transition-group name="list-reverse" tag="div">
-      <notify-items
-        v-for="item in $store.state.Notify.notifyArray"
-        v-bind:notify="item"
+      <todo-category-panel
+        @sort="sortByCategory">
+      </todo-category-panel>
+      <transition name="fade-element">
+        <todo-item-new-line
+          v-if="animStates.newTextVisible"
+          v-bind:todo="todoItems"
+          @add="addTodo">
+        </todo-item-new-line>
+      </transition>
+      <transition name="list-reverse">
+        <todo-item-sort
+          v-if="storeLength !== 0"
+          @sortbydefault="sortByDefault"
+          @sortbystatus="sortByStatus"
+          @sortbytime="sortByTime">
+        </todo-item-sort>
+      </transition>
+      <transition-group name="list" tag="div">
+        <todo-item
+          v-for="item in todoItems"
+          v-bind:todo="item"
+          v-bind:key="item.id"
+          @done="statusDone"
+          @run="statusRunning"
+          @pause="statusPaused"
+          @clear="clearThis"
+          @edit="itemEdit"
+          @newText="setNewText"
+        ></todo-item>
+      </transition-group>
+    </div>
+    <datalist id="hintlist">
+      <hint-item
+        v-for="item in todoItems"
+        v-bind:hint="item"
         v-bind:key="item.id">
-      </notify-items>
-    </transition-group>
+      </hint-item>
+    </datalist>
+    <div class="notify-box">
+      <transition-group name="list-reverse" tag="div">
+        <notify-items
+          v-for="item in $store.state.Notify.notifyArray"
+          v-bind:notify="item"
+          v-bind:key="item.id">
+        </notify-items>
+      </transition-group>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
