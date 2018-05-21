@@ -1,15 +1,49 @@
 <template>
   <div>
-    <ul>
-      <li>ID: {{todo.id}}</li>
-      <li>Category: {{getCategoryName(todo.categoryId)}}</li>
-      <li>Text: {{todo.text}}</li>
-      <li>createdTime: {{getCreationTime(todo.time.createdTime)}}</li>
-      <li>Sort: {{todo.sort}}</li>
-      <li>Status: {{todo.status}}</li>
-      <li class="hide">Action: {{todo.action}}</li>
-    </ul>
-    <pre>{{$store.state}}</pre>
+    <table class="text-left" style="table-layout: fixed;">
+      <tr>
+        <td class="pr-3">ID</td>
+        <td class="pl-3">{{todo.id}}</td>
+      </tr>
+      <tr>
+        <td class="pr-3">Category</td>
+        <td class="pl-3">{{getCategoryName(todo.categoryId)}}</td>
+      </tr>
+      <tr>
+        <td class="pr-3">Text</td>
+        <td class="pl-3">
+          <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            :value="todo.text"/>
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button">
+                Ok
+              </button>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="pr-3">createdTime</td>
+        <td class="pl-3">{{getCreationTime(todo.time.createdTime)}}</td>
+      </tr>
+      <tr>
+        <td class="pr-3">Sort</td>
+        <td class="pl-3">{{todo.sort}}</td>
+      </tr>
+      <tr>
+        <td class="pr-3">Status</td>
+        <td class="pl-3">{{todo.status}}</td>
+      </tr>
+      <tr>
+        <td class="pr-3">Action</td>
+        <td class="pl-3">{{todo.action}}</td>
+      </tr>
+    </table>
+    <!-- remove me!!!!1 -->
+    <!-- <pre class="text-left hidden">{{todo}}</pre> -->
   </div>
 </template>
 

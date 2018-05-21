@@ -29,7 +29,7 @@
                   {{getLocalMsg('TRK_LABEL_TAB_DIAGRAMM')}}
               </div>
             </li>
-            <li class="nav-item hidden">
+            <li class="nav-item">
               <div
                 class="nav-link"
                 v-bind:class="{active: isProperty}"
@@ -83,7 +83,7 @@
             </transition>
             <transition name="fade-element">
               <div
-                class="tab-pane fade hidden"
+                class="tab-pane fade"
                 role="tabpanel"
                 v-bind:class="{active: isProperty, show: isProperty}"
                 v-if="isProperty">
