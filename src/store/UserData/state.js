@@ -10,7 +10,6 @@ const KEY_HALF = KEY_LENGTH / 2;
 export const STORAGE_KEY = 'time-tracker';
 const TODO_KEY = 'todoList';
 
-
 const INIT_TEMPLATE = JSON.stringify(dataTemplates.DEFAULT_OBJECT);
 let data = '';
 
@@ -56,10 +55,10 @@ if (isFirstRun()) {
 
 let modelValidate = (data) => {
   modelChecker.complement(data, dataTemplates.DEFAULT_OBJECT);
-  modelChecker.clippingPropertys(data, ["test"]);
+  modelChecker.clippingPropertys(data, ['test']);
   for (let item of data.items) {
     modelChecker.complement(item, dataTemplates.DEFAULT_OBJECT_ITEM);
-    modelChecker.clippingPropertys(item, ["test"]);
+    modelChecker.clippingPropertys(item, ['test']);
     modelChecker.complement(item.time, dataTemplates.DEFAULT_OBJECT_ITEM_TIME);
     modelChecker.complement(item.time.pastTime, dataTemplates.DEFAULT_OBJECT_ITEM_TIME_PAST);
 

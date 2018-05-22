@@ -14,12 +14,12 @@ const DEFAULT_OBJECT = {
 
 const DEFAULT_OBJECT_ITEM_TIME_TRACK_ITEM = {
   startTime: 0,
-  duration: 0,
+  duration: 0
 };
 
 const DEFAULT_OBJECT_ITEM_TIME_PAST = {
-    duration: 0,
-    render: '00:00:00'
+  duration: 0,
+  render: '00:00:00'
 };
 
 const DEFAULT_OBJECT_ITEM_TIME = {
@@ -40,12 +40,10 @@ const DEFAULT_OBJECT_ITEM = {
   action: 'Default'
 };
 
-
 const DEFAULT_OBJECT_CAT = {
-    id: 0,
-    name: 'default'
+  id: 0,
+  name: 'default'
 };
-
 
 const dataTemplates = {
   DEFAULT_OBJECT,
@@ -54,6 +52,6 @@ const dataTemplates = {
   DEFAULT_OBJECT_ITEM_TIME,
   DEFAULT_OBJECT_ITEM,
   DEFAULT_OBJECT_CAT
-}
+};
 
 export default dataTemplates;

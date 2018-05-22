@@ -16,13 +16,14 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 // -----bootstrap-vue:
 import BootstrapVue from 'bootstrap-vue';
-Vue.use(BootstrapVue);
 
 // -----styles:
 import '@/assets/less/common.less';
 
 // import helper from '@/components/lib/todoHelpers';
 Vue.config.productionTip = false;
+
+Vue.use(BootstrapVue);
 
 Vue.use(VueYandexMetrika, {
   id: 48713990,

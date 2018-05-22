@@ -20,7 +20,6 @@
         </todo-item-sort>
       </transition>
 
-
         <transition-group name="list" tag="div">
           <todo-item
             v-for="item in todoItems"
@@ -34,7 +33,6 @@
             @newText="setNewText"
           ></todo-item>
         </transition-group>
-
 
     </div>
     <datalist id="hintlist">

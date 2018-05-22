@@ -85,9 +85,6 @@ import momentDurationFormat from 'moment-duration-format';
 // eslint-disable-next-line
 import momentTimer from 'moment-timer';
 
-import $ from 'jquery';
-
-
 // -----other:
 import array from '@/library/array';
 
@@ -145,7 +142,6 @@ export default {
       this.selectedCategory = id;
       this.todo.categoryId = this.selectedCategory;
     }
-
   },
   computed: { },
   components: { }
