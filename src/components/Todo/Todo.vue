@@ -25,6 +25,11 @@
             v-for="item in todoItems"
             v-bind:todo="item"
             v-bind:key="item.id"
+            v-dragging="{
+              item: item,
+              list: todoItems,
+              group: 'item'
+            }"
             @done="statusDone"
             @run="statusRunning"
             @pause="statusPaused"

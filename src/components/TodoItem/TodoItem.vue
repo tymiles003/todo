@@ -19,7 +19,7 @@
     @click="editThis"
     v-if="todo.action!==actns.EDIT"
     :title="todo.status">
-      [ {{todo.sort}} ] --- {{todo.text}}
+      {{todo.text}}
   </div>
   <transition name="fade-element">
     <todo-item-edit

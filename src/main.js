@@ -16,6 +16,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 // -----bootstrap-vue:
 import BootstrapVue from 'bootstrap-vue';
+import VueDND from 'awe-dnd'
 
 // -----styles:
 import '@/assets/less/common.less';
@@ -23,6 +24,7 @@ import '@/assets/less/common.less';
 // import helper from '@/components/lib/todoHelpers';
 Vue.config.productionTip = false;
 
+Vue.use(VueDND)
 Vue.use(BootstrapVue);
 
 Vue.use(VueYandexMetrika, {

@@ -16,7 +16,6 @@ export const methods = {
   ...sortMethods,
   ...statusMethods,
   ...actionsMethods,
-
   addTodo (newText) {
     const trimmedText = newText.trim();
     if (trimmedText && trimmedText !== '') {
