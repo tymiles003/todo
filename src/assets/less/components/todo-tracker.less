@@ -74,3 +74,19 @@
     color: @clr-link!important;
   }
 }
+
+.propertys-teble {
+  table-layout: fixed;
+  tr {
+    &.editable{
+      cursor: pointer;
+    }
+    &.noeditable{
+      color: @clr-gray;
+      display: none;
+    }
+    td {
+      padding-top:1em;
+    }
+  }
+}

@@ -1,5 +1,7 @@
 <template>
 <div class="todo-item trace- row" v-bind:class="todo.status">
+  <!-- <div
+    class="col-3 col-sm-3 col-md-2 col-lg-2 text-left pr-2 pl-2 pt-3">[HI!] </div> -->
   <play-button
     :isRun="isRun"
     :isPause="isPause"
@@ -17,7 +19,7 @@
     @click="editThis"
     v-if="todo.action!==actns.EDIT"
     :title="todo.status">
-      {{todo.text}}
+      [ {{todo.sort}} ] --- {{todo.text}}
   </div>
   <transition name="fade-element">
     <todo-item-edit

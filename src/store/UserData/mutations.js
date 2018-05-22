@@ -38,6 +38,9 @@ export const UserDataMutations = {
   update (state, arg) { // обновить таск
     state.todoList.items[arg.index] = arg.object;
   },
+  updateAll (state, elements) { // обновить таск
+    state.todoList.items = elements;
+  },
   setLocalization (state, arg) { // сменить текущую локализацию
     state.todoList.localization = arg.loc;
   }

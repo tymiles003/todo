@@ -8,9 +8,15 @@ import getLocalMsg from '@/plugins/getLocalMsg';
 // import notify from '@/components/plugins/notify';
 
 import VueYandexMetrika from 'vue-yandex-metrika';
+
 // -----bootstrap:
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
+
+// -----bootstrap-vue:
+import BootstrapVue from 'bootstrap-vue';
+Vue.use(BootstrapVue);
 
 // -----styles:
 import '@/assets/less/common.less';

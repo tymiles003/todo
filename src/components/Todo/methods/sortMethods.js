@@ -11,5 +11,6 @@ export const sortMethods = {
   sortByCategory (_id) {
     let id = _id || this.$store.state.UserData.todoList.selectedCategory;
     this.todoList = this.$store.getters['UserData/categorySort'](id);
+    this.todoList = this.$store.getters['UserData/all'];
   }
 };

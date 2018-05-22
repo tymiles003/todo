@@ -1,23 +1,38 @@
 <template>
   <div>
-    <table class="text-left" style="table-layout: fixed;">
-      <tr>
+    <table class="text-left propertys-teble">
+      <tr class="noeditable">
         <td class="pr-3">ID</td>
         <td class="pl-3">{{todo.id}}</td>
       </tr>
-      <tr>
+      <tr class="editable">
         <td class="pr-3">Category</td>
-        <td class="pl-3">{{getCategoryName(todo.categoryId)}}</td>
-      </tr>
-      <tr>
-        <td class="pr-3">Text</td>
         <td class="pl-3">
-          <div class="input-group">
-          <input
-            type="text"
-            class="form-control"
-            v-model="newText"
-            @keydown.enter="editText(todo.id)"/>
+          <b-dropdown
+            id="ddown1"
+            :text="getCategoryName(selectedCategory)"
+            class="m-md-2"
+            variant="light"
+            size="sm">
+            <b-dropdown-item
+              v-for="item in $store.getters['UserData/getAllCategories']"
+              v-bind:key="item.id"
+              @click="selectCategory(item.id)">
+                {{item.name}}
+            </b-dropdown-item>
+          </b-dropdown>
+        </td>
+      </tr>
+      <tr class="editable">
+        <td class="pr-3" @click="startEditText">Text</td>
+        <td class="pl-3">
+          <span v-if="!isTextEdit" @click="startEditText">{{todo.text}}</span>
+          <div class="input-group" v-if="isTextEdit">
+            <input
+              type="text"
+              class="form-control"
+              v-model="newText"
+              @keydown.enter="editText(todo.id)"/>
             <div class="input-group-append">
               <button class="btn btn-outline-secondary" type="button" @click="editText(todo.id)">
                 Ok
@@ -26,25 +41,39 @@
           </div>
         </td>
       </tr>
-      <tr>
+      <tr class="noeditable">
         <td class="pr-3">createdTime</td>
         <td class="pl-3">{{getCreationTime(todo.time.createdTime)}}</td>
       </tr>
-      <tr>
-        <td class="pr-3">Sort</td>
-        <td class="pl-3">{{todo.sort}}</td>
+      <tr class="editable">
+        <td class="pr-3" @click="startEditSort">Sort</td>
+        <td class="pl-3">
+          <span v-if="!isSortEdit" @click="startEditSort">{{todo.sort}}</span>
+          <div class="input-group" v-if="isSortEdit">
+            <input
+              type="text"
+              class="form-control"
+              v-model="newSort"
+              @keydown.enter="editSort(todo.id)"/>
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button" @click="editSort(todo.id)">
+                Ok
+              </button>
+            </div>
+          </div>
+        </td>
       </tr>
-      <tr>
+      <tr class="noeditable">
         <td class="pr-3">Status</td>
         <td class="pl-3">{{todo.status}}</td>
       </tr>
-      <tr>
+      <tr class="noeditable">
         <td class="pr-3">Action</td>
         <td class="pl-3">{{todo.action}}</td>
       </tr>
     </table>
     <!-- remove me!!!!1 -->
-    <!-- <pre class="text-left hidden">{{todo}}</pre> -->
+    <!-- <pre class="text-left">{{$store.state}}</pre> -->
   </div>
 </template>
 
@@ -56,6 +85,9 @@ import momentDurationFormat from 'moment-duration-format';
 // eslint-disable-next-line
 import momentTimer from 'moment-timer';
 
+import $ from 'jquery';
+
+
 // -----other:
 import array from '@/library/array';
 
@@ -65,6 +97,10 @@ export default {
   data () {
     return {
       newText: this.todo.text,
+      newSort: this.todo.sort,
+      isTextEdit: false,
+      isSortEdit: false,
+      selectedCategory: this.todo.categoryId
     };
   },
   methods: {
@@ -77,15 +113,37 @@ export default {
     getCreationTime (ms) {
       return moment(ms).format('DD.MM.YYYY -- HH:mm:ss');
     },
+    startEditText () {
+      this.isTextEdit = true;
+    },
+    startEditSort () {
+      this.isSortEdit = true;
+    },
     editText (id) {
       let object = this.getItem(id);
       let index = object.index;
       let item = object.object;
-      this.todo.text = this.newText
+      this.todo.text = this.newText;
       this.$store.commit('UserData/update', {
         index: index,
         object: item
       });
+      this.isTextEdit = false;
+    },
+    editSort (id) {
+      let object = this.getItem(id);
+      let index = object.index;
+      let item = object.object;
+      this.todo.sort = this.newSort;
+      this.$store.commit('UserData/update', {
+        index: index,
+        object: item
+      });
+      this.isSortEdit = false;
+    },
+    selectCategory (id) {
+      this.selectedCategory = id;
+      this.todo.categoryId = this.selectedCategory;
     }
 
   },

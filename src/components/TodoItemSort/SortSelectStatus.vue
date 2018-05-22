@@ -51,8 +51,7 @@ export default {
       this.$emit('sort', e.toElement.innerText);
     }
   },
-  computed: {
-  },
+  computed: { },
   components: { }
 };
 </script>

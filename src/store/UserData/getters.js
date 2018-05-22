@@ -14,6 +14,10 @@ export const UserDataGetters = {
   all (state) {
     return [...state.todoList.items].filter((todo) => {
       return filterAll(todo, state.todoList.selectedCategory);
+    }).sort((a, b) => {
+      let at = parseInt(a.sort);
+      let bt = parseInt(b.sort);
+      return at < bt;
     });
   },
   timeSort (state) {
@@ -70,5 +74,8 @@ export const UserDataGetters = {
         }
       });
     };
+  },
+  getAllCategories (state) {
+    return state.todoList.categories;
   }
 };

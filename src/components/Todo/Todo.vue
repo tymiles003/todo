@@ -19,19 +19,23 @@
           @sortbytime="sortByTime">
         </todo-item-sort>
       </transition>
-      <transition-group name="list" tag="div">
-        <todo-item
-          v-for="item in todoItems"
-          v-bind:todo="item"
-          v-bind:key="item.id"
-          @done="statusDone"
-          @run="statusRunning"
-          @pause="statusPaused"
-          @clear="clearThis"
-          @edit="itemEdit"
-          @newText="setNewText"
-        ></todo-item>
-      </transition-group>
+
+
+        <transition-group name="list" tag="div">
+          <todo-item
+            v-for="item in todoItems"
+            v-bind:todo="item"
+            v-bind:key="item.id"
+            @done="statusDone"
+            @run="statusRunning"
+            @pause="statusPaused"
+            @clear="clearThis"
+            @edit="itemEdit"
+            @newText="setNewText"
+          ></todo-item>
+        </transition-group>
+
+
     </div>
     <datalist id="hintlist">
       <hint-item

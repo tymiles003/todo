@@ -5,7 +5,6 @@ import TodoItemSort from '@/components/TodoItemSort/TodoItemSort';
 import TodoItemNewLine from '@/components/TodoItemNewLine';
 import TodoCategoryPanel from '@/components/TodoCategoryPanel/TodoCategoryPanel';
 import NotifyItems from '@/components/NotifyItems';
-
 export const components = {
   TodoItem,
   HintItem,
