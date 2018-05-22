@@ -45,24 +45,6 @@
         <td class="pr-3">createdTime</td>
         <td class="pl-3">{{getCreationTime(todo.time.createdTime)}}</td>
       </tr>
-      <tr class="editable">
-        <td class="pr-3" @click="startEditSort">Sort</td>
-        <td class="pl-3">
-          <span v-if="!isSortEdit" @click="startEditSort">{{todo.sort}}</span>
-          <div class="input-group" v-if="isSortEdit">
-            <input
-              type="text"
-              class="form-control"
-              v-model="newSort"
-              @keydown.enter="editSort(todo.id)"/>
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button" @click="editSort(todo.id)">
-                Ok
-              </button>
-            </div>
-          </div>
-        </td>
-      </tr>
       <tr class="noeditable">
         <td class="pr-3">Status</td>
         <td class="pl-3">{{todo.status}}</td>
@@ -96,7 +78,6 @@ export default {
       newText: this.todo.text,
       newSort: this.todo.sort,
       isTextEdit: false,
-      isSortEdit: false,
       selectedCategory: this.todo.categoryId
     };
   },
@@ -113,9 +94,6 @@ export default {
     startEditText () {
       this.isTextEdit = true;
     },
-    startEditSort () {
-      this.isSortEdit = true;
-    },
     editText (id) {
       let object = this.getItem(id);
       let index = object.index;
@@ -126,17 +104,6 @@ export default {
         object: item
       });
       this.isTextEdit = false;
-    },
-    editSort (id) {
-      let object = this.getItem(id);
-      let index = object.index;
-      let item = object.object;
-      this.todo.sort = this.newSort;
-      this.$store.commit('UserData/update', {
-        index: index,
-        object: item
-      });
-      this.isSortEdit = false;
     },
     selectCategory (id) {
       this.selectedCategory = id;

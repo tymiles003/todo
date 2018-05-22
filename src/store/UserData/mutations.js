@@ -41,7 +41,7 @@ export const UserDataMutations = {
   updateAll (state, elements) { // все таски
     elements.forEach((item, i, arr) => {
       state.todoList.items.forEach((item2, i2, arr2) => {
-        if(item.id === item2.id){
+        if (item.id === item2.id) {
           state.todoList.items[i2] = item;
         }
       });

@@ -25,6 +25,6 @@ function cryptoStorage (store, namespace) {
 export const localStoragePlugin = (options) => {
   const namespace = options.namespace;
   return (store) => {
-    cryptoStorage (store, namespace);
+    cryptoStorage(store, namespace);
   };
 };
