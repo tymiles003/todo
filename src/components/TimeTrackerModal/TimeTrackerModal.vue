@@ -121,7 +121,7 @@ import brands from '@fortawesome/fontawesome-free-brands';
 
 export default {
   name: 'TimeTrackerModal',
-  props: ['trackerShow', 'tracks', 'todo'],
+  props: ['tracks', 'todo'],
   data () {
     return {
       isTracker: true,

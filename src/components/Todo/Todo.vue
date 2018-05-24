@@ -36,10 +36,22 @@
             @clear="clearThis"
             @edit="itemEdit"
             @newText="setNewText"
+            @showtracks="showTracks"
           ></todo-item>
         </transition-group>
 
     </div>
+
+    <transition name="fade">
+      <time-tracker-modal
+        v-if="trackerShow"
+        v-bind:tracks="showingTracks"
+        v-bind:todo="showingTodo"
+        @close="hideTracks"
+        >
+      </time-tracker-modal>
+    </transition>
+
     <datalist id="hintlist">
       <hint-item
         v-for="item in todoItems"

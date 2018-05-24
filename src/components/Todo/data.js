@@ -6,6 +6,9 @@ export const data = function () {
       newTextVisible: false
     },
     todoList: [ ],
+    trackerShow: false,
+    showingTodo: {},
+    showingTracks: {},
     storeLength: 0,
     stats: helper.stats,
     actns: helper.actns

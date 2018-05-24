@@ -10,7 +10,7 @@
   </play-button>
   <div
     class="todo-item-time col-3 col-sm-3 col-md-2 col-lg-2 text-left pr-2 pl-2 pt-3"
-    @click="showTracks"
+    @click="show"
     :title="getLocalMsg('ITM_TOOLTIP_OPEN_TRACKER')">
       {{todo.time.pastTime.render}}
   </div>
@@ -50,15 +50,6 @@
       {{todo.time}}
     </pre>
   </div>
-  <transition name="fade">
-    <time-tracker-modal
-      v-if="trackerShow"
-      v-bind:trackerShow="trackerShow"
-      v-bind:tracks="todo.time.track"
-      v-bind:todo="todo"
-      @close="hideTracks">
-    </time-tracker-modal>
-  </transition>
 </div>
 </template>
 
@@ -75,7 +66,6 @@ import brands from '@fortawesome/fontawesome-free-brands';
 
 // -----vue components:
 import TodoItemEdit from '@/components/TodoItem/TodoItemEdit';
-import TimeTrackerModal from '@/components/TimeTrackerModal/TimeTrackerModal';
 import PlayButton from '@/components/TodoItem/PlayButton';
 
 // -----other:
@@ -111,17 +101,13 @@ export default {
       this.$emit('edit', this.todo.id);
     },
     setNewText (fromChild) {
-      // this.todo.text = fromChild.text;
       this.$emit('newText', {
         id: this.todo.id,
         text: fromChild.text
       });
     },
-    showTracks () {
-      this.trackerShow = true;
-    },
-    hideTracks () {
-      this.trackerShow = false;
+    show () {
+      this.$emit('showtracks', this.todo.id);
     }
   },
   computed: {
@@ -152,7 +138,6 @@ export default {
     faRegular,
     brands,
     TodoItemEdit,
-    TimeTrackerModal,
     PlayButton
   }
 };

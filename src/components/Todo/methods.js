@@ -1,5 +1,6 @@
 // -----for component:
 import {commonMethods} from '@/components/Todo/methods/commonMethods';
+import {tracksMethods} from '@/components/Todo/methods/tracksMethods';
 import {sortMethods} from '@/components/Todo/methods/sortMethods';
 import {statusMethods} from '@/components/Todo/methods/statusMethods';
 import {actionsMethods} from '@/components/Todo/methods/actionsMethods';
@@ -13,6 +14,7 @@ import momentTimer from 'moment-timer';
 
 export const methods = {
   ...commonMethods,
+  ...tracksMethods,
   ...sortMethods,
   ...statusMethods,
   ...actionsMethods,
