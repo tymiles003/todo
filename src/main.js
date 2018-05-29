@@ -6,6 +6,7 @@ import store from './store';
 import router from './router';
 import getLocalMsg from '@/plugins/getLocalMsg';
 // import notify from '@/components/plugins/notify';
+import ajax from '@/library/ajax';
 
 import VueYandexMetrika from 'vue-yandex-metrika';
 
@@ -16,7 +17,12 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 // -----bootstrap-vue:
 import BootstrapVue from 'bootstrap-vue';
+
+// -----awe-dnd:
 import VueDND from 'awe-dnd';
+
+// -----jquery:
+import $ from 'jquery';
 
 // -----styles:
 import '@/assets/less/common.less';
