@@ -42,6 +42,21 @@ Vue.use(VueYandexMetrika, {
 Vue.use(getLocalMsg);
 // Vue.use(notify);
 
+// let sendData = {
+//   'username': 'Johnny',
+//   'email': 'john@kage.ghh',
+//   'password': '123'
+// };
+// ajax
+//   .request({
+//     // address: 'http://rest/test',
+//     address: 'http://rest2/register',
+//     method: 'POST'
+//   })
+//   .complete((e) => { console.log(e); })
+//   .error((e) => { console.log(e); })
+//   .send(sendData);
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
