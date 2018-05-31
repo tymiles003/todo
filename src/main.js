@@ -8,27 +8,26 @@ import getLocalMsg from '@/plugins/getLocalMsg';
 // import notify from '@/components/plugins/notify';
 import ajax from '@/library/ajax';
 
+
 import VueYandexMetrika from 'vue-yandex-metrika';
+import BootstrapVue from 'bootstrap-vue';
+import VueDND from 'awe-dnd';
+
+import $ from 'jquery';
 
 // -----bootstrap:
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
-// -----bootstrap-vue:
-import BootstrapVue from 'bootstrap-vue';
 
-// -----awe-dnd:
-import VueDND from 'awe-dnd';
-
-// -----jquery:
-import $ from 'jquery';
 
 // -----styles:
 import '@/assets/less/common.less';
 
 // import helper from '@/components/lib/todoHelpers';
 Vue.config.productionTip = false;
+
 
 Vue.use(VueDND);
 Vue.use(BootstrapVue);
@@ -56,7 +55,7 @@ Vue.use(getLocalMsg);
 // ajax
 //   .request({
 //     // address: 'http://rest/test',
-//     address: 'http://rest2/register',
+//     address: 'http://todoserver/register',
 //     method: 'POST'
 //   })
 //   .complete((e) => { console.log(e); })
