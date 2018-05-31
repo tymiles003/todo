@@ -1,7 +1,8 @@
 <template>
   <div class="row">
     <div class="col-sm-12 text-right">
-      <login-button/>
+      <login-button
+        @show="showPopupLogin"></login-button>
       <local-button/>
     </div>
   </div>
@@ -15,7 +16,11 @@ export default {
   data () {
     return { };
   },
-  methods: { },
+  methods: {
+    showPopupLogin () {
+      this.$emit('show');
+    }
+  },
   computed: { },
   components: {
     LocalButton,
