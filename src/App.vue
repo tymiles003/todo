@@ -1,25 +1,42 @@
 <template>
 <div id="app">
-  <panel-app/>
+  <panel-app
+    @show="showPopupLogin">
+  </panel-app>
   <header-app/>
   <router-view/>
+  <login-modal
+    v-if="isLoginPopupShow"
+    @close="closePopupLogin">
+  </login-modal>
 </div>
 </template>
 
 <script>
 import PanelApp from '@/components/App/PanelApp';
 import HeaderApp from '@/components/App/HeaderApp';
+import LoginModal from '@/components/LoginModal/LoginModal';
 
 export default {
   name: 'App',
   data () {
-    return { };
+    return {
+      isLoginPopupShow: false
+    };
   },
-  methods: { },
+  methods: {
+    showPopupLogin () {
+      this.isLoginPopupShow = true;
+    },
+    closePopupLogin () {
+      this.isLoginPopupShow = false;
+    }
+  },
   computed: { },
   components: {
     HeaderApp,
-    PanelApp
+    PanelApp,
+    LoginModal
   }
 };
 </script>

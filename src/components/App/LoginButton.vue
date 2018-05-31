@@ -1,6 +1,8 @@
 <template>
   <div class="d-inline-block mr-4">
-    <a href="#">Войти</a>
+    <button
+      class="btn btn-link"
+      @click="showMeBeautifulPopup">Войти</button>
   </div>
 </template>
 
@@ -10,7 +12,11 @@ export default {
   data () {
     return { };
   },
-  methods: { },
+  methods: {
+    showMeBeautifulPopup () {
+      this.$emit('show');
+    }
+  },
   computed: { }
 };
 </script>
