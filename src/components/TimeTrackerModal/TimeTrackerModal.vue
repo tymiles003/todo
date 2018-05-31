@@ -5,7 +5,7 @@
         <div class="card todo-tracker-modal">
           <h5 class="card-header">
             <div class="row">
-              <div class="col-10 col-sm-10 col-md-10 col-lg-10 pt-2">{{getLocalMsg('ITM_LABEL_TRACKER_TITLE')}}</div>
+              <div class="col-10 col-sm-10 col-md-10 col-lg-10 pt-2 text-left">{{getLocalMsg('ITM_LABEL_TRACKER_TITLE')}}</div>
               <div class="col-2 col-sm-2 col-md-2 col-lg-2"><button type="button" class="btn btn-light" style="float: right;" @click="closeMe"><font-awesome-icon icon="times" /></button></div>
             </div>
           </h5>
