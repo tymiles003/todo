@@ -3,6 +3,13 @@ export default (() => {
   let obj = {};
   obj.errors = [ ];
 
+  obj.init = () => {
+    obj.errors = [];
+  };
+  obj.reset = () => {
+    obj.errors = [];
+  };
+
   obj.get = (name) => {
     // let returnItem = {};
     if (!name) return;
