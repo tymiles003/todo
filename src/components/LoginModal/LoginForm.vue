@@ -44,10 +44,18 @@
           </li>
         </ul>
     </div>
-    <button
-      type="button"
-      class="btn btn-primary"
-      @click="login">Войти</button>
+    <div class="form-group" >
+      <button
+        v-if="isDisabled"
+        type="button"
+        class="btn btn-primary"
+        disabled>Войти</button>
+      <button
+        v-if="isEnabled"
+        type="button"
+        class="btn btn-primary"
+        @click="login">Войти</button>
+    </div>
   </form>
 </template>
 
@@ -64,14 +72,19 @@ export default {
   name: 'LoginForm',
   data () {
     return {
-      valid: false,
+      isFirstRun: true,
       email: '',
       password: '',
       validator: validator
     };
   },
+  created () {
+    validator.reset();
+  },
   methods: {
-
+    notFirst () {
+      this.isFirstRun = false;
+    },
     checkMail (_mail) {
       const MAIL = _mail.trim();
       const RULE_1 = {
@@ -91,8 +104,9 @@ export default {
       };
       validator
         .addRule(RULE_1)
-        .addRule(RULE_2)
-        .addRule(RULE_3);
+        .addRule(RULE_2);
+      // .addRule(RULE_3);
+      this.notFirst();
     },
     checkPassword (pass) {
       const RULE_1 = {
@@ -102,6 +116,7 @@ export default {
       };
       validator
         .addRule(RULE_1);
+      this.notFirst();
     },
     checkForm () {
       this.checkMail(this.email);
@@ -109,9 +124,16 @@ export default {
     },
     login () {
       this.checkForm();
+      console.log('login');
     }
   },
   computed: {
+    isDisabled () {
+      return this.isFirstRun === true || this.validator.errors.length > 0;
+    },
+    isEnabled () {
+      return this.isFirstRun === false && this.validator.errors.length === 0;
+    },
     isMailErrors () {
       let errors = this.validator.getErrors('email');
       return errors && errors.length > 0;
