@@ -64,4 +64,4 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 [Labuzov Evgeny](Silksofthesoul@yandex.ru)
 
 #### License
-ничогава незнаю
+[MIT](http://opensource.org/licenses/MIT)
