@@ -33,6 +33,7 @@
     "npm": "^5.8.0",
     "popper.js": "^1.12.9",
     "vue": "^2.5.2",
+    "vue-m-validator": "^1.0.5",
     "vue-router": "^3.0.1",
     "vue-yandex-metrika": "^1.6.1",
     "vuex": "^3.0.1"
