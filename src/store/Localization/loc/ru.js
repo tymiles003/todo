@@ -1,4 +1,28 @@
 const localization = {
+  SGN_LABEL_LOGIN: 'Войти',
+  SGN_LABEL_REGST: 'Зарегистрироваться',
+
+  SGN_PLACEHOLDER_USERNAME: 'Имя пользователя',
+  SGN_PLACEHOLDER_EMAIL: 'Адрес электронной почты',
+  SGN_PLACEHOLDER_PASS: 'Пароль',
+  SGN_PLACEHOLDER_PASS2: 'Повторите пароль',
+
+  SGN_LABEL_USERNAME: 'Имя пользователя',
+  SGN_LABEL_EMAIL: 'Электронная почта',
+  SGN_LABEL_PASS: 'Пароль',
+  SGN_LABEL_PASS2: 'Пароль еще раз',
+
+  SGN_TEXT_PASSAGAIN: 'Введите пароль еще раз',
+
+  SGN_VALIDATION_EMAILREQ: 'Укажите почту почту',
+  SGN_VALIDATION_EMAILVALID: 'Не верный формат почты',
+  SGN_VALIDATION_PASSREQ: 'Укажите пароль',
+  SGN_VALIDATION_PASSMATCH: 'Пароли не совпадают',
+  SGN_VALIDATION_USERNAMEREQ: 'Укажите имя пользователя',
+  SGN_VALIDATION_USERNAMEVALID: 'Не разрешается использовать цифры и некоторые символы',
+  SGN_VALIDATION_USERNAMELONG: 'Используйте не более 128 символов',
+  SGN_VALIDATION_USERNAMESHORT: 'Введите хотя бы 3 символа',
+
   STAT_ALL: 'Все',
   STAT_PENDING: 'Запланировано',
   STAT_PAUSED: 'Пауза',

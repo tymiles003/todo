@@ -1,4 +1,28 @@
 const localization = {
+  SGN_LABEL_LOGIN: 'Sign up',
+  SGN_LABEL_REGST: 'Sign in',
+
+  SGN_PLACEHOLDER_USERNAME: 'User name',
+  SGN_PLACEHOLDER_EMAIL: 'Enter email',
+  SGN_PLACEHOLDER_PASS: 'Password',
+  SGN_PLACEHOLDER_PASS2: 'Password again',
+
+  SGN_LABEL_USERNAME: 'Username',
+  SGN_LABEL_EMAIL: 'Email',
+  SGN_LABEL_PASS: 'Password',
+  SGN_LABEL_PASS2: 'Password again',
+
+  SGN_TEXT_PASSAGAIN: 'input password again',
+
+  SGN_VALIDATION_EMAILREQ: 'Email field required',
+  SGN_VALIDATION_EMAILVALID: 'email is not valid',
+  SGN_VALIDATION_PASSREQ: 'Password field required',
+  SGN_VALIDATION_PASSMATCH: 'Passwords do not match',
+  SGN_VALIDATION_USERNAMEREQ: 'Username field required',
+  SGN_VALIDATION_USERNAMEVALID: 'Username is not valid',
+  SGN_VALIDATION_USERNAMELONG: 'Username is too long',
+  SGN_VALIDATION_USERNAMESHORT: 'Username is too short',
+
   STAT_ALL: 'All',
   STAT_PENDING: 'Pending',
   STAT_PAUSED: 'Paused',

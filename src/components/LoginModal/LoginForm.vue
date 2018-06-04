@@ -9,13 +9,13 @@
       </li>
     </ul>
     <div class="form-group">
-      <label>Email address</label>
+      <label>{{this.getLocalMsg('SGN_LABEL_EMAIL')}}</label>
       <input
         type="email"
         name="email"
         class="form-control"
         v-bind:class="{'text-danger':isMailErrors,'is-invalid':isMailErrors}"
-        placeholder="Enter email"
+        :placeholder="this.getLocalMsg('SGN_PLACEHOLDER_EMAIL')"
         v-model="email"
         @blur="checkMail(email)">
         <ul v-if="isMailErrors">
@@ -27,13 +27,13 @@
         </ul>
     </div>
     <div class="form-group">
-      <label>Password</label>
+      <label>{{this.getLocalMsg('SGN_LABEL_PASS')}}</label>
       <input
         type="password"
         name="password"
         class="form-control"
         v-bind:class="{'text-danger':isPassErrors,'is-invalid':isPassErrors}"
-        placeholder="Password"
+        :placeholder="this.getLocalMsg('SGN_PLACEHOLDER_PASS')"
         v-model="password"
         @blur="checkPassword(password)">
         <ul>
@@ -49,12 +49,12 @@
         v-if="isDisabled"
         type="button"
         class="btn btn-primary"
-        disabled>Войти</button>
+        disabled>{{this.getLocalMsg('SGN_LABEL_LOGIN')}}</button>
       <button
         v-if="isEnabled"
         type="button"
         class="btn btn-primary"
-        @click="login">Войти</button>
+        @click="login">{{this.getLocalMsg('SGN_LABEL_LOGIN')}}</button>
     </div>
   </form>
 </template>
@@ -66,7 +66,7 @@ import faSolid from '@fortawesome/fontawesome-free-solid';
 import faRegular from '@fortawesome/fontawesome-free-regular';
 import brands from '@fortawesome/fontawesome-free-brands';
 
-import validator from '@/library/validator';
+import validator from 'vue-m-validator';
 
 export default {
   name: 'LoginForm',
@@ -90,12 +90,12 @@ export default {
       const RULE_1 = {
         expression: !MAIL || MAIL === '',
         name: 'email',
-        msg: 'email field required'
+        msg: this.getLocalMsg('SGN_VALIDATION_EMAILREQ')
       };
       const RULE_2 = {
         expression: !(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(MAIL)),
         name: 'email',
-        msg: 'email is not valid'
+        msg: this.getLocalMsg('SGN_VALIDATION_EMAILVALID')
       };
       const RULE_3 = {
         expression: !(MAIL === 'ad@ad.ad'),
@@ -112,7 +112,7 @@ export default {
       const RULE_1 = {
         expression: !pass || pass === '',
         name: 'pass',
-        msg: 'pass field required'
+        msg: this.getLocalMsg('SGN_VALIDATION_PASSREQ')
       };
       validator
         .addRule(RULE_1);

@@ -2,7 +2,7 @@
   <div class="d-inline-block mr-4">
     <button
       class="btn btn-link"
-      @click="showMeBeautifulPopup">Войти</button>
+      @click="showMeBeautifulPopup">{{this.getLocalMsg('SGN_LABEL_LOGIN')}}</button>
   </div>
 </template>
 
