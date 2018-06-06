@@ -1,16 +1,4 @@
-const DEFAULT_OBJECT = {
-  localization: 'en',
-  items: [],
-  lastCount: -1,
-  lastCountCategory: 0,
-  selectedCategory: 0,
-  categories: [
-    {
-      id: 0,
-      name: 'default'
-    }
-  ]
-};
+
 
 const DEFAULT_OBJECT_ITEM_TIME_TRACK_ITEM = {
   startTime: 0,
@@ -45,13 +33,30 @@ const DEFAULT_OBJECT_CAT = {
   name: 'default'
 };
 
+const DEFAULT_OBJECT_LOGIN = {
+  login: 'Anonymous',
+  token: '',
+  lastLogin: ''
+};
+
+const DEFAULT_OBJECT = {
+  localization: 'en',
+  items: [],
+  lastCount: -1,
+  lastCountCategory: 0,
+  selectedCategory: 0,
+  categories: [ DEFAULT_OBJECT_LOGIN ],
+  loginData: DEFAULT_OBJECT_LOGIN
+};
+
 const dataTemplates = {
   DEFAULT_OBJECT,
   DEFAULT_OBJECT_ITEM_TIME_TRACK_ITEM,
   DEFAULT_OBJECT_ITEM_TIME_PAST,
   DEFAULT_OBJECT_ITEM_TIME,
   DEFAULT_OBJECT_ITEM,
-  DEFAULT_OBJECT_CAT
+  DEFAULT_OBJECT_CAT,
+  DEFAULT_OBJECT_LOGIN
 };
 
 export default dataTemplates;

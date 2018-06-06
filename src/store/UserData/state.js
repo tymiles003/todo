@@ -56,6 +56,7 @@ if (isFirstRun()) {
 let modelValidate = (data) => {
   modelChecker.complement(data, dataTemplates.DEFAULT_OBJECT);
   modelChecker.clippingPropertys(data, ['test']);
+  modelChecker.complement(data.loginData, dataTemplates.DEFAULT_OBJECT_LOGIN);
   for (let item of data.items) {
     modelChecker.complement(item, dataTemplates.DEFAULT_OBJECT_ITEM);
     modelChecker.clippingPropertys(item, ['test']);
@@ -73,7 +74,6 @@ let modelValidate = (data) => {
 };
 
 modelValidate(data);
-
 export const UserDataState = { [TODO_KEY]: data };
 
 export const KEY = key;

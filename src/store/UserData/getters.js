@@ -77,5 +77,8 @@ export const UserDataGetters = {
   },
   getAllCategories (state) {
     return state.todoList.categories;
+  },
+  getLoginDataAll (state) {
+    return state.todoList.loginData;
   }
 };

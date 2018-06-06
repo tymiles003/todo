@@ -10,6 +10,10 @@ import {NotifyState} from './Notify/state';
 import {NotifyMutations} from './Notify/mutations';
 import {NotifyGetters} from './Notify/getters';
 
+import {LoginDataState} from './LoginData/state';
+import {LoginDataMutations} from './LoginData/mutations';
+import {LoginDataGetters} from './LoginData/getters';
+
 import {LocalizationState} from './Localization/state';
 import {LocalizationMutations} from './Localization/mutations';
 import {LocalizationGetters} from './Localization/getters';
@@ -20,6 +24,12 @@ let UserData = {
   state: UserDataState,
   mutations: UserDataMutations,
   getters: UserDataGetters
+};
+let LoginData = {
+  namespaced: true,
+  state: LoginDataState,
+  mutations: LoginDataMutations,
+  getters: LoginDataGetters
 };
 let Localization = {
   namespaced: true,
@@ -37,6 +47,7 @@ let Notify = {
 export default new Vuex.Store({
   modules: {
     UserData,
+    LoginData,
     Notify,
     Localization
   },
