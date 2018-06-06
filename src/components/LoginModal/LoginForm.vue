@@ -1,80 +1,100 @@
 <template>
-  <form class="text-left">
-    <ul class="form-group">
-      <li
-        v-for="error in validator.errors">
-        <small
-          class="form-text text-muted"
-          v-for="msg in error.msgs">{{msg}}</small>
-      </li>
-    </ul>
-    <div class="form-group">
-      <label>{{this.getLocalMsg('SGN_LABEL_EMAIL')}}</label>
-      <input
-        type="email"
-        name="email"
-        class="form-control"
-        v-bind:class="{'text-danger':isMailErrors,'is-invalid':isMailErrors}"
-        :placeholder="this.getLocalMsg('SGN_PLACEHOLDER_EMAIL')"
-        v-model="email"
-        @blur="checkMail(email)">
-        <ul v-if="isMailErrors">
-          <li
-          class="form-text text-danger"
-          v-for="error in validator.getErrors('email')">
-              &nbsp;{{ error }}
-          </li>
-        </ul>
+  <div>
+    <form class="text-left"  v-if="!isComplite">
+      <ul class="form-group">
+        <li
+          v-for="error in validator.errors">
+          <small
+            class="form-text text-muted"
+            v-for="msg in error.msgs">{{msg}}</small>
+        </li>
+      </ul>
+      <div class="form-group">
+        <label>{{this.getLocalMsg('SGN_LABEL_EMAIL')}}</label>
+        <input
+          type="email"
+          name="email"
+          class="form-control"
+          v-bind:class="{'text-danger':isMailErrors,'is-invalid':isMailErrors}"
+          :placeholder="this.getLocalMsg('SGN_PLACEHOLDER_EMAIL')"
+          v-model="email"
+          @blur="checkMail(email)">
+          <ul v-if="isMailErrors">
+            <li
+            class="form-text text-danger"
+            v-for="error in validator.getErrors('email')">
+                &nbsp;{{ error }}
+            </li>
+          </ul>
+      </div>
+      <div class="form-group">
+        <label>{{this.getLocalMsg('SGN_LABEL_PASS')}}</label>
+        <input
+          type="password"
+          name="password"
+          class="form-control"
+          v-bind:class="{'text-danger':isPassErrors,'is-invalid':isPassErrors}"
+          :placeholder="this.getLocalMsg('SGN_PLACEHOLDER_PASS')"
+          v-model="password"
+          @blur="checkPassword(password)">
+          <ul>
+            <li
+            class="form-text text-danger"
+            v-for="error in validator.getErrors('pass')">
+                &nbsp;{{ error }}
+            </li>
+          </ul>
+      </div>
+      <div class="form-group" >
+        <button
+          v-if="isDisabled"
+          type="button"
+          class="btn btn-primary"
+          disabled>{{this.getLocalMsg('SGN_LABEL_LOGIN')}}</button>
+        <button
+          v-if="isEnabled"
+          type="button"
+          class="btn btn-primary"
+          @click="login">{{this.getLocalMsg('SGN_LABEL_LOGIN')}}</button>
+      </div>
+    </form>
+    <div class="statusWork" v-if="isComplite">
+      <div class="soccess">
+        <h5 class="card-title text-success">{{statusCompliteMsg.title}}</h5>
+        <p class="card-text">{{statusCompliteMsg.body}}</p>
+        <p class="card-text">{{statusCompliteMsg.extra}}</p>
+      </div>
+      <div class="error hide"></div>
     </div>
-    <div class="form-group">
-      <label>{{this.getLocalMsg('SGN_LABEL_PASS')}}</label>
-      <input
-        type="password"
-        name="password"
-        class="form-control"
-        v-bind:class="{'text-danger':isPassErrors,'is-invalid':isPassErrors}"
-        :placeholder="this.getLocalMsg('SGN_PLACEHOLDER_PASS')"
-        v-model="password"
-        @blur="checkPassword(password)">
-        <ul>
-          <li
-          class="form-text text-danger"
-          v-for="error in validator.getErrors('pass')">
-              &nbsp;{{ error }}
-          </li>
-        </ul>
-    </div>
-    <div class="form-group" >
-      <button
-        v-if="isDisabled"
-        type="button"
-        class="btn btn-primary"
-        disabled>{{this.getLocalMsg('SGN_LABEL_LOGIN')}}</button>
-      <button
-        v-if="isEnabled"
-        type="button"
-        class="btn btn-primary"
-        @click="login">{{this.getLocalMsg('SGN_LABEL_LOGIN')}}</button>
-    </div>
-  </form>
+  </div>
 </template>
 
 <script>
+
+import validator from 'vue-m-validator';
+
 // -----fontAwesome:
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
 import faSolid from '@fortawesome/fontawesome-free-solid';
 import faRegular from '@fortawesome/fontawesome-free-regular';
 import brands from '@fortawesome/fontawesome-free-brands';
 
-import validator from 'vue-m-validator';
+// -----libs:
+import ajax from '@/library/ajax';
 
 export default {
   name: 'LoginForm',
   data () {
     return {
       isFirstRun: true,
+      isComplite: false,
       email: '',
       password: '',
+      statusCompliteMsg: {
+        title: '',
+        body: '',
+        extra: ''
+      },
       validator: validator
     };
   },
@@ -118,13 +138,62 @@ export default {
         .addRule(RULE_1);
       this.notFirst();
     },
+    formDataClean () {
+      this.email = '';
+      this.password = '';
+    },
     checkForm () {
       this.checkMail(this.email);
       this.checkPassword(this.password);
     },
+    showCompliteStatus (objMsg) {
+      this.statusCompliteMsg = objMsg;
+      this.isComplite = true;
+    },
+    sendData (sendDataObject) {
+      ajax
+        .request({
+          // address: 'http://rest/test',
+          address: 'http://todoserver/login',
+          method: 'POST'
+        })
+        .complete((e) => {
+          let responce = JSON.parse(e);
+          if (responce.status === true) {
+            this.formDataClean();
+            this.showCompliteStatus({
+              title: 'Вы успешно вошли',
+              body: `Хелло ${responce.data.username}!`,
+              extra: 'Чувствуй себя как дома, кусок говна!'
+            });
+          }
+          this.$store.commit('LoginData/login', {
+            login: responce.data.username,
+            token: responce.api_token,
+            lastLogin: responce.data.updated_at
+          });
+          this.$store.commit('UserData/updateLogin', {
+            login: responce.data.username,
+            token: responce.api_token,
+            lastLogin: responce.data.updated_at
+          });
+          // console.log(responce);
+          console.log(this.$store.getters['UserData/getLoginDataAll']);
+
+
+        })
+        .error((e) => { console.log(e); })
+        .send(sendDataObject);
+    },
+
     login () {
       this.checkForm();
-      console.log('login');
+      if (this.validator.errors.length === 0) {
+        this.sendData({
+          'email': this.email,
+          'password': this.password
+        });
+      }
     }
   },
   computed: {
