@@ -6,7 +6,7 @@ import store from './store';
 import router from './router';
 import getLocalMsg from '@/plugins/getLocalMsg';
 // import notify from '@/components/plugins/notify';
-import ajax from '@/library/ajax';
+
 
 
 import VueYandexMetrika from 'vue-yandex-metrika';
@@ -46,21 +46,6 @@ Vue.use(VueYandexMetrika, {
 
 Vue.use(getLocalMsg);
 // Vue.use(notify);
-
-// let sendData = {
-//   'username': 'Johnny',
-//   'email': 'john@kage.ghh',
-//   'password': '123'
-// };
-// ajax
-//   .request({
-//     // address: 'http://rest/test',
-//     address: 'http://todoserver/register',
-//     method: 'POST'
-//   })
-//   .complete((e) => { console.log(e); })
-//   .error((e) => { console.log(e); })
-//   .send(sendData);
 
 /* eslint-disable no-new */
 new Vue({
