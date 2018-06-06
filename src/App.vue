@@ -24,6 +24,11 @@ export default {
       isLoginPopupShow: false
     };
   },
+  beforeCreate () {
+    console.log(this.$store);
+    console.log(this.$store.getters['LoginData/getAll']);
+    console.log(this.$store.getters['UserData/getLoginDataAll']);
+  },
   methods: {
     showPopupLogin () {
       this.isLoginPopupShow = true;
