@@ -80,7 +80,7 @@ export default {
   data () {
     return {
       isLogin: true,
-      isRegistration: false,
+      isRegistration: false
     };
   },
   methods: {

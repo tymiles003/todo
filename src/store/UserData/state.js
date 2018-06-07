@@ -57,6 +57,7 @@ let modelValidate = (data) => {
   modelChecker.complement(data, dataTemplates.DEFAULT_OBJECT);
   modelChecker.clippingPropertys(data, ['test']);
   modelChecker.complement(data.loginData, dataTemplates.DEFAULT_OBJECT_LOGIN);
+  modelChecker.clippingPropertys(data.loginData, ['login']);
   for (let item of data.items) {
     modelChecker.complement(item, dataTemplates.DEFAULT_OBJECT_ITEM);
     modelChecker.clippingPropertys(item, ['test']);

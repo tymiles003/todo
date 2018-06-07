@@ -12,8 +12,8 @@ export const LoginDataMutations = {
     state.LoginData.expiration = newValue;
   },
   login (state, objArg) {
-    this.commit('LoginData/setLogin',objArg.login);
-    this.commit('LoginData/setToken',objArg.token);
-    this.commit('LoginData/setLastLogin',objArg.lastLogin);
+    this.commit('LoginData/setLogin', objArg.login);
+    this.commit('LoginData/setToken', objArg.token);
+    this.commit('LoginData/setLastLogin', objArg.lastLogin);
   }
 };

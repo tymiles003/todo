@@ -3,10 +3,12 @@
     <form class="text-left" v-if="!isComplite">
       <ul class="form-group">
         <li
-          v-for="error in validator.errors">
+          v-for="(error, index) in validator.errors"
+          v-bind:key="index">
           <small
             class="form-text text-muted"
-            v-for="msg in error.msgs">{{msg}}</small>
+            v-for="(msg, index) in error.msgs"
+            v-bind:key="index">{{msg}}</small>
         </li>
       </ul>
       <div class="form-group">
@@ -21,7 +23,8 @@
           <ul v-if="isUsernameErrors">
             <li
             class="form-text text-danger"
-            v-for="error in validator.getErrors('username')">
+            v-for="(error, index) in validator.getErrors('username')"
+            v-bind:key="index">
                 &nbsp;{{ error }}
             </li>
           </ul>
@@ -39,7 +42,8 @@
           <ul v-if="isMailErrors">
             <li
             class="form-text text-danger"
-            v-for="error in validator.getErrors('email')">
+            v-for="(error, index) in validator.getErrors('email')"
+            v-bind:key="index">
                 &nbsp;{{ error }}
             </li>
           </ul>
@@ -63,13 +67,15 @@
           v-model="password2"
           @blur="checkPassword(password, password2)">
         <small id="emailHelp" class="form-text text-muted">{{this.getLocalMsg('SGN_TEXT_PASSAGAIN')}}</small>
-          <li
-          class="form-text text-danger"
-          v-for="error in validator.getErrors('pass')">
-              &nbsp;{{ error }}
-          </li>
-        </ul>
-      </div>
+      <ul class="form-group">
+        <li
+        class="form-text text-danger"
+        v-for="(error, index) in validator.getErrors('pass')"
+        v-bind:key="index">
+            &nbsp;{{ error }}
+        </li>
+      </ul>
+    </div>
       <div class="form-group" >
         <button
           v-if="isDisabled"
@@ -140,8 +146,10 @@ export default {
         name: 'username',
         msg: this.getLocalMsg('SGN_VALIDATION_USERNAMEREQ')
       };
+      /* eslint-disable-next-line */
+      const RULE_2_REGEXP = new RegExp('^[a-zA-Z0-9_-]+$');
       const RULE_2 = {
-        expression: /[\d\-\+\\\.\,\/\(\)\*\&\^\%\$\#\@\!\~\?\{\}\;\:\<\>\|]/.test(USERNAME),
+        expression: !(RULE_2_REGEXP.test(USERNAME)),
         name: 'username',
         msg: this.getLocalMsg('SGN_VALIDATION_USERNAMEVALID')
       };
@@ -171,8 +179,10 @@ export default {
         name: 'email',
         msg: this.getLocalMsg('SGN_VALIDATION_EMAILREQ')
       };
+      /* eslint-disable-next-line */
+      const RULE_2_REGEXP = new RegExp('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$');
       const RULE_2 = {
-        expression: !(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(MAIL)),
+        expression: !(RULE_2_REGEXP.test(MAIL)),
         name: 'email',
         msg: this.getLocalMsg('SGN_VALIDATION_EMAILVALID')
       };

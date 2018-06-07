@@ -19,24 +19,28 @@ import {LocalizationMutations} from './Localization/mutations';
 import {LocalizationGetters} from './Localization/getters';
 
 Vue.use(Vuex);
+
 let UserData = {
   namespaced: true,
   state: UserDataState,
   mutations: UserDataMutations,
   getters: UserDataGetters
 };
+
 let LoginData = {
   namespaced: true,
   state: LoginDataState,
   mutations: LoginDataMutations,
   getters: LoginDataGetters
 };
+
 let Localization = {
   namespaced: true,
   state: LocalizationState,
   mutations: LocalizationMutations,
   getters: LocalizationGetters
 };
+
 let Notify = {
   namespaced: true,
   state: NotifyState,

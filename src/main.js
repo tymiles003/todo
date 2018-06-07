@@ -7,27 +7,20 @@ import router from './router';
 import getLocalMsg from '@/plugins/getLocalMsg';
 // import notify from '@/components/plugins/notify';
 
-
-
 import VueYandexMetrika from 'vue-yandex-metrika';
 import BootstrapVue from 'bootstrap-vue';
 import VueDND from 'awe-dnd';
-
-import $ from 'jquery';
 
 // -----bootstrap:
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
-
-
 // -----styles:
 import '@/assets/less/common.less';
 
 // import helper from '@/components/lib/todoHelpers';
 Vue.config.productionTip = false;
-
 
 Vue.use(VueDND);
 Vue.use(BootstrapVue);
@@ -45,8 +38,6 @@ Vue.use(VueYandexMetrika, {
 });
 
 Vue.use(getLocalMsg);
-// Vue.use(notify);
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

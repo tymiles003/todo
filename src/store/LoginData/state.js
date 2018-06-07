@@ -1,5 +1,5 @@
 export const LoginDataState = {
-  LoginData:{
+  LoginData: {
     'login': 'anonymous',
     'token': '',
     'lastLogin': null,

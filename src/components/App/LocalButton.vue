@@ -22,7 +22,8 @@ export default {
     return {
       localization: undefined
     };
-  },created () {
+  },
+  created () {
     if (!this.$store.state.UserData.todoList.localization) {
       this.$store.state.UserData.todoList.localization = 'en';
     }

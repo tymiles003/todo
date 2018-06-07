@@ -1,5 +1,3 @@
-
-
 const DEFAULT_OBJECT_ITEM_TIME_TRACK_ITEM = {
   startTime: 0,
   duration: 0
@@ -34,7 +32,6 @@ const DEFAULT_OBJECT_CAT = {
 };
 
 const DEFAULT_OBJECT_LOGIN = {
-  login: 'Anonymous',
   token: '',
   lastLogin: ''
 };
