@@ -179,14 +179,11 @@ export default {
             token: responce.api_token,
             lastLogin: responce.data.updated_at
           });
+          console.log(">>>>>900707770", responce.data.updated_at);
           this.$store.commit('UserData/updateLogin', {
-            login: responce.data.username,
             token: responce.api_token,
             lastLogin: responce.data.updated_at
           });
-          // console.log(responce);
-          console.log(this.$store.getters['LoginData/getAll']);
-          console.log(this.$store.getters['UserData/getLoginDataAll']);
         })
         .error((e) => { console.log(e); })
         .send(sendDataObject);

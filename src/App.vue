@@ -1,5 +1,10 @@
 <template>
 <div id="app">
+  <ul class="text-left">
+    <li>{{$store.getters['UserData/getLoginDataAll']}}</li>
+    <li>{{$store.getters['UserData/getLoginDataToken']}}</li>
+    <li>{{$store.getters['LoginData/getAll']}}</li>
+  </ul>
   <panel-app
     @show="showPopupLogin">
   </panel-app>
@@ -32,7 +37,7 @@ export default {
     function checkLogin (store) {
       // TODO: сделать проверку на протухание токена
       let token = store.getters['UserData/getLoginDataToken'];
-      if(token){
+      if(token&&token!==""){
         return token
       }else{
         return false;
@@ -49,31 +54,22 @@ export default {
         })
         .complete((e) => {
           let responce = JSON.parse(e);
-          console.log('123>>>',responce);
           if (responce.status === true) {
             // предположим, что все ок
           }
+          console.log('look at my horse! My horse is amaizing!',responce);
           store.commit('LoginData/login', {
-            login: responce.data.username,
+            login: responce.message.username,
             token: responce.api_token,
-            lastLogin: responce.data.updated_at
+            lastLogin: responce.message.updated_at
           });
-          store.commit('UserData/updateLogin', {
-            token: responce.api_token,
-            lastLogin: responce.data.updated_at
-          });
-          // console.log(responce);
-          console.log(this.$store.getters['LoginData/getAll']);
-          console.log(this.$store.getters['UserData/getLoginDataAll']);
         })
         .error((e) => { console.log(e); })
         .send();
     }
-    console.log(this.$store);
-    console.log(this.$store.getters['LoginData/getAll']);
-    console.log(this.$store.getters['UserData/getLoginDataAll']);
-    // checkLogin(this.$store);
     login(this.$store);
+    console.log(this.$store);
+    console.log(this.$store.getters['UserData/getLoginDataAll']);
   },
   methods: {
 

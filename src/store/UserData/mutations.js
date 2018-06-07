@@ -50,8 +50,7 @@ export const UserDataMutations = {
   setLocalization (state, arg) { // сменить текущую локализацию
     state.todoList.localization = arg.loc;
   },
-  updateLogin (state, arg) {
-    state.todoList.loginData.login = arg.login;
+  updateLogin (state, arg) {// обновить данные входа
     state.todoList.loginData.token = arg.token;
     state.todoList.loginData.lastLogin = arg.lastLogin;
   }
