@@ -37,15 +37,15 @@ export default {
     function checkLogin (store) {
       // TODO: сделать проверку на протухание токена
       let token = store.getters['UserData/getLoginDataToken'];
-      if(token&&token!==""){
-        return token
-      }else{
+      if (token && token !== '') {
+        return token;
+      } else {
         return false;
       }
     }
     function login (store) {
       let token = checkLogin(store);
-      if(!token) return false;
+      if (!token) return false;
       ajax
         .request({
           // address: 'http://rest/test',
@@ -57,7 +57,7 @@ export default {
           if (responce.status === true) {
             // предположим, что все ок
           }
-          console.log('look at my horse! My horse is amaizing!',responce);
+          console.log('look at my horse! My horse is amaizing!', responce);
           store.commit('LoginData/login', {
             login: responce.message.username,
             token: responce.api_token,
