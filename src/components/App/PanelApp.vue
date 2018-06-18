@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col-sm-12 text-right">
       <login-button
+        v-if="!isLogin"
         @show="showPopupLogin"></login-button>
       <local-button/>
     </div>
@@ -21,7 +22,13 @@ export default {
       this.$emit('show');
     }
   },
-  computed: { },
+  computed: {
+    isLogin () {
+      let userName = this.$store.getters['LoginData/getLogin'];
+      let boolExpr = userName !== "anonymous";
+      return true;
+    }
+  },
   components: {
     LocalButton,
     LoginButton
