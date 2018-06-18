@@ -34,40 +34,7 @@ export default {
     };
   },
   beforeCreate () {
-    function checkLogin (store) {
-      // TODO: сделать проверку на протухание токена
-      let token = store.getters['UserData/getLoginDataToken'];
-      if (token && token !== '') {
-        return token;
-      } else {
-        return false;
-      }
-    }
-    function login (store) {
-      let token = checkLogin(store);
-      if (!token) return false;
-      ajax
-        .request({
-          // address: 'http://rest/test',
-          address: `http://todoserver/user?api_token=${token}`,
-          method: 'GET'
-        })
-        .complete((e) => {
-          let responce = JSON.parse(e);
-          if (responce.status === true) {
-            // предположим, что все ок
-          }
-          console.log('look at my horse! My horse is amaizing!', responce);
-          store.commit('LoginData/login', {
-            login: responce.message.username,
-            token: responce.api_token,
-            lastLogin: responce.message.updated_at
-          });
-        })
-        .error((e) => { console.log(e); })
-        .send();
-    }
-    login(this.$store);
+    this.checkLogin.checkLoginData(this.$store)
     console.log(this.$store);
     console.log(this.$store.getters['UserData/getLoginDataAll']);
   },
