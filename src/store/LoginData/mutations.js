@@ -15,5 +15,10 @@ export const LoginDataMutations = {
     this.commit('LoginData/setLogin', objArg.login);
     this.commit('LoginData/setToken', objArg.token);
     this.commit('LoginData/setLastLogin', objArg.lastLogin);
+  },
+  exit (state) {
+    this.commit('LoginData/setLogin', "anonymous");
+    this.commit('LoginData/setToken', "");
+    this.commit('LoginData/setLastLogin', "");
   }
 };

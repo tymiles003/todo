@@ -179,7 +179,6 @@ export default {
             token: responce.api_token,
             lastLogin: responce.data.updated_at
           });
-          console.log(">>>>>900707770", responce.data.updated_at);
           this.$store.commit('UserData/updateLogin', {
             token: responce.api_token,
             lastLogin: responce.data.updated_at
