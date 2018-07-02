@@ -1,13 +1,12 @@
 import ajax from '@/library/ajax';
 
-const checkLogin = {
+const sync = {
   install (Vue) {
-    Vue.prototype.checkLogin = {
+    Vue.prototype.sync = {
       serverProtocol: 'http',
       serverAddress: 'todoserver',
-      serverRequestAddress: 'user',
-      serverRequestParametr: 'api_token',
-      serverRequestMethod: 'GET',
+      serverRequestAddress: 'add-todos',
+      serverRequestMethod: 'POST',
       checkToken (store) {
         // TODO: сделать проверку на протухание токена
         let token = store.getters['UserData/getLoginDataToken'];
@@ -22,38 +21,35 @@ const checkLogin = {
         let protocol = objArg.serverProtocol || this.serverProtocol;
         let address = objArg.serverAddress || this.serverAddress;
         let requestAddress = objArg.serverRequestAddress || this.serverRequestAddress;
-        let requestParametr = objArg.serverRequestParametr || this.serverRequestParametr;
         let token = objArg.token || '';
-        return `${protocol}://${address}/${requestAddress}?${requestParametr}=${token}`;
+        return `${protocol}://${address}/${requestAddress}`;
       },
-      checkLoginData (store) {
+      synchronizationLocalToRemote (store) {
         let token = this.checkToken(store);
         if (!token) return false;
+        let objectSend = {};
+        objectSend.token = token;
+        objectSend.userData = JSON.stringify(store.getters['UserData/getFullState']);
+        // console.log(objectSend);
+
         ajax
           .request({
             // address: 'http://rest/test',
-            address: this.getFullRequestString({token: token}),
+            address: this.getFullRequestString(),
             method: this.serverRequestMethod
           })
           .complete((e) => {
             let responce = JSON.parse(e);
-            if (responce.status === true) {
-              // если есть токен
-              // console.log('look at my horse! My horse is amaizing!', responce);
-              store.commit('LoginData/login', {
-                login: responce.message.username,
-                token: responce.api_token,
-                lastLogin: responce.message.updated_at
-              });
-            }
+            console.log(responce);
+            if (responce.status === true) { }
           })
           .error((e) => {
             console.error('Error: ', e);
           })
-          .send();
-      }// loginByMailAndPass
-    };// Vue.prototype.checkLogin
+          .send(objectSend);
+      }// synchronizationLocalToRemote
+    };// Vue.prototype.sync
   }// install
 };
 
-export default checkLogin;
+export default sync;

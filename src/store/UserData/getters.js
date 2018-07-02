@@ -83,5 +83,8 @@ export const UserDataGetters = {
   },
   getLoginDataToken (state) {
     return state.todoList.loginData.token;
+  },
+  getFullState (state) {
+    return state.todoList;
   }
 };

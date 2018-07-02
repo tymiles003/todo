@@ -6,6 +6,7 @@ import store from './store';
 import router from './router';
 import getLocalMsg from '@/plugins/getLocalMsg';
 import checkLogin from '@/plugins/checkLogin';
+import sync from '@/plugins/sync';
 // import notify from '@/components/plugins/notify';
 
 import VueYandexMetrika from 'vue-yandex-metrika';
@@ -40,6 +41,8 @@ Vue.use(VueYandexMetrika, {
 
 Vue.use(getLocalMsg);
 Vue.use(checkLogin);
+Vue.use(sync);
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

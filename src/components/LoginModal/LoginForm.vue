@@ -171,7 +171,7 @@ export default {
             this.showCompliteStatus({
               title: 'Вы успешно вошли',
               body: `Хелло ${responce.data.username}!`,
-              extra: 'Чувствуй себя как дома, кусок говна!'
+              extra: 'Чувствуй себя как дома!'
             });
           }
           this.$store.commit('LoginData/login', {
@@ -183,6 +183,7 @@ export default {
             token: responce.api_token,
             lastLogin: responce.data.updated_at
           });
+          this.sync.synchronizationLocalToRemote(this.$store);
         })
         .error((e) => { console.log(e); })
         .send(sendDataObject);
