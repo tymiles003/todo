@@ -30,7 +30,7 @@ const sync = {
         let objectSend = {};
         objectSend.token = token;
         objectSend.userData = JSON.stringify(store.getters['UserData/getFullState']);
-        // console.log(objectSend);
+        console.log(JSON.stringify(objectSend));
 
         ajax
           .request({
@@ -47,7 +47,34 @@ const sync = {
             console.error('Error: ', e);
           })
           .send(objectSend);
-      }// synchronizationLocalToRemote
+      },// synchronizationLocalToRemote
+
+      add (store, sendObject) {
+        let token = this.checkToken(store);
+        if (!token) return false;
+        let objectSend = {};
+        objectSend.token = token;
+        objectSend.userData = JSON.stringify(sendObject);
+        console.log(JSON.stringify(sendObject));
+
+        ajax
+          .request({
+            // address: 'http://rest/test',
+            address: this.getFullRequestString({
+              serverRequestAddress: 'add-todos'
+            }),
+            method: this.serverRequestMethod
+          })
+          .complete((e) => {
+            let responce = JSON.parse(e);
+            console.log(responce);
+            if (responce.status === true) { }
+          })
+          .error((e) => {
+            console.error('Error: ', e);
+          })
+          .send(objectSend);
+      }// add
     };// Vue.prototype.sync
   }// install
 };

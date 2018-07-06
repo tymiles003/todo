@@ -21,23 +21,25 @@ export const methods = {
   addTodo (newText) {
     const trimmedText = newText.trim();
     if (trimmedText && trimmedText !== '') {
-      this.$store.commit('UserData/add', {
-        id: ++this.$store.state.UserData.todoList.lastCount,
-        categoryId: this.$store.state.UserData.todoList.selectedCategory,
-        text: trimmedText,
-        time: {
-          createdTime: parseInt(moment().format('x')),
-          startTime: null,
-          pastTime: {
-            duration: 0,
-            render: '00:00:00'
+      let sendObject = {
+          id: ++this.$store.state.UserData.todoList.lastCount,
+          categoryId: this.$store.state.UserData.todoList.selectedCategory,
+          text: trimmedText,
+          time: {
+            createdTime: parseInt(moment().format('x')),
+            startTime: null,
+            pastTime: {
+              duration: 0,
+              render: '00:00:00'
+            },
+            track: []
           },
-          track: []
-        },
-        sort: 0,
-        status: this.stats.PENDING,
-        action: this.actns.DEFAULT
-      });
+          sort: 0,
+          status: this.stats.PENDING,
+          action: this.actns.DEFAULT
+      };
+      this.$store.commit('UserData/add', sendObject);
+      this.sync.add(this.$store, sendObject);
       this.$store.commit('Notify/addNotify', {
         text: this.getLocalMsg('NTF_MSG_TASKADD'),
         duration: 5

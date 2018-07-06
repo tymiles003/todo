@@ -8,6 +8,7 @@ const checkLogin = {
       serverRequestAddress: 'user',
       serverRequestParametr: 'api_token',
       serverRequestMethod: 'GET',
+
       checkToken (store) {
         // TODO: сделать проверку на протухание токена
         let token = store.getters['UserData/getLoginDataToken'];
@@ -17,6 +18,7 @@ const checkLogin = {
           return false;
         }
       },
+
       getFullRequestString (_objArg) {
         let objArg = _objArg || {};
         let protocol = objArg.serverProtocol || this.serverProtocol;
@@ -26,6 +28,7 @@ const checkLogin = {
         let token = objArg.token || '';
         return `${protocol}://${address}/${requestAddress}?${requestParametr}=${token}`;
       },
+
       checkLoginData (store) {
         let token = this.checkToken(store);
         if (!token) return false;
@@ -51,7 +54,8 @@ const checkLogin = {
             console.error('Error: ', e);
           })
           .send();
-      }// loginByMailAndPass
+      }// checkLoginData
+      
     };// Vue.prototype.checkLogin
   }// install
 };

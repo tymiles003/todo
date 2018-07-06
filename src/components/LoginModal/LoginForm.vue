@@ -183,7 +183,7 @@ export default {
             token: responce.api_token,
             lastLogin: responce.data.updated_at
           });
-          this.sync.synchronizationLocalToRemote(this.$store);
+          // this.sync.synchronizationLocalToRemote(this.$store);
         })
         .error((e) => { console.log(e); })
         .send(sendDataObject);
