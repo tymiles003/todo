@@ -1,5 +1,6 @@
 <template>
   <div>
+    <serverSideValidation></serverSideValidation>
     <form class="text-left"  v-if="!isComplite">
       <ul class="form-group">
         <li
@@ -85,6 +86,8 @@ import brands from '@fortawesome/fontawesome-free-brands';
 
 // -----libs:
 import ajax from '@/library/ajax';
+
+import serverSideValidation from '@/components/LoginModal/serverSideValidation';
 
 export default {
   name: 'LoginForm',
@@ -219,7 +222,8 @@ export default {
     FontAwesomeIcon,
     faSolid,
     faRegular,
-    brands
+    brands,
+    serverSideValidation
   }
 };
 </script>
