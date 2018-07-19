@@ -139,28 +139,71 @@ export default {
     notFirst () {
       this.isFirstRun = false;
     },
+    serverCheckSuccess (response, objArr) {
+      const NAME = objArr.name || 'unknown';
+      try {
+        response = JSON.parse(response);
+      } catch (err) {
+        console.log(err);
+        console.log(response);
+      }
+
+      function haseErrorByName (errorArray, ruleErrorName) {
+        if(errorArray===undefined) return false;
+        if(typeof errorArray != 'object') return false;
+        if(errorArray.length === 0) return false;
+        for (let item of errorArray) {
+          if(item.hasOwnProperty('name')){
+            if(item.name === ruleErrorName){
+              return true;
+            }
+          }
+        }
+        return false;
+      }
+
+      if (
+        response.hasOwnProperty('status') &&
+        (response.status === false && haseErrorByName(response.errors, NAME))
+      ) {
+        response.errors.forEach((item, i, arr) => {
+          if (NAME === item.name) {
+            item.msgs.forEach((msg, y, msgs) => {
+              validator.addError({
+                expression: true,
+                name: NAME,
+                msg: msg
+              });
+            });
+          }
+        });
+      } else {
+        validator.deleteAllErrorByName(NAME);
+      }
+    },
     checkUsername (_username) {
+      const NAME = 'username';
       const USERNAME = _username.trim();
       const RULE_1 = {
         expression: !USERNAME || USERNAME === '',
-        name: 'username',
+        name: NAME,
         msg: this.getLocalMsg('SGN_VALIDATION_USERNAMEREQ')
       };
       /* eslint-disable-next-line */
       const RULE_2_REGEXP = new RegExp('^[a-zA-Z0-9_-]+$');
       const RULE_2 = {
         expression: !(RULE_2_REGEXP.test(USERNAME)),
-        name: 'username',
+        name: NAME,
         msg: this.getLocalMsg('SGN_VALIDATION_USERNAMEVALID')
       };
       const RULE_3 = {
         expression: USERNAME.length > 128,
-        name: 'username',
+        name: NAME,
         msg: this.getLocalMsg('SGN_VALIDATION_USERNAMELONG')
       };
       const RULE_4 = {
         expression: USERNAME.length < 3 && USERNAME.length !== 0,
-        name: 'username',
+        name: NAME,
         msg: this.getLocalMsg('SGN_VALIDATION_USERNAMESHORT')
       };
 
@@ -168,28 +211,53 @@ export default {
         .addRule(RULE_1)
         .addRule(RULE_2)
         .addRule(RULE_3)
-        .addRule(RULE_4);
+        .addRule(RULE_4)
+        .serverCheck({
+          address: 'http://rest3/registration',
+          method: 'POST',
+          data: {
+            name: NAME,
+            [NAME]: USERNAME
+          },
+          success: (response) => {
+            this.serverCheckSuccess(response, {name: NAME});
+          },
+          error: (response) => { console.log(response); }
+        });
       this.notFirst();
     },
 
     checkMail (_mail) {
+      const NAME = 'email';
       const MAIL = _mail.trim();
       const RULE_1 = {
         expression: !MAIL || MAIL === '',
-        name: 'email',
+        name: NAME,
         msg: this.getLocalMsg('SGN_VALIDATION_EMAILREQ')
       };
       /* eslint-disable-next-line */
       const RULE_2_REGEXP = new RegExp('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$');
       const RULE_2 = {
         expression: !(RULE_2_REGEXP.test(MAIL)),
-        name: 'email',
+        name: NAME,
         msg: this.getLocalMsg('SGN_VALIDATION_EMAILVALID')
       };
 
       validator
         .addRule(RULE_1)
-        .addRule(RULE_2);
+        .addRule(RULE_2)
+        .serverCheck({
+          address: 'http://rest3/registration',
+          method: 'POST',
+          data: {
+            name: NAME,
+            [NAME]: MAIL
+          },
+          success: (response) => {
+            this.serverCheckSuccess(response, {name: NAME});
+          },
+          error: (response) => { console.log(response); }
+        });
       this.notFirst();
     },
     checkPassword (pass, pass2) {
@@ -226,13 +294,13 @@ export default {
     sendData (sendDataObject) {
       ajax
         .request({
-          // address: 'http://rest/test',
-          address: 'http://todoserver/register',
+          address: 'http://rest3/registration',
           method: 'POST'
         })
         .complete((e) => {
-          let responce = JSON.parse(e);
-          if (responce.status === true) {
+          let response = JSON.parse(e);
+          // console.log(response);
+          if (response.status === true) {
             this.formDataClean();
             this.showCompliteStatus({
               title: 'Вы успешно зарегистрировались',
@@ -240,7 +308,7 @@ export default {
               extra: 'Удачи!'
             });
           }
-          // console.log(e, responce);
+          // console.log(e, response);
         })
         .error((e) => { console.log(e); })
         .send(sendDataObject);
@@ -251,7 +319,8 @@ export default {
         this.sendData({
           'username': this.username,
           'email': this.email,
-          'password': this.password
+          'password': this.password,
+          'password_again': this.password2
         });
       }
     }
