@@ -13,25 +13,6 @@
         </li>
       </ul>
       <div class="form-group">
-        <label>Юзернейм</label>
-        <input
-          type="text"
-          name="username"
-          class="form-control"
-          v-bind:class="{'text-danger':isUsernameErrors,'is-invalid':isUsernameErrors}"
-          placeholder="введите имя пользователя"
-          v-model="username"
-          @blur="checkUsername(username)">
-          <ul v-if="isUsernameErrors">
-            <li
-            class="form-text text-danger"
-            v-for="(error, index) in validator.getErrors('username')"
-            v-bind:key="index">
-                &nbsp;{{ error }}
-            </li>
-          </ul>
-      </div>
-      <div class="form-group">
         <label>{{this.getLocalMsg('SGN_LABEL_EMAIL')}}</label>
         <input
           type="email"
@@ -114,7 +95,6 @@ export default {
     return {
       isFirstRun: true,
       isComplite: false,
-      username: '',
       email: '',
       password: '',
       statusCompliteMsg: {
@@ -158,27 +138,6 @@ export default {
       // .addRule(RULE_3);
       this.notFirst();
     },
-    checkUsername (_username) {
-      const USERNAME = _username.trim();
-      let name = 'username';
-      const RULE_1 = {
-        expression: !USERNAME || USERNAME === '',
-        name: name,
-        msg: ''
-      };
-      /* eslint-disable-next-line */
-      const RULE_2_REGEXP = new RegExp('^[a-zA-Z]+[a-zA-Z0-9_-]*[a-zA-Z0-9]+$');
-      const RULE_2 = {
-        expression: !(RULE_2_REGEXP.test(USERNAME)),
-        name: name,
-        msg: 'Не правильный формат в имени пользователя'
-      };
-
-      validator
-        .addRule(RULE_1)
-        .addRule(RULE_2);
-      this.notFirst();
-    },
     checkPassword (pass) {
       const RULE_1 = {
         expression: !pass || pass === '',
@@ -194,7 +153,6 @@ export default {
       this.password = '';
     },
     checkForm () {
-      this.checkUsername(this.username);
       this.checkMail(this.email);
       this.checkPassword(this.password);
     },
@@ -238,7 +196,6 @@ export default {
       this.checkForm();
       if (this.validator.errors.length === 0) {
         this.sendData({
-          'username': this.username,
           'email': this.email,
           'password': this.password
         });
@@ -254,10 +211,6 @@ export default {
     },
     isMailErrors () {
       let errors = this.validator.getErrors('email');
-      return errors && errors.length > 0;
-    },
-    isUsernameErrors () {
-      let errors = this.validator.getErrors('username');
       return errors && errors.length > 0;
     },
     isPassErrors () {
