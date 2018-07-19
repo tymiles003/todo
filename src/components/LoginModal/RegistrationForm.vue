@@ -307,6 +307,14 @@ export default {
               body: 'Теперь вы можете воспользоваться формой входа',
               extra: 'Удачи!'
             });
+          }else{
+            console.log(response.errors);
+            console.log(response.errors.join(','));
+            this.showCompliteStatus({
+              title: 'Ошибка',
+              body: `${response.errors.join(',')}`,
+              extra: 'Удачи!'
+            });
           }
           // console.log(e, response);
         })
@@ -320,7 +328,7 @@ export default {
           'username': this.username,
           'email': this.email,
           'password': this.password,
-          'password_again': this.password2
+          'password_again': this.password2+'0'
         });
       }
     }
