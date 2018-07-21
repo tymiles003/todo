@@ -38,7 +38,7 @@
           v-bind:class="{'text-danger':isMailErrors,'is-invalid':isMailErrors}"
           :placeholder="this.getLocalMsg('SGN_PLACEHOLDER_EMAIL')"
           v-model="email"
-          @blur="checkMail(email)">
+          @blur="checkEmail(email)">
           <ul v-if="isMailErrors">
             <li
             class="form-text text-danger"
@@ -91,7 +91,7 @@
     </form>
     <div class="statusWork" v-if="isComplite">
       <div class="soccess">
-        <h5 class="card-title text-success">{{statusCompliteMsg.title}}</h5>
+        <h5 class="card-title" :class="{ 'text-danger': isError, 'text-success': !isError }">{{statusCompliteMsg.title}}</h5>
         <p class="card-text">{{statusCompliteMsg.body}}</p>
         <p class="card-text">{{statusCompliteMsg.extra}}</p>
       </div>
@@ -114,12 +114,16 @@ import brands from '@fortawesome/fontawesome-free-brands';
 // -----libs:
 import ajax from '@/library/ajax';
 
+// -----methods:
+import {validtionLoginMethods} from '@/components/validation/validtion-login-methods';
+
 export default {
   name: 'RegistrationForm',
   data () {
     return {
       isFirstRun: true,
       isComplite: false,
+      isError: false,
       username: '',
       email: '',
       password: '',
@@ -136,146 +140,11 @@ export default {
     validator.reset();
   },
   methods: {
+    ...validtionLoginMethods,
     notFirst () {
       this.isFirstRun = false;
     },
-    serverCheckSuccess (response, objArr) {
-      const NAME = objArr.name || 'unknown';
-      try {
-        response = JSON.parse(response);
-      } catch (err) {
-        console.log(err);
-        console.log(response);
-      }
 
-      function haseErrorByName (errorArray, ruleErrorName) {
-        if(errorArray===undefined) return false;
-        if(typeof errorArray != 'object') return false;
-        if(errorArray.length === 0) return false;
-        for (let item of errorArray) {
-          if(item.hasOwnProperty('name')){
-            if(item.name === ruleErrorName){
-              return true;
-            }
-          }
-        }
-        return false;
-      }
-
-      if (
-        response.hasOwnProperty('status') &&
-        (response.status === false && haseErrorByName(response.errors, NAME))
-      ) {
-        response.errors.forEach((item, i, arr) => {
-          if (NAME === item.name) {
-            item.msgs.forEach((msg, y, msgs) => {
-              validator.addError({
-                expression: true,
-                name: NAME,
-                msg: msg
-              });
-            });
-          }
-        });
-      } else {
-        validator.deleteAllErrorByName(NAME);
-      }
-    },
-    checkUsername (_username) {
-      const NAME = 'username';
-      const USERNAME = _username.trim();
-      const RULE_1 = {
-        expression: !USERNAME || USERNAME === '',
-        name: NAME,
-        msg: this.getLocalMsg('SGN_VALIDATION_USERNAMEREQ')
-      };
-      /* eslint-disable-next-line */
-      const RULE_2_REGEXP = new RegExp('^[a-zA-Z0-9_-]+$');
-      const RULE_2 = {
-        expression: !(RULE_2_REGEXP.test(USERNAME)),
-        name: NAME,
-        msg: this.getLocalMsg('SGN_VALIDATION_USERNAMEVALID')
-      };
-      const RULE_3 = {
-        expression: USERNAME.length > 128,
-        name: NAME,
-        msg: this.getLocalMsg('SGN_VALIDATION_USERNAMELONG')
-      };
-      const RULE_4 = {
-        expression: USERNAME.length < 3 && USERNAME.length !== 0,
-        name: NAME,
-        msg: this.getLocalMsg('SGN_VALIDATION_USERNAMESHORT')
-      };
-
-      validator
-        .addRule(RULE_1)
-        .addRule(RULE_2)
-        .addRule(RULE_3)
-        .addRule(RULE_4)
-        .serverCheck({
-          address: 'http://rest3/registration',
-          method: 'POST',
-          data: {
-            name: NAME,
-            [NAME]: USERNAME
-          },
-          success: (response) => {
-            this.serverCheckSuccess(response, {name: NAME});
-          },
-          error: (response) => { console.log(response); }
-        });
-      this.notFirst();
-    },
-
-    checkMail (_mail) {
-      const NAME = 'email';
-      const MAIL = _mail.trim();
-      const RULE_1 = {
-        expression: !MAIL || MAIL === '',
-        name: NAME,
-        msg: this.getLocalMsg('SGN_VALIDATION_EMAILREQ')
-      };
-      /* eslint-disable-next-line */
-      const RULE_2_REGEXP = new RegExp('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$');
-      const RULE_2 = {
-        expression: !(RULE_2_REGEXP.test(MAIL)),
-        name: NAME,
-        msg: this.getLocalMsg('SGN_VALIDATION_EMAILVALID')
-      };
-
-      validator
-        .addRule(RULE_1)
-        .addRule(RULE_2)
-        .serverCheck({
-          address: 'http://rest3/registration',
-          method: 'POST',
-          data: {
-            name: NAME,
-            [NAME]: MAIL
-          },
-          success: (response) => {
-            this.serverCheckSuccess(response, {name: NAME});
-          },
-          error: (response) => { console.log(response); }
-        });
-      this.notFirst();
-    },
-    checkPassword (pass, pass2) {
-      const RULE_1 = {
-        expression: !pass || pass === '',
-        name: 'pass',
-        msg: this.getLocalMsg('SGN_VALIDATION_PASSREQ')
-      };
-      const RULE_2 = {
-        expression: pass !== pass2,
-        name: 'pass',
-        msg: this.getLocalMsg('SGN_VALIDATION_PASSMATCH')
-      };
-      validator
-        .addRule(RULE_1)
-        .addRule(RULE_2);
-      this.notFirst();
-    },
     formDataClean () {
       this.username = '';
       this.email = '';
@@ -284,7 +153,7 @@ export default {
     },
     checkForm () {
       this.checkUsername(this.username);
-      this.checkMail(this.email);
+      this.checkEmail(this.email);
       this.checkPassword(this.password, this.password2);
     },
     showCompliteStatus (objMsg) {
@@ -301,6 +170,7 @@ export default {
           let response = JSON.parse(e);
           // console.log(response);
           if (response.status === true) {
+            this.isError = false;
             this.formDataClean();
             this.showCompliteStatus({
               title: 'Вы успешно зарегистрировались',
@@ -308,11 +178,18 @@ export default {
               extra: 'Удачи!'
             });
           }else{
-            console.log(response.errors);
-            console.log(response.errors.join(','));
+            this.isError = true;
+            let errors = [];
+
+            response.errors.forEach((item, i, arr)=>{
+              item.msgs.forEach((item2, i2, arr2)=>{
+                errors.push(item2);
+              });
+            });
+
             this.showCompliteStatus({
               title: 'Ошибка',
-              body: `${response.errors.join(',')}`,
+              body: `${errors.join('; ')}`,
               extra: 'Удачи!'
             });
           }
@@ -324,11 +201,12 @@ export default {
     register () {
       this.checkForm();
       if (this.validator.errors.length === 0) {
+        this.isError = true;
         this.sendData({
           'username': this.username,
           'email': this.email,
           'password': this.password,
-          'password_again': this.password2+'0'
+          'password_again': this.password2
         });
       }
     }
