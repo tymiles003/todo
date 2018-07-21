@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <serverSideValidation></serverSideValidation> -->
     <form class="text-left"  v-if="!isComplite">
       <ul class="form-group">
         <li
@@ -21,7 +20,7 @@
           v-bind:class="{'text-danger':isMailErrors,'is-invalid':isMailErrors}"
           :placeholder="this.getLocalMsg('SGN_PLACEHOLDER_EMAIL')"
           v-model="email"
-          @blur="checkMail(email)">
+          @blur="checkEmail(email, extraAddr)">
           <ul v-if="isMailErrors">
             <li
             class="form-text text-danger"
@@ -40,7 +39,7 @@
           v-bind:class="{'text-danger':isPassErrors,'is-invalid':isPassErrors}"
           :placeholder="this.getLocalMsg('SGN_PLACEHOLDER_PASS')"
           v-model="password"
-          @blur="checkPassword(password)">
+          @blur="checkPassword(password, password)">
           <ul>
             <li
             class="form-text text-danger"
@@ -87,12 +86,15 @@ import brands from '@fortawesome/fontawesome-free-brands';
 // -----libs:
 import ajax from '@/library/ajax';
 
-import serverSideValidation from '@/components/LoginModal/serverSideValidation';
+// -----methods:
+import {validationLoginMethods} from '@/components/validation/validation-login-methods';
 
 export default {
   name: 'LoginForm',
   data () {
     return {
+      server: 'http://rest3',
+      extraAddr: '/login',
       isFirstRun: true,
       isComplite: false,
       email: '',
@@ -109,52 +111,17 @@ export default {
     validator.reset();
   },
   methods: {
+    ...validationLoginMethods,
     notFirst () {
       this.isFirstRun = false;
-    },
-    checkMail (_mail) {
-      const MAIL = _mail.trim();
-      const RULE_1 = {
-        expression: !MAIL || MAIL === '',
-        name: 'email',
-        msg: this.getLocalMsg('SGN_VALIDATION_EMAILREQ')
-      };
-      /* eslint-disable-next-line */
-      const RULE_2_REGEXP = new RegExp('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$');
-      const RULE_2 = {
-        expression: !(RULE_2_REGEXP.test(MAIL)),
-        name: 'email',
-        msg: this.getLocalMsg('SGN_VALIDATION_EMAILVALID')
-      };
-      /* eslint-disable-next-line */
-      const RULE_3 = {
-        expression: !(MAIL === 'ad@ad.ad'),
-        name: 'email',
-        msg: 'email rule3'
-      };
-      validator
-        .addRule(RULE_1)
-        .addRule(RULE_2);
-      // .addRule(RULE_3);
-      this.notFirst();
-    },
-    checkPassword (pass) {
-      const RULE_1 = {
-        expression: !pass || pass === '',
-        name: 'pass',
-        msg: this.getLocalMsg('SGN_VALIDATION_PASSREQ')
-      };
-      validator
-        .addRule(RULE_1);
-      this.notFirst();
     },
     formDataClean () {
       this.email = '';
       this.password = '';
     },
     checkForm () {
-      this.checkMail(this.email);
-      this.checkPassword(this.password);
+      this.checkEmail(this.email, this.extraAddr);
+      this.checkPassword(this.password, this.password);
     },
     showCompliteStatus (objMsg) {
       this.statusCompliteMsg = objMsg;
@@ -163,12 +130,18 @@ export default {
     sendData (sendDataObject) {
       ajax
         .request({
-          // address: 'http://rest/test',
-          address: 'http://rest3/login',
+          address: this.server + this.extraAddr,
           method: 'POST'
         })
         .complete((e) => {
-          let responce = JSON.parse(e);
+          let responce = "";
+          try {
+            responce = JSON.parse(e);
+          } catch (err) {
+            responce = e;
+            console.log(err);
+            console.log(response);
+          }
           if (responce.status === true) {
             this.formDataClean();
             this.showCompliteStatus({
@@ -197,7 +170,8 @@ export default {
       if (this.validator.errors.length === 0) {
         this.sendData({
           'email': this.email,
-          'password': this.password
+          'password': this.password,
+          'password_again': this.password
         });
       }
     }
@@ -222,8 +196,7 @@ export default {
     FontAwesomeIcon,
     faSolid,
     faRegular,
-    brands,
-    serverSideValidation
+    brands
   }
 };
 </script>

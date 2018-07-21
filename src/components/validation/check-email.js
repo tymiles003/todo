@@ -1,6 +1,6 @@
 import validator from 'vue-m-validator';
 export const checkEmail = {
-  checkEmail (_mail) {
+  checkEmail (_mail, strExtraAddr = '') {
     const NAME = 'email';
     const MAIL = _mail.trim();
     const RULE_1 = {
@@ -20,7 +20,7 @@ export const checkEmail = {
       .addRule(RULE_1)
       .addRule(RULE_2)
       .serverCheck({
-        address: 'http://rest3/registration',
+        address: this.server + strExtraAddr,
         method: 'POST',
         data: {
           name: NAME,

@@ -4,6 +4,7 @@ export const serverCheckSuccess = {
     const NAME = objArr.name || 'unknown';
     try {
       response = JSON.parse(response);
+      console.log(response);
     } catch (err) {
       console.log(err);
       console.log(response);
@@ -22,7 +23,7 @@ export const serverCheckSuccess = {
       }
       return false;
     }
-
+    console.log(haseErrorByName(response.errors, NAME));
     if (
       response.hasOwnProperty('status') &&
       (response.status === false && haseErrorByName(response.errors, NAME))

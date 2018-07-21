@@ -19,7 +19,7 @@
           v-bind:class="{'text-danger':isUsernameErrors,'is-invalid':isUsernameErrors}"
           v-model="username"
           :placeholder="this.getLocalMsg('SGN_PLACEHOLDER_USERNAME')"
-          @blur="checkUsername(username)">
+          @blur="checkUsername(username, extraAddr)">
           <ul v-if="isUsernameErrors">
             <li
             class="form-text text-danger"
@@ -38,7 +38,7 @@
           v-bind:class="{'text-danger':isMailErrors,'is-invalid':isMailErrors}"
           :placeholder="this.getLocalMsg('SGN_PLACEHOLDER_EMAIL')"
           v-model="email"
-          @blur="checkEmail(email)">
+          @blur="checkEmail(email, extraAddr)">
           <ul v-if="isMailErrors">
             <li
             class="form-text text-danger"
@@ -115,12 +115,14 @@ import brands from '@fortawesome/fontawesome-free-brands';
 import ajax from '@/library/ajax';
 
 // -----methods:
-import {validtionLoginMethods} from '@/components/validation/validtion-login-methods';
+import {validationRegistrationMethods} from '@/components/validation/validation-registration-methods';
 
 export default {
   name: 'RegistrationForm',
   data () {
     return {
+      server: 'http://rest3',
+      extraAddr: '/registration',
       isFirstRun: true,
       isComplite: false,
       isError: false,
@@ -140,7 +142,7 @@ export default {
     validator.reset();
   },
   methods: {
-    ...validtionLoginMethods,
+    ...validationRegistrationMethods,
     notFirst () {
       this.isFirstRun = false;
     },
@@ -152,8 +154,8 @@ export default {
       this.password2 = '';
     },
     checkForm () {
-      this.checkUsername(this.username);
-      this.checkEmail(this.email);
+      this.checkUsername(this.username, this.extraAddr);
+      this.checkEmail(this.email, this.extraAddr);
       this.checkPassword(this.password, this.password2);
     },
     showCompliteStatus (objMsg) {
@@ -163,7 +165,7 @@ export default {
     sendData (sendDataObject) {
       ajax
         .request({
-          address: 'http://rest3/registration',
+          address: this.server + this.extraAddr,
           method: 'POST'
         })
         .complete((e) => {
