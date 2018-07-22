@@ -15,7 +15,7 @@ export const serverCheckSuccess = {
       if(typeof errorArray != 'object') return false;
       if(errorArray.length === 0) return false;
       for (let item of errorArray) {
-        if(item.hasOwnProperty('name')){
+        if(item && item.hasOwnProperty('name')){
           if(item.name === ruleErrorName){
             return true;
           }
